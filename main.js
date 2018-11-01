@@ -6,9 +6,7 @@ const express = require('express');
 const data = require('./data.js');
 const app = express();
 
-// For Heroku, it requires a specific port with process.env.PORT
-// There is no environment variable for that on local, so have it
-// see if the variable exsists.  If not, then use port 5000 (localhost:5000)
+// Check if running on server.  If not, then use a port for local testing
 let port = process.env.PORT;
 if (port == null || port == '') {
     port = 5000;
@@ -17,14 +15,12 @@ if (port == null || port == '') {
 app.use('/', express.static(__dirname + '/'));
 app.listen(port);
 
-
 // Respects counter
 let rc = 0;
 
-
 // When the bot is on, do some things
 client.on('ready', () => {
-    console.log("\nIsabelleBot is a go!\n");
+    console.log("IsabelleBot is a go!");
     client.user.setActivity("the mayor", { type: "LISTENING" }); // Status will be set to "Listening to the mayor"
 });
 
@@ -113,7 +109,13 @@ function processCmd(msg) {
 
 }
 
-// Have the bot login
-client.login(data.data);
+// Grab the token and log in.
+let token = process.env.TOKEN;
+if (token == ''|| token == null) {
+    console.info("Switching token");
+    token = data.data;
+}
+client.login(token); // "I'm in"
 
+// Prevent from idling for too long
 keepAlive.keepAlive();
