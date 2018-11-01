@@ -1,4 +1,4 @@
-// A way to keep the server up without relying on any third-part service
+// Ping itself to keep it awake
 const http = require('http');
 
 exports.keepAlive = function() {
@@ -12,7 +12,7 @@ exports.keepAlive = function() {
         http.get(options, (res) => {
             res.on('data', (chunks) => {
                 try {
-                    console.log("WAKE UP!  " + chunk);
+                    console.log("Idle prevention.  Stay awake.");
                 } catch (err) {
                     console.log(err.message);
                 }
