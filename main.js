@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const commands = require('./commands');
 const keepAlive = require('./keepAlive');
 const express = require('express');
-const data = require('./data.js');
 const app = express();
 
 // Check if running on server.  If not, then use a port for local testing
@@ -111,8 +110,10 @@ function processCmd(msg) {
 
 // Grab the token and log in.
 let token = process.env.TOKEN;
+// Check to see if it's running on the server.  If not, switch to local token
 if (token == ''|| token == null) {
     console.info("Switching token");
+    const data = require('./data.js');
     token = data.data;
 }
 client.login(token); // "I'm in"
