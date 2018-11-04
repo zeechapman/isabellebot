@@ -103,7 +103,7 @@ function processCmd(msg) {
     else if (primaryCmd === "fixtable") {
         commands.fixTable(msg);
     } else if (primaryCmd === "rip") {
-        commands.payRespects(msg, rc);
+        commands.payRespects(msg, msg.guild.id);
     }
 
 }
@@ -115,8 +115,10 @@ if (token == ''|| token == null) {
     console.info("Switching token");
     const data = require('./data.js');
     token = data.data;
+} else {
+    // Prevent from idling for too long
+    keepAlive.keepAlive();
 }
+
 client.login(token); // "I'm in"
 
-// Prevent from idling for too long
-keepAlive.keepAlive();
