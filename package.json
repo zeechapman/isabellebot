@@ -5,7 +5,8 @@
   "main": "main.js",
   "dependencies": {
     "discord.js": "^11.4.2",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {},
   "scripts": {
