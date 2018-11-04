@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
-// Just in case I need this.  Looked cute, but might delete later
-const client = new Discord.Client();
+const client = new Discord.Client(); // Just in case I need this.  Looked cute, but might delete later
+const counter = require('./counter');
+
 module.exports = {
     // ---!sa commands
     /**
@@ -9,7 +10,7 @@ module.exports = {
     showCommands: function (msg) {
         let str = "\n\n- !sa help --- A list of commands.  I'm sorry, I'm a bit repetitve sometimes!  Haha\n- !sa sendhelp --- If you or someone is feeling a bit down, I'll do what I can to help!\n- !sa info --- Information about me!"
         let footer = "There's this weird blue guy that took my exclamation, so remember to use \"!sa\" at the start to call me!";
-        let embed = new Discord.RichEmbed().setTitle("Oh, hello!").setDescription("Good to see you!  I'm Isabelle, and I'm here to help when you need it!\nWhenever you need me, you can always say:").setColor(0xB5E8F2).setDescription(str).setFooter(footer);
+        let embed = new Discord.RichEmbed().setTitle("Oh, hello!").setDescription("Good to see you!  I'm Isabelle, and I'm here to help when you need it!\nWhenever you need me, you can always say:" + str).setColor(0xB5E8F2).setFooter(footer);
         let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :caw:\n- !fliptable --- For mobile users who need to flip a table (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects").setFooter("The blue man didn't take those, thank goodness.");
         msg.channel.send(embed);
         setTimeout(() => {
@@ -64,7 +65,8 @@ module.exports = {
         msg.channel.send("Needs more Phil.");
     },
     // Press F to pay respects, with the ability to count how many "F's" there are.
-    payRespects: function (msg, rc) {
-        msg.channel.send("Press F to pay respects\nTotal respects paid: " + rc);
+    payRespects: function (msg) {
+        let c = new counter(msg);
+        msg.channel.send("Press F to pay respects\nTotal respects paid: " + c.counter);
     }
 }
