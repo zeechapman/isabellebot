@@ -43,7 +43,7 @@ module.exports = {
     info: function (msg) {
         let embed = new Discord.RichEmbed()
             .setTitle("Oh, info?  About me? \u{1F495}")
-            .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by < not bound > (aka Bound).  Enjoying my company?  I'm glad!");
+            .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by < not bound > (aka Bound).  Enjoying my company?  I'm glad!")
             .setThumbnail("https://raw.githubusercontent.com/zeechapman/isabellebot/master/isabelle-pic.png");
         msg.channel.send(embed);
     },
