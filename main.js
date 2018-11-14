@@ -108,6 +108,9 @@ function processCmd(msg) {
     else if (primaryCmd === "nani") {
         commands.naniCommand(msg);
     }
+    else if (primaryCmd === "rave") {
+        commands.raveCommand(msg);
+    }
 
 }
 

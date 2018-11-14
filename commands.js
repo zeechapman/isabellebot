@@ -11,7 +11,7 @@ module.exports = {
         let str = "\n\n- !sa help --- A list of commands.  I'm sorry, I'm a bit repetitve sometimes!  Haha\n- !sa sendhelp --- If you or someone is feeling a bit down, I'll do what I can to help!\n- !sa info --- Information about me!"
         let footer = "There's this weird blue guy that took my exclamation, so remember to use \"!sa\" at the start to call me!";
         let embed = new Discord.RichEmbed().setTitle("Oh, hello!").setDescription("Good to see you!  I'm Isabelle, and I'm here to help when you need it!\nWhenever you need me, you can always say:" + str).setColor(0xB5E8F2).setFooter(footer);
-        let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :bird:\n- !fliptable --- For mobile users who need to flip a table (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects\n- !nani --- NANI??").setFooter("The blue man didn't take those, thank goodness.");
+        let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :bird:\n- !fliptable --- For mobile users who need to flip a table (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects\n- !nani --- NANI??\n- !rave --- Summon a quick rave").setFooter("The blue man didn't take those, thank goodness.");
         msg.channel.send(embed);
         setTimeout(() => {
             msg.channel.startTyping();
@@ -72,5 +72,14 @@ module.exports = {
         let phrases = ["*steps back in shock*\nNANI??", "*surprised, stepped back*\nNANI??", "*suddenly tenses up*\nNANI??", "*jolts head backwards*\nNANI??"];
         let ran = Math.floor(Math.random() * phrases.length);
         msg.reply(phrases[ran]);
+    },
+    raveCommand: function(msg) {
+        // Glowsticks
+        let left = "<:glo1:512309043671597066>";
+        let right = "<:glo2:512309060461264897>";
+        // List of emojis in the server
+        let emotes = ["<:LadyG:426153954703835137>", "<:caw:477160191029280769>", "<:pusheenblob:406307734267494410>", "<:halo:491761775440560138>", "<:grump:491761231711961120>", "<:frisk:467196742438354969>", "<:Isabelle:512143594187128832>", "<:bongo:505545336274550806>", "<:derp:406307417584959489>"];
+        let ran = Math.floor(Math.random() * emotes.length); // Randomly generate a number between 0 and (length of emotes array)
+        msg.channel.send(left + emotes[ran] + right);
     }
 }
