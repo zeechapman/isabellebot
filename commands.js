@@ -11,7 +11,7 @@ module.exports = {
         let str = "\n\n- !sa help --- A list of commands.  I'm sorry, I'm a bit repetitve sometimes!  Haha\n- !sa sendhelp --- If you or someone is feeling a bit down, I'll do what I can to help!\n- !sa info --- Information about me!"
         let footer = "There's this weird blue guy that took my exclamation, so remember to use \"!sa\" at the start to call me!";
         let embed = new Discord.RichEmbed().setTitle("Oh, hello!").setDescription("Good to see you!  I'm Isabelle, and I'm here to help when you need it!\nWhenever you need me, you can always say:" + str).setColor(0xB5E8F2).setFooter(footer);
-        let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :caw:\n- !fliptable --- For mobile users who need to flip a table (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects").setFooter("The blue man didn't take those, thank goodness.");
+        let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :bird:\n- !fliptable --- For mobile users who need to flip a table (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects\n- !nani --- NANI??").setFooter("The blue man didn't take those, thank goodness.");
         msg.channel.send(embed);
         setTimeout(() => {
             msg.channel.startTyping();
@@ -43,14 +43,14 @@ module.exports = {
     info: function (msg) {
         let embed = new Discord.RichEmbed()
             .setTitle("Oh, info?  About me? \u{1F495}")
-            .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by < not bound > (aka Bound).\nIf you're one of those programmer types that wants to see how I'm built visit [the Github Repo](https://github.com/zeechapman/isabellebot) (whatever that is).")
+            .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by < not bound > (aka Bound).  Enjoying my company?  I'm glad!");
             .setThumbnail("https://raw.githubusercontent.com/zeechapman/isabellebot/master/isabelle-pic.png");
         msg.channel.send(embed);
     },
-    // --- Normal commands.  Usually reflects Goggle's stream
+    // Normal commands.  Usually reflects Goggle's stream
     // Caw caw, baby! \u{1F426}
     cawCaw: function (msg) {
-        msg.channel.send("Caw caw, baby! :caw:");
+        msg.channel.send("Caw caw, baby! :bird:");
     },
     // Table flip (anger)
     flipTable: function (msg) {
@@ -66,7 +66,11 @@ module.exports = {
     },
     // Press F to pay respects, with the ability to count how many "F's" there are.
     payRespects: function (msg) {
-        let c = new counter(msg);
-        msg.channel.send("Press F to pay respects\nTotal respects paid: " + c.counter);
+        msg.channel.send("Press F to pay respects");
+    },
+    naniCommand: function(msg) {
+        let phrases = ["*steps back in shock*\nNANI??", "*surprised, stepped back*\nNANI??", "*suddenly tenses up*\nNANI??", "*jolts head backwards*\nNANI??"];
+        let ran = Math.floor(Math.random() * phrases.length);
+        msg.reply(phrases[ran]);
     }
 }

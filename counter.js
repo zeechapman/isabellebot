@@ -13,7 +13,6 @@ module.exports = function counter(msg) {
     this.fileName = this.guildID + ".counter.json"; // The file name
     this.file = './counters/' + this.guildID + '.counter.json'; // Path to file
     
-
     // If file doesn't exist, write one
     if (!fs.existsSync(this.file)) {
         fs.writeFileSync(this.file, '{ "respects": 0 }');
