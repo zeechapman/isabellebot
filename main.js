@@ -103,7 +103,10 @@ function processCmd(msg) {
     else if (primaryCmd === "fixtable") {
         commands.fixTable(msg);
     } else if (primaryCmd === "rip") {
-        commands.payRespects(msg, msg.guild.id);
+        commands.payRespects(msg);
+    }
+    else if (primaryCmd === "nani") {
+        commands.naniCommand(msg);
     }
 
 }
