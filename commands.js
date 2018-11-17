@@ -81,5 +81,13 @@ module.exports = {
         let emotes = ["<:LadyG:426153954703835137>", "<:caw:477160191029280769>", "<:pusheenblob:406307734267494410>", "<:halo:491761775440560138>", "<:grump:491761231711961120>", "<:frisk:467196742438354969>", "<:Isabelle:512143594187128832>", "<:bongo:505545336274550806>", "<:derp:406307417584959489>"];
         let ran = Math.floor(Math.random() * emotes.length); // Randomly generate a number between 0 and (length of emotes array)
         msg.channel.send(left + emotes[ran] + right);
+    },
+    hugCommand: function(msg, arg) {
+        let sender = msg.member;
+        if (arg.length === 0) {
+            msg.channel.send("You open your arms for a big hug \u{1F495}");
+        } else {
+            msg.channel.send(sender + " gives a bug hug to " + arg + " \u{1F495}");
+        }
     }
 }
