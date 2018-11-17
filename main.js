@@ -5,6 +5,9 @@ const keepAlive = require('./keepAlive');
 const express = require('express');
 const app = express();
 
+// Server stuff for testing
+const coutner = require('./counter');
+
 // Check if running on server.  If not, then use a port for local testing
 let port = process.env.PORT;
 if (port == null || port == '') {
@@ -14,8 +17,6 @@ if (port == null || port == '') {
 app.use('/', express.static(__dirname + '/'));
 app.listen(port);
 
-// Respects counter
-let rc = 0;
 
 // When the bot is on, do some things
 client.on('ready', () => {
@@ -39,9 +40,6 @@ client.on('message', (msg) => {
     else if (msg.content.startsWith("!")) {
         processCmd(msg);
     }
-    else if (msg.content === 'F' || msg.content === 'f') {
-        rc++;
-    }
 });
 
 /**
@@ -62,7 +60,6 @@ function specialCommand(msg) {
 
     // Display list of commands
     if (primaryCmd === "help") {
-        // msg.channel.send("Oh, hello there!  Is there something I can help you with today? I can do:");
         commands.showCommands(msg);
     }
     // Self care resources
@@ -110,6 +107,9 @@ function processCmd(msg) {
     }
     else if (primaryCmd === "rave") {
         commands.raveCommand(msg);
+    }
+    else if (primaryCmd === "hug") {
+        commands.hugCommand(msg, args);
     }
 
 }
