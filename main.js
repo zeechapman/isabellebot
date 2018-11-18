@@ -5,9 +5,6 @@ const keepAlive = require('./keepAlive');
 const express = require('express');
 const app = express();
 
-// Server stuff for testing
-const coutner = require('./counter');
-
 // Check if running on server.  If not, then use a port for local testing
 let port = process.env.PORT;
 if (port == null || port == '') {
