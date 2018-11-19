@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const client = new Discord.Client(); // Just in case I need this.  Looked cute, but might delete later
-const counter = require('./counter');
 
 module.exports = {
     // ---!sa commands
