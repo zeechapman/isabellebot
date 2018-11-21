@@ -53,7 +53,13 @@ module.exports = {
     },
     // Table flip (anger)
     flipTable: function (msg) {
-        msg.channel.send("(╯°□°）╯︵ ┻━┻");
+        let num = Math.floor(Math.random() * 100);
+        console.log(num);
+        if (num === 69 || num === 25) {
+            msg.channel.send("**CRIT!**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
+        } else {
+            msg.channel.send("(╯°□°）╯︵ ┻━┻");
+        }
     },
     // Table flip (reverse anger)
     fixTable: function (msg) {
@@ -86,7 +92,7 @@ module.exports = {
         if (arg.length === 0) {
             msg.channel.send("You open your arms for a big hug \u{1F495}");
         } else {
-            msg.channel.send(sender + " gives a bug hug to " + arg + " \u{1F495}");
+            msg.channel.send(sender + " gives a big hug to " + arg + " \u{1F495}");
         }
     }
 }
