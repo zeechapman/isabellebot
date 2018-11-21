@@ -91,10 +91,10 @@ function processCmd(msg) {
     else if (primaryCmd === "poke") {
         commands.poke(msg, args);
     }
-    else if (primaryCmd === "fliptable") {
+    else if (primaryCmd === "fliptable" || primaryCmd === "tableflip") {
         commands.flipTable(msg);
     }
-    else if (primaryCmd === "fixtable") {
+    else if (primaryCmd === "fixtable" || primaryCmd === "tablefix") {
         commands.fixTable(msg);
     } else if (primaryCmd === "rip") {
         commands.payRespects(msg);
