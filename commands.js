@@ -53,9 +53,9 @@ module.exports = {
     },
     // Table flip (anger)
     flipTable: function (msg) {
-        let num = Math.floor(Math.random() * 10);
+        let num = Math.floor(Math.random() * 4);
         console.log(num);
-        if (num === 10) {
+        if (num === 3) {
             msg.channel.send("**CRIT**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
         } else {
             msg.channel.send("(╯°□°）╯︵ ┻━┻");
