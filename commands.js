@@ -53,10 +53,10 @@ module.exports = {
     },
     // Table flip (anger)
     flipTable: function (msg) {
-        let num = Math.floor(Math.random() * 100);
+        let num = Math.floor(Math.random() * 10);
         console.log(num);
-        if (num === 69 || num === 25) {
-            msg.channel.send("**CRIT!**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
+        if (num === 10) {
+            msg.channel.send("**CRIT**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
         } else {
             msg.channel.send("(╯°□°）╯︵ ┻━┻");
         }
