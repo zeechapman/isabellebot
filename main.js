@@ -67,6 +67,9 @@ function specialCommand(msg) {
     else if (primaryCmd === "info") {
         commands.info(msg);
     }
+    else if (primaryCmd === "hh") {
+        msg.channel.send("Happy Holidays, everyone!");
+    }
 }
 
 /**
