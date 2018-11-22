@@ -49,7 +49,8 @@ module.exports = {
     // Normal commands.  Usually reflects Goggle's stream
     // Caw caw, baby! \u{1F426}
     cawCaw: function (msg) {
-        msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
+        // msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
+        msg.channel.send("Gobble gobble, baby \u{1F983}");
     },
     // Table flip (anger)
     flipTable: function (msg) {
