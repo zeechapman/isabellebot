@@ -101,6 +101,8 @@ function processCmd(msg) {
         commands.fixTable(msg);
     } else if (primaryCmd === "rip") {
         commands.payRespects(msg);
+    } else if (primaryCmd === "trip") {
+        commands.tripCommand(msg);
     }
     else if (primaryCmd === "nani") {
         commands.naniCommand(msg);

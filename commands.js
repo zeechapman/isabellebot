@@ -75,6 +75,10 @@ module.exports = {
     payRespects: function (msg) {
         msg.channel.send("Press F to pay respects");
     },
+    // Inside joke sort of
+    tripCommand: function (msg) {
+        msg.channel.send("Press T to pay respects for Joshy");
+    },
     // NANI????
     naniCommand: function(msg) {
         let phrases = ["steps back in shock*\nNANI??", "surprised, stepped back*\nNANI??", "suddenly tenses up*\nNANI??", "jolts head backwards*\nNANI??"];
