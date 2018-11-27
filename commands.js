@@ -46,17 +46,18 @@ module.exports = {
             .setThumbnail("https://raw.githubusercontent.com/zeechapman/isabellebot/master/isabelle-pic.png");
         msg.channel.send(embed);
     },
+
     // Normal commands.  Usually reflects Goggle's stream
+
     // Caw caw, baby! \u{1F426}
     cawCaw: function (msg) {
-        // msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
-        msg.channel.send("Gobble gobble, baby \u{1F983}");
+        msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
     },
     // Table flip (anger)
     flipTable: function (msg) {
-        let num = Math.floor(Math.random() * 4);
+        let num = Math.floor(Math.random() * 6);
         console.log(num);
-        if (num === 3) {
+        if (num === 5) {
             msg.channel.send("**CRIT**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
         } else {
             msg.channel.send("(╯°□°）╯︵ ┻━┻");
@@ -70,14 +71,16 @@ module.exports = {
     phil: function (msg) {
         msg.channel.send("Needs more Phil.");
     },
-    // Press F to pay respects, with the ability to count how many "F's" there are.
+    // Press F to pay respects
     payRespects: function (msg) {
         msg.channel.send("Press F to pay respects");
     },
+    // NANI????
     naniCommand: function(msg) {
-        let phrases = ["*steps back in shock*\nNANI??", "*surprised, stepped back*\nNANI??", "*suddenly tenses up*\nNANI??", "*jolts head backwards*\nNANI??"];
+        let phrases = ["steps back in shock*\nNANI??", "surprised, stepped back*\nNANI??", "suddenly tenses up*\nNANI??", "jolts head backwards*\nNANI??"];
+        let sender = msg.member;
         let ran = Math.floor(Math.random() * phrases.length);
-        msg.reply(phrases[ran]);
+        msg.channel.send("*" + sender + " " + phrases[ran]);
     },
     raveCommand: function(msg) {
         // Glowsticks
