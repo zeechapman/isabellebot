@@ -3,6 +3,7 @@ const client = new Discord.Client(); // Just in case I need this.  Looked cute, 
 
 // Global variables
 let chara = false;
+let isabelle = "<@523039317036368105>"; // Identify itself
 
 module.exports = {
     // ---!sa commands
@@ -96,25 +97,51 @@ module.exports = {
         // List of emojis in the server
         let emotes = ["<:LadyG:426153954703835137>", "<:caw:477160191029280769>", "<:pusheenblob:406307734267494410>", "<:halo:491761775440560138>", "<:grump:491761231711961120>", "<:frisk:467196742438354969>", "<:Isabelle:512143594187128832>", "<:bongo:505545336274550806>", "<:derp:406307417584959489>", "<:chara:524041640948531210>"];
         let ran = Math.floor(Math.random() * emotes.length); // Randomly generate a number between 0 and (length of emotes array)
+        // If Frisk is the picked emote, then replace with nothing as he's dead
         if (ran === 5 && chara === true) {
-            let r = Math.floor(Math.random() * 2);
-            msg.channel.send(left + " " + right + "\n*but nobody came...*");
+            msg.channel.send(left + right + "\n*but nobody came...*");
         } else {
             msg.channel.send(left + emotes[ran] + right);
         }
+        // If Chara is picked, plant the seed
         if (ran === 9 && chara === false) {
-            chara = true;
+            chara = true; // The seed
             setTimeout(() => {
-                emb = new Discord.RichEmbed().setColor(0xD30000).setDescription("The seed...has been planted...").setImage('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/chara-wide.png');
+                // Warn the user
+                emb = new Discord.RichEmbed().setColor(0x8D0000).setDescription("The seed...has been planted...").setImage('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/chara-wide.png');
                 msg.channel.send(emb);
-            }, 2000);
+            }, 1000);
         }
     },
     hugCommand: function (msg, arg) {
         let sender = msg.member;
         if (arg.length === 0) {
+            // If nothing was entered
             msg.channel.send("You open your arms for a big hug \u{1F495}");
-        } else {
+        } else if (arg.toString() === isabelle) {
+            // If user tries to hug the bot
+            msg.channel.send("You hug me!! \u{1F495}");
+        } else if (arg.toString() === sender) {
+            // If the user tries to hug themselves
+            msg.channel.send("You wrap your arms around yourself.  Silly \u{1F495}");
+        }
+        // Easter egg time
+          else if (arg.toString() === "toriel") {
+            msg.channel.send("You hug the goat mom! \u{1F495}");
+        } else if (arg.toString() === "asriel") {
+            msg.channel.send("You hug the goat boy! \u{1F495}");
+        } else if (arg.toString() === "ralsei") {
+            msg.channel.send("You hug the fluffy boy! \u{1F495}")
+        } else if (arg.toString() === "frisk") {
+            msg.channel.send("You try to hug Frisk, but Toriel came in and beat you to it.  How sweet \u{1F495}");
+        } else if (arg.toString() === "chara") {
+            msg.channel.send("You hug...is that a knife?")
+            setTimeout(() => {
+                msg.channel.send("a̸͚̙͇̓ͭ͠ȁ̧̹͕̗̬͎̜̯͉̼ͤ̍̽͗͐ͤ̾a͔̝̼͊̽̊ͫͮ̆̏a̵̧̺̝̫͍̥̳͔͍̞ͥ̏ͩ̋̆̍͜a̡̱̳̙̰̓ͮ́̇̃͌͌͌ȃ̴̱̜͔̣͚̺̱͓̾̓͊̒͟͝a̴͚ͩ̍̍ͪ̎̓͆ͪ̿͢a̧̯̠̘̻̽̏ͯͥͭͫͯ̚ͅǎ̵̛̠͍̽͋͑̌̿̓ͦ́á̟̠̲̺̄̑̋̈́ͧͨ̾͐͘͘a̦̯̝͍̫͌ͥ͒̎̈́͜͞ạ̣̟͙̭ͧ̌̄͊̊́̚͜ͅả̴̯̤̙̤̱̀͌̄a̶̡̽̾ͫͩ͏͙̦a͖͕̝̠͍̺͍̅̿͋ͫ͂͋͜ͅă͉̻̜̱̟̹͉̮ͩ̌̇a͖̝̪͖͚̥̮̫̤̐̃̊ͤ̔̌̽ͯͮ̕a̧̨̺̻͖̟̹̻̞͛̈́͊ͮ̈́̋͗ȃ̭̺̙̩ą̗͎͓̺̖̺͚̗̩͆a̛̼͖̲ͫͦ̿̅́͝"); // Sorry
+            }, 1000)
+        }
+        else {
+            // If the user uses it to actually hug a person
             msg.channel.send(sender + " gives a big hug to " + arg + " \u{1F495}");
         }
     }
