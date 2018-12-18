@@ -83,32 +83,34 @@ module.exports = {
         msg.channel.send("Press T to pay respects for Joshy");
     },
     // NANI????
-    naniCommand: function(msg) {
+    naniCommand: function (msg) {
         let phrases = ["steps back in shock*\nNANI??", "surprised, stepped back*\nNANI??", "suddenly tenses up*\nNANI??", "jolts head backwards*\nNANI??"];
         let sender = msg.member;
         let ran = Math.floor(Math.random() * phrases.length);
         msg.channel.send("*" + sender + " " + phrases[ran]);
     },
-    raveCommand: function(msg) {
+    raveCommand: function (msg) {
         // Glowsticks
-        let left = "<:glo1:512309043671597066>";
-        let right = "<:glo2:512309060461264897>";
+        let left = "<:glo1:524424654065238026>";
+        let right = "<:glo2:524424686122041365>";
         // List of emojis in the server
         let emotes = ["<:LadyG:426153954703835137>", "<:caw:477160191029280769>", "<:pusheenblob:406307734267494410>", "<:halo:491761775440560138>", "<:grump:491761231711961120>", "<:frisk:467196742438354969>", "<:Isabelle:512143594187128832>", "<:bongo:505545336274550806>", "<:derp:406307417584959489>", "<:chara:524041640948531210>"];
         let ran = Math.floor(Math.random() * emotes.length); // Randomly generate a number between 0 and (length of emotes array)
         if (ran === 5 && chara === true) {
-            msg.channe.send(left + emotes[5] + right);
+            let r = Math.floor(Math.random() * 2);
+            msg.channel.send(left + " " + right + "\n*but nobody came...*");
         } else {
             msg.channel.send(left + emotes[ran] + right);
         }
         if (ran === 9 && chara === false) {
             chara = true;
-            console.log("The seed has been planted...");
-            emb = new Discord.RichEmbed().setColor(0xD30000).setDescription("The seed has been planted...").setImage('./chara-wide.png');
-            msg.channel.send(emb);
+            setTimeout(() => {
+                emb = new Discord.RichEmbed().setColor(0xD30000).setDescription("The seed...has been planted...").setImage('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/chara-wide.png');
+                msg.channel.send(emb);
+            }, 2000);
         }
     },
-    hugCommand: function(msg, arg) {
+    hugCommand: function (msg, arg) {
         let sender = msg.member;
         if (arg.length === 0) {
             msg.channel.send("You open your arms for a big hug \u{1F495}");
