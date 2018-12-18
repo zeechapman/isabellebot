@@ -1,6 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client(); // Just in case I need this.  Looked cute, but might delete later
 
+// Global variables
+let chara = false;
+
 module.exports = {
     // ---!sa commands
     /**
@@ -91,9 +94,19 @@ module.exports = {
         let left = "<:glo1:512309043671597066>";
         let right = "<:glo2:512309060461264897>";
         // List of emojis in the server
-        let emotes = ["<:LadyG:426153954703835137>", "<:caw:477160191029280769>", "<:pusheenblob:406307734267494410>", "<:halo:491761775440560138>", "<:grump:491761231711961120>", "<:frisk:467196742438354969>", "<:Isabelle:512143594187128832>", "<:bongo:505545336274550806>", "<:derp:406307417584959489>"];
+        let emotes = ["<:LadyG:426153954703835137>", "<:caw:477160191029280769>", "<:pusheenblob:406307734267494410>", "<:halo:491761775440560138>", "<:grump:491761231711961120>", "<:frisk:467196742438354969>", "<:Isabelle:512143594187128832>", "<:bongo:505545336274550806>", "<:derp:406307417584959489>", "<:chara:524041640948531210>"];
         let ran = Math.floor(Math.random() * emotes.length); // Randomly generate a number between 0 and (length of emotes array)
-        msg.channel.send(left + emotes[ran] + right);
+        if (ran === 5 && chara === true) {
+            msg.channe.send(left + emotes[5] + right);
+        } else {
+            msg.channel.send(left + emotes[ran] + right);
+        }
+        if (ran === 9 && chara === false) {
+            chara = true;
+            console.log("The seed has been planted...");
+            emb = new Discord.RichEmbed().setColor(0xD30000).setDescription("The seed has been planted...").setImage('./chara-wide.png');
+            msg.channel.send(emb);
+        }
     },
     hugCommand: function(msg, arg) {
         let sender = msg.member;
