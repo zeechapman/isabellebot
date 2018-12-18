@@ -2,8 +2,9 @@ const Discord = require('discord.js');
 const client = new Discord.Client(); // Just in case I need this.  Looked cute, but might delete later
 
 // Global variables
-let chara = false;
 let isabelle = "<@523039317036368105>"; // Identify itself
+let chara = false;
+let critHappened = false;
 
 module.exports = {
     // ---!sa commands
@@ -60,8 +61,8 @@ module.exports = {
     // Table flip (anger)
     flipTable: function (msg) {
         let num = Math.floor(Math.random() * 6);
-        console.log(num);
         if (num === 5) {
+            critHappened = true;
             msg.channel.send("**CRIT**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
         } else {
             msg.channel.send("(╯°□°）╯︵ ┻━┻");
@@ -69,7 +70,11 @@ module.exports = {
     },
     // Table flip (reverse anger)
     fixTable: function (msg) {
-        msg.channel.send("┬──┬ ノ( ゜-゜ノ)");
+        if (critHappened === true) {
+            msg.channel.send("**COUNTER**\n┬──┬ ︵ヽ( ゜- ゜)ﾉ︵ ┬──┬");
+        } else {
+            msg.channel.send("┬──┬ ノ( ゜-゜ノ)");
+        }
     },
     // Needs more phill
     phil: function (msg) {
