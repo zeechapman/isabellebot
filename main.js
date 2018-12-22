@@ -99,9 +99,11 @@ function processCmd(msg) {
     }
     else if (primaryCmd === "fixtable" || primaryCmd === "tablefix") {
         commands.fixTable(msg);
-    } else if (primaryCmd === "rip") {
+    }
+    else if (primaryCmd === "rip") {
         commands.payRespects(msg);
-    } else if (primaryCmd === "trip") {
+    }
+    else if (primaryCmd === "trip" || primaryCmd === "t") {
         commands.tripCommand(msg);
     }
     else if (primaryCmd === "nani") {
