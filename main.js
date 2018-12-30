@@ -95,7 +95,7 @@ function processCmd(msg) {
         commands.poke(msg, args);
     }
     else if (primaryCmd === "fliptable" || primaryCmd === "tableflip") {
-        commands.flipTable(msg);
+        commands.flipTable(msg, args);
     }
     else if (primaryCmd === "fixtable" || primaryCmd === "tablefix") {
         commands.fixTable(msg);

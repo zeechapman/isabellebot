@@ -59,21 +59,41 @@ module.exports = {
         msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
     },
     // Table flip (anger)
-    flipTable: function (msg) {
+    flipTable: function (msg, arg) {
+        let faces = ['(╯˘ ᵕ˘）╯︵ ┻━┻', '(╯˘꒳˘）╯︵ ┻━┻', '(/¯◡ ‿ ◡)/¯ ~ ┻━┻', '┬─┬ ︵ /(.□. \\）\n(wait wut)']; // Extra faces
         let num = Math.floor(Math.random() * 6);
+        let num2 = Math.floor(Math.random() * 6); // Need to rename these variables
+        let numFace = Math.floor(Math.random() * faces.length); // Random face picker
+        let sender = msg.member;
+
         if (num === 5) {
             critHappened = true;
             msg.channel.send("**CRIT**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
         } else {
-            msg.channel.send("(╯°□°）╯︵ ┻━┻");
+            if (arg.length === 0) {
+                if (num2 === 5) {
+                    msg.channel.send(faces[numFace]); // Fancy faces
+                }
+                else {
+                    msg.channel.send("(╯°□°）╯︵ ┻━┻");
+                }
+            } else {
+                msg.channel.send(sender + ' flips ' + arg + ' over.\n' + sender + '(╯°Д°）╯︵ /(.□ . \) '  + arg);
+            }
         }
     },
     // Table flip (reverse anger)
     fixTable: function (msg) {
+        let num = Math.floor(Math.random() * 6);
         if (critHappened === true) {
             msg.channel.send("**COUNTER**\n┬──┬ ︵ヽ( ゜- ゜)ﾉ︵ ┬──┬");
+            critHappened = false;
         } else {
-            msg.channel.send("┬──┬ ノ( ゜-゜ノ)");
+            if (num === 5) {
+                msg.channel.send('┬─────────────┬ ノ( ゜-゜ノ)\n*looong table*');
+            } else {
+                msg.channel.send("┬──┬ ノ( ゜-゜ノ)");
+            }
         }
     },
     // Needs more phill
@@ -131,7 +151,7 @@ module.exports = {
             msg.channel.send("You wrap your arms around yourself.  Silly \u{1F495}");
         }
         // Easter egg time
-          else if (arg.toString() === "toriel") {
+        else if (arg.toString() === "toriel") {
             msg.channel.send("You hug the goat mom! \u{1F495}");
         } else if (arg.toString() === "asriel") {
             msg.channel.send("You hug the goat boy! \u{1F495}");
