@@ -115,6 +115,9 @@ function processCmd(msg) {
     else if (primaryCmd === "hug") {
         commands.hugCommand(msg, args);
     }
+    else if (primaryCmd === "isawthat" || primaryCmd === "sawthat") {
+        commands.iSawThat(msg);
+    }
 
 }
 

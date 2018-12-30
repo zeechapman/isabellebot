@@ -169,5 +169,13 @@ module.exports = {
             // If the user uses it to actually hug a person
             msg.channel.send(sender + " gives a big hug to " + arg + " \u{1F495}");
         }
+    },
+    // Call out someone ninja-editing their posts
+    iSawThat: function(msg) {
+        let preMsg = ['I saw that edit! ', 'Is that a...NINJA EDIT? ', 'Nice edit you did there...'];
+        let lennys = ['(͠≖ ͜ʖ͠≖)', '( ͡~ ͜ʖ ͡°)', '( ͡◉ ͜ʖ ͡◉)', '( ͡° ͜ʖ ͡°)']
+        let pre = Math.floor(Math.random() * preMsg.length);
+        let len = Math.floor(Math.random() * lennys.length);
+        msg.channel.send(preMsg[pre] + lennys[len]);
     }
 }
