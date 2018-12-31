@@ -81,6 +81,8 @@ function processCmd(msg) {
     let splitCmd = fullCmd.split(" "); // same as the other function
     let primaryCmd = splitCmd[0]; // Yup, still the same
     let args = splitCmd.slice(1); // Look, just take a peek at specialCommand because I don't want to have to re-write it (write a function for it) what was that?
+    
+    let argJoin = args.join().replace(/,/g, ' ');
 
     console.log("Command seen: " + primaryCmd);
     console.log("Arguments: " + args + "\n");
@@ -92,10 +94,10 @@ function processCmd(msg) {
         commands.phil(msg);
     }
     else if (primaryCmd === "poke") {
-        commands.poke(msg, args);
+        commands.poke(msg, argJoin);
     }
     else if (primaryCmd === "fliptable" || primaryCmd === "tableflip") {
-        commands.flipTable(msg, args);
+        commands.flipTable(msg, argJoin);
     }
     else if (primaryCmd === "fixtable" || primaryCmd === "tablefix") {
         commands.fixTable(msg);
@@ -113,7 +115,7 @@ function processCmd(msg) {
         commands.raveCommand(msg);
     }
     else if (primaryCmd === "hug") {
-        commands.hugCommand(msg, args);
+        commands.hugCommand(msg, argJoin);
     }
     else if (primaryCmd === "isawthat" || primaryCmd === "sawthat") {
         commands.iSawThat(msg);

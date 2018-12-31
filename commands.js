@@ -51,7 +51,19 @@ module.exports = {
             .setThumbnail("https://raw.githubusercontent.com/zeechapman/isabellebot/master/isabelle-pic.png");
         msg.channel.send(embed);
     },
-
+    update: function(msg) {
+        let str =   '**New commands!**\n' +
+                    '- *!sa update* --- The command you\'re reading right now!  Shows last (major) update\n'
+                    '- *!isawthat* or *!sawthat* --- Call out on a ninja edit ( ͡~ ͜ʖ ͡°)\n' +
+                    '**Updated commands**\n' +
+                    '- *!tableflip* --- Now you can flip a person...which I don\'t recomend, please!  Also, random chance for special flips added (1 in 6 chance, same as criticals)\n' +
+                    ''
+        let embed = new Discord.RichEmbed()
+            .setTitle("Updates!")
+            .setDescription(str)
+            .setColor(0x00b300);
+        msg.channel.send(embed);
+    },
     // Normal commands.  Usually reflects Goggle's stream
 
     // Caw caw, baby! \u{1F426}
@@ -78,7 +90,7 @@ module.exports = {
                     msg.channel.send("(╯°□°）╯︵ ┻━┻");
                 }
             } else {
-                msg.channel.send(sender + ' flips ' + arg + ' over.\n' + sender + '(╯°Д°）╯︵ /(.□ . \) '  + arg);
+                msg.channel.send(sender + ' flips ' + arg + ' over.\n' + sender + ' (╯°Д°）╯︵ /(.□ . \) '  + arg);
             }
         }
     },
