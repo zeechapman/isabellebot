@@ -74,7 +74,7 @@ module.exports = {
     flipTable: function (msg, arg) {
         let faces = ['(╯˘ ᵕ˘）╯︵ ┻━┻', '(╯˘꒳˘）╯︵ ┻━┻', '(/¯◡ ‿ ◡)/¯ ~ ┻━┻', '┬─┬ ︵ /(.□. ﾉ）\n(wait wut)']; // Extra faces
         let num = Math.floor(Math.random() * 6);
-        let num2 = Math.floor(Math.random() * 6); // Need to rename these variables
+        let num2 = Math.floor(Math.random() * 3); // Need to rename these variables
         let numFace = Math.floor(Math.random() * faces.length); // Random face picker
         let sender = msg.member;
 
@@ -83,7 +83,7 @@ module.exports = {
             msg.channel.send("**CRIT**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
         } else {
             if (arg.length === 0) {
-                if (num2 === 5) {
+                if (num2 === 2) {
                     msg.channel.send(faces[numFace]); // Fancy faces
                 }
                 else {
