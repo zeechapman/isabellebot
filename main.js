@@ -67,8 +67,12 @@ function specialCommand(msg) {
     else if (primaryCmd === "info") {
         commands.info(msg);
     }
+    // Update info
+    else if (primaryCmd === "update") {
+        commands.update(msg);
+    }
     else if (primaryCmd === "hh") {
-        msg.channel.send("Happy Holidays, everyone!");
+        msg.channel.send("\u{1F38A} Happy New Years! \u{1F38A}");
     }
 }
 

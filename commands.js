@@ -47,13 +47,13 @@ module.exports = {
     info: function (msg) {
         let embed = new Discord.RichEmbed()
             .setTitle("Oh, info?  About me? \u{1F495}")
-            .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by < not bound > (aka Bound).  Enjoying my company?  I'm glad!")
+            .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by <@518190826933977099> (aka Bound).  Enjoying my company?  I'm glad!")
             .setThumbnail("https://raw.githubusercontent.com/zeechapman/isabellebot/master/isabelle-pic.png");
         msg.channel.send(embed);
     },
     update: function(msg) {
         let str =   '**New commands!**\n' +
-                    '- *!sa update* --- The command you\'re reading right now!  Shows last (major) update\n'
+                    '- *!sa update* --- The command you\'re reading right now!  Shows last (major) update\n' +
                     '- *!isawthat* or *!sawthat* --- Call out on a ninja edit ( ͡~ ͜ʖ ͡°)\n' +
                     '**Updated commands**\n' +
                     '- *!tableflip* --- Now you can flip a person...which I don\'t recomend, please!  Also, random chance for special flips added (1 in 6 chance, same as criticals)\n' +
@@ -72,7 +72,7 @@ module.exports = {
     },
     // Table flip (anger)
     flipTable: function (msg, arg) {
-        let faces = ['(╯˘ ᵕ˘）╯︵ ┻━┻', '(╯˘꒳˘）╯︵ ┻━┻', '(/¯◡ ‿ ◡)/¯ ~ ┻━┻', '┬─┬ ︵ /(.□. \\）\n(wait wut)']; // Extra faces
+        let faces = ['(╯˘ ᵕ˘）╯︵ ┻━┻', '(╯˘꒳˘）╯︵ ┻━┻', '(/¯◡ ‿ ◡)/¯ ~ ┻━┻', '┬─┬ ︵ /(.□. ﾉ）\n(wait wut)']; // Extra faces
         let num = Math.floor(Math.random() * 6);
         let num2 = Math.floor(Math.random() * 6); // Need to rename these variables
         let numFace = Math.floor(Math.random() * faces.length); // Random face picker
@@ -89,6 +89,8 @@ module.exports = {
                 else {
                     msg.channel.send("(╯°□°）╯︵ ┻━┻");
                 }
+            } else if (arg.toString() === sender.toString()) {
+                msg.channel.send("**SHADOW COUNTER**\n┬─┬ ︵ /(.□. ﾉ)");
             } else {
                 msg.channel.send(sender + ' flips ' + arg + ' over.\n' + sender + ' (╯°Д°）╯︵ /(.□ . \) '  + arg);
             }
@@ -158,7 +160,7 @@ module.exports = {
         } else if (arg.toString() === isabelle) {
             // If user tries to hug the bot
             msg.channel.send("You hug me!! \u{1F495}");
-        } else if (arg.toString() === sender) {
+        } else if (arg.toString() === sender.toString()) {
             // If the user tries to hug themselves
             msg.channel.send("You wrap your arms around yourself.  Silly \u{1F495}");
         }
