@@ -52,14 +52,12 @@ module.exports = {
         msg.channel.send(embed);
     },
     update: function(msg) {
-        let str =   '**New commands!**\n' +
-                    '- *!sa update* --- The command you\'re reading right now!  Shows last (major) update\n' +
-                    '- *!isawthat* or *!sawthat* --- Call out on a ninja edit ( ͡~ ͜ʖ ͡°)\n' +
-                    '**Updated commands**\n' +
-                    '- *!tableflip* --- Now you can flip a person...which I don\'t recomend, please!  Also, random chance for special flips added (1 in 6 chance, same as criticals)\n' +
-                    ''
+        let str =   '*** New command! ***\n' +
+                    '- !thisisfine - This is fine :fire:<:thisisfine:467198644823654402>:fire:\n' +
+                    '*** Fixes ***\n' +
+                    '- !hug - Fixed when hugging self.  Now you can hug yourself, without a clone of yourself hugging you';
         let embed = new Discord.RichEmbed()
-            .setTitle("Updates!")
+            .setTitle("Updates! (01/14/19)")
             .setDescription(str)
             .setColor(0x00b300);
         msg.channel.send(embed);
