@@ -72,37 +72,41 @@ module.exports = {
     },
     // Table flip (anger)
     flipTable: function (msg, arg) {
-        let faces = ['(╯˘ ᵕ˘）╯︵ ┻━┻', '(╯˘꒳˘）╯︵ ┻━┻', '(/¯◡ ‿ ◡)/¯ ~ ┻━┻', '┬─┬ ︵ /(.□. ﾉ）\n(wait wut)']; // Extra faces
-        let num = Math.floor(Math.random() * 6);
-        let num2 = Math.floor(Math.random() * 3); // Need to rename these variables
-        let numFace = Math.floor(Math.random() * faces.length); // Random face picker
+        let faces = ['(╯˘ ᵕ˘）╯︵ ┻━┻', '(╯˘꒳˘）╯︵ ┻━┻', '(/¯◡ ‿ ◡)/¯ ~ ┻━┻', '┬─┬ ︵ /(.□. ﾉ）(wait wut)']; // Extra faces
         let sender = msg.member;
 
-        if (num === 5) {
-            critHappened = true;
-            msg.channel.send("**CRIT**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
-        } else {
-            if (arg.length === 0) {
-                if (num2 === 2) {
-                    msg.channel.send(faces[numFace]); // Fancy faces
-                }
-                else {
-                    msg.channel.send("(╯°□°）╯︵ ┻━┻");
-                }
-            } else if (arg.toString() === sender.toString()) {
-                msg.channel.send("**SHADOW COUNTER**\n┬─┬ ︵ /(.□. ﾉ)");
+        if (arg.length === 0) {
+            // If the user hasn't provided an argument (name)
+            let critRoll = Math.floor(Math.random() * 6);
+            let faceRoll = Math.floor(Math.random() * 3);
+            let numFace = Math.floor(Math.random() * faces.length); // Random face picker
+            if (critRoll === 5) {
+                // Crit did happen
+                critHappened = true;
+                msg.channel.send("**CRIT**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
+            } else if (faceRoll === 2) {
+                // If fancy face is rolled
+                msg.channel.send(faces[numFace]);
             } else {
-                msg.channel.send(sender + ' flips ' + arg + ' over.\n' + sender + ' (╯°Д°）╯︵ /(.□ . \) '  + arg);
+                // Just normal flip
+                msg.channel.send("(╯°□°）╯︵ ┻━┻");
             }
+        } else if (arg.toString() === sender.toString()) {
+            // If user tags themselves
+            msg.channel.send("**SHADOW COUNTER**\n┬─┬  ︵  /(.□. ﾉ) " + sender);
+        } else {
+            // If user tags someone else
+            msg.channel.send(sender + ' flips ' + arg + ' over.\n' + sender + ' (╯°Д°）╯︵ /(.□ .ﾉ) '  + arg);
         }
     },
     // Table flip (reverse anger)
     fixTable: function (msg) {
-        let num = Math.floor(Math.random() * 6);
         if (critHappened === true) {
+            // If a crit had already happened
             msg.channel.send("**COUNTER**\n┬──┬ ︵ヽ( ゜- ゜)ﾉ︵ ┬──┬");
             critHappened = false;
         } else {
+            let num = Math.floor(Math.random() * 6);
             if (num === 5) {
                 msg.channel.send('┬─────────────┬ ノ( ゜-゜ノ)\n*looong table*');
             } else {
@@ -118,7 +122,7 @@ module.exports = {
     payRespects: function (msg) {
         msg.channel.send("Press F to pay respects");
     },
-    // Inside joke sort of
+    // Inside joke
     tripCommand: function (msg) {
         msg.channel.send("Press T to pay respects for Joshy");
     },
@@ -191,5 +195,11 @@ module.exports = {
         let pre = Math.floor(Math.random() * preMsg.length);
         let len = Math.floor(Math.random() * lennys.length);
         msg.channel.send(preMsg[pre] + lennys[len]);
+    },
+    // Fire (this is fine dog) fire
+    thisIsFine: function(msg) {
+        let dog = "<:thisisfine:467198644823654402>";
+        let fire = ":fire:";
+        msg.channel.send(fire + dog + fire);
     }
 }

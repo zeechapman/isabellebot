@@ -124,7 +124,9 @@ function processCmd(msg) {
     else if (primaryCmd === "isawthat" || primaryCmd === "sawthat") {
         commands.iSawThat(msg);
     }
-
+    else if (primaryCmd === "thisisfine") {
+        commands.thisIsFine(msg);
+    }
 }
 
 // Grab the token and log in.
