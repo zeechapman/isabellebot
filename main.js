@@ -126,6 +126,8 @@ function processCmd(msg) {
     }
     else if (primaryCmd === "thisisfine") {
         commands.thisIsFine(msg);
+    } else if (primaryCmd === "diceroll") {
+        commands.diceRoll(msg, argJoin);
     }
 }
 
