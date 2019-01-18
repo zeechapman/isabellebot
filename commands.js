@@ -199,5 +199,23 @@ module.exports = {
         let dog = "<:thisisfine:467198644823654402>";
         let fire = ":fire:";
         msg.channel.send(fire + dog + fire);
+    },
+    // Diceroll (with optional number choices)
+    diceRoll: function(msg, arg) {
+        let droll;
+        // If nothing is put in for the arg, then have it be a d6 by default
+        if (arg.length === 0) {
+            droll = 6;
+            let ran = Math.floor(Math.random() * droll + 1);
+            msg.channel.send("You rolled a " + ran);
+        } else {
+            if (isNaN(arg) || arg <= 1) {
+                msg.channel.send("Not a number, or too small!  Please try again.");
+            } else {
+                droll = arg;
+                let ran = Math.floor(Math.random() * arg + 1);
+                msg.channel.send("You rolled a " + ran);
+            }
+        }
     }
 }
