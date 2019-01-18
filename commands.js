@@ -52,12 +52,13 @@ module.exports = {
         msg.channel.send(embed);
     },
     update: function(msg) {
-        let str =   '*** New command! ***\n' +
+        let str =   '*** New commands! ***\n' +
                     '- !thisisfine - This is fine :fire:<:thisisfine:467198644823654402>:fire:\n' +
+                    '- !diceroll <number> - Roll a dice.  If a number is included, roll a dice based on that number.\n' +
                     '*** Fixes ***\n' +
                     '- !hug - Fixed when hugging self.  Now you can hug yourself, without a clone of yourself hugging you';
         let embed = new Discord.RichEmbed()
-            .setTitle("Updates! (01/14/19)")
+            .setTitle("Updates! (01/17/19)")
             .setDescription(str)
             .setColor(0x00b300);
         msg.channel.send(embed);
