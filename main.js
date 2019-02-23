@@ -129,6 +129,9 @@ function processCmd(msg) {
     } else if (primaryCmd === "diceroll") {
         commands.diceRoll(msg, argJoin);
     }
+    else if (primaryCmd === "8ball") {
+        commands.eBall(msg);
+    }
 }
 
 // Grab the token and log in.
