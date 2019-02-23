@@ -124,7 +124,14 @@ function processCmd(msg) {
     else if (primaryCmd === "isawthat" || primaryCmd === "sawthat") {
         commands.iSawThat(msg);
     }
-
+    else if (primaryCmd === "thisisfine") {
+        commands.thisIsFine(msg);
+    } else if (primaryCmd === "diceroll") {
+        commands.diceRoll(msg, argJoin);
+    }
+    else if (primaryCmd === "8ball") {
+        commands.eBall(msg);
+    }
 }
 
 // Grab the token and log in.
@@ -133,7 +140,7 @@ let token = process.env.TOKEN;
 if (token == ''|| token == null) {
     console.info("Switching token");
     const data = require('./data.js');
-    token = data.data;
+    token = data;
 } else {
     // Prevent from idling for too long
     keepAlive.keepAlive();

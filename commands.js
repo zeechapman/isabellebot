@@ -15,7 +15,7 @@ module.exports = {
         let str = "\n\n- !sa help --- A list of commands.  I'm sorry, I'm a bit repetitve sometimes!  Haha\n- !sa sendhelp --- If you or someone is feeling a bit down, I'll do what I can to help!\n- !sa info --- Information about me!"
         let footer = "There's this weird blue guy that took my exclamation, so remember to use \"!sa\" at the start to call me!";
         let embed = new Discord.RichEmbed().setTitle("Oh, hello!").setDescription("Good to see you!  I'm Isabelle, and I'm here to help when you need it!\nWhenever you need me, you can always say:" + str).setColor(0xB5E8F2).setFooter(footer);
-        let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :bird:\n- !fliptable --- For mobile users who need to flip a table, or a person (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke <person> --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects\n- !trip --- Pay respects for Josh Jrs' typo\n- !nani --- NANI??\n- !rave --- Summon a quick rave (careful with it...)\n- !hug <person> --- Give someone a hug! \u{1F495}\n- !isawthat --- Call out a ninja edit.").setFooter("The blue man didn't take those, thank goodness.");
+        let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :bird:\n- !fliptable --- For mobile users who need to flip a table, or a person (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke <person> --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects\n- !trip --- Pay respects for Josh Jrs' typo\n- !nani --- NANI??\n- !rave --- Summon a quick rave (careful with it...)\n- !hug <person> --- Give someone a hug! \u{1F495}\n- !isawthat --- Call out a ninja edit.\n- !8ball --- Consult the magic 8Ball!").setFooter("The blue man didn't take those, thank goodness.");
         msg.channel.send(embed);
         setTimeout(() => {
             msg.channel.startTyping();
@@ -52,6 +52,7 @@ module.exports = {
         msg.channel.send(embed);
     },
     update: function(msg) {
+<<<<<<< HEAD
         let str =   '*** New commands! ***\n' +
                     '- !thisisfine - This is fine :fire:<:thisisfine:467198644823654402>:fire:\n' +
                     '- !diceroll <number> - Roll a dice.  If a number is included, roll a dice based on that number.\n' +
@@ -59,6 +60,13 @@ module.exports = {
                     '- !hug - Fixed when hugging self.  Now you can hug yourself, without a clone of yourself hugging you';
         let embed = new Discord.RichEmbed()
             .setTitle("Updates! (01/17/19)")
+=======
+        let str =   '*** I was updated! ***\n' +
+                    '*New command*\n' +
+                    ' - !8ball --- Consult the Magic 8-Ball!';
+        let embed = new Discord.RichEmbed()
+            .setTitle("Updates! (02/23/19)")
+>>>>>>> dev
             .setDescription(str)
             .setColor(0x00b300);
         msg.channel.send(embed);
@@ -200,5 +208,74 @@ module.exports = {
         let dog = "<:thisisfine:467198644823654402>";
         let fire = ":fire:";
         msg.channel.send(fire + dog + fire);
+    },
+    // Diceroll (with optional number choices)
+    diceRoll: function(msg, arg) {
+        let droll;
+        // If nothing is put in for the arg, then have it be a d6 by default
+        if (arg.length === 0) {
+            droll = 6;
+            let ran = Math.floor(Math.random() * droll + 1);
+            msg.channel.send("You rolled a " + ran);
+        } else {
+            if (isNaN(arg) || arg <= 1) {
+                msg.channel.send("Not a number, or too small!  Please try again.");
+            } else {
+                droll = arg;
+                let ran = Math.floor(Math.random() * arg + 1);
+                msg.channel.send("You rolled a " + ran);
+            }
+        }
+    },
+    eBall: function(msg) {
+        // Most 8 Balls don't have this many outcomes, so this may be changed in the future.
+        let outcomes = {
+            "pos": [
+                "It is certain.",
+                "It is decidedly so.",
+                "Without a doubt.",
+                "Yes - definitely.",
+                "You may rely on it.",
+                "As I see it, yes.",
+                "Most likely.",
+                "Outlook good.",
+                "Yes.",
+                "Signs point to yes."
+            ],
+            "neu": [
+                "Reply hazy, try again.",
+                "Ask again later.",
+                "Better not tell you now.",
+                "Cannot predict now.",
+                "Concentrate and ask again."                
+            ],
+            "neg": [
+                "Don't count on it.",
+                "My reply is no.",
+                "My sources say no.",
+                "Outlook not so good.",
+                "Very doubtful."
+            ]
+        };
+        
+        // Generate a random number between 0 and 8
+        let ran = Math.floor(Math.random() * 9);
+        
+        // For use later on RichEmbed
+        let desc = "";
+
+        if (ran <= 2) { // If number is between 0 and 2
+            let i = Math.floor(Math.random() * outcomes.pos.length);
+            desc = outcomes.pos[i];
+        } else if (ran <= 3 && ran <= 5) { // If number is between 3 and 5
+            let i = Math.floor(Math.random() * outcomes.neu.length);
+            desc = outcomes.neu[i];
+        } else if (ran <= 6 && ran <= 8) { // If number is between 6 and 8
+            let i = Math.floor(Math.random() * outcomes.neg.length);
+            desc = outcomes.neg[i];
+        }
+        
+        msg.channel.send(desc);
+
     }
 }
