@@ -130,7 +130,7 @@ function processCmd(msg) {
         commands.diceRoll(msg, argJoin);
     }
     else if (primaryCmd === "8ball") {
-        commands.eBall(msg);
+        commands.eBall(msg, argJoin);
     }
 }
 
