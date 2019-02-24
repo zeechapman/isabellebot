@@ -5,6 +5,9 @@ const client = new Discord.Client(); // Just in case I need this.  Looked cute, 
 let isabelle = "<@523039317036368105>"; // Identify itself
 let chara = false;
 let critHappened = false;
+let ballCD = false;
+let ballDate = new Date();
+let ballLast = ballDate.getTime();
 
 module.exports = {
     // ---!sa commands
@@ -232,60 +235,66 @@ module.exports = {
                 "Most likely.",
                 "Outlook good.",
                 "Yes.",
-                "Signs point to yes."
-            ],
+                "Signs point to yes."],
             "neu": [
                 "Reply hazy, try again.",
                 "Ask again later.",
                 "Better not tell you now.",
                 "Cannot predict now.",
-                "Concentrate and ask again."
-            ],
+                "Concentrate and ask again."],
             "neg": [
                 "Don't count on it.",
                 "My reply is no.",
                 "My sources say no.",
                 "Outlook not so good.",
-                "Very doubtful."
-            ]
+                "Very doubtful."]
         };
 
-        // Generate a random number between 0 and 8
-        let ran = Math.floor(Math.random() * 9);
+        let command = () => {
+            ballCD = true;
+            ballLast = date.getTime(); // Get the time the command was initiated and set it globally
+            // Generate a random number between 0 and 7
+            let ran = Math.floor(Math.random() * 12);
 
-        let desc = "";
+            let desc = ""; // Blank on purpose
 
-
-
-        if (arg.length === 0) {
-            msg.channel.send("You got to ask the 8-Ball a question, silly!\n\`!8ball <Question>\`");
-        } else {
-            
-            console.log("Entering now. Current number is " + ran);
-
-            if (ran >= 0) { // If number is between 0 and 2
+            if (ran <= 4) { // If number is between 0 and 1
                 let i = Math.floor(Math.random() * outcomes.pos.length);
                 desc = outcomes.pos[i];
-
-                console.log("Positives\ni = " + i + "\ndesc = " + desc);
-
-            } else if (ran >= 3 && ran <= 5) { // If number is between 3 and 5
+            } else if (ran >= 5 && ran <= 9) { // If number is between 2 and 3
                 let i = Math.floor(Math.random() * outcomes.neu.length);
                 desc = outcomes.neu[i];
-
-                console.log("Neuturals\ni = " + i + "\ndesc = " + desc);
-
-            } else if (ran >= 6 && ran <= 8) { // If number is between 6 and 8
+            } else if (ran >= 10 && ran <= 11) { // If number is between 4 and 5
                 let i = Math.floor(Math.random() * outcomes.neg.length);
                 desc = outcomes.neg[i];
-
-                console.log("Negatives\ni = " + i + "\ndesc = " + desc);
-
-
             }
-            let pre = ["*Shaking the Magic 8-Ball to reveal*", "Let's see what it says!"]
-            let j = Math.floor(Math.random() * pre.length);
-            msg.channel.send(pre[j] + "\n*" + desc + "*");
-        }    
+            let pre = arg.toString();
+            msg.channel.send("\"" + arg + "\"\n8-Ball says: *" + desc + "*");
+        };
+
+        /* Cooldown control */
+        let date = new Date();
+        let ballNow = date.getTime();
+        let ballBetween = ballNow - ballLast;
+        if (arg.length === 0) { // If user didn't ask anything
+            msg.channel.send("You got to ask the 8-Ball a question, silly!\n\`!8ball <Question>\`");
+        } else {
+            if (ballCD === false) {
+                command();
+            } else if (ballCD === true) {
+                if (ballBetween <= 20000) {
+                    // Something is not correct here in terms of seconds vs MS, so I will have to come back later and fix it
+                    let timeRemaining = 20000 - ballBetween;
+                    let timeStr = timeRemaining.toString();
+                    if (timeRemaining <= 10000) {
+                        msg.channel.send("The Magic 8-Ball needs time to cool down.\nTime remaining: " + timeStr.substring(0, 1) + " seconds.");
+                    } else {
+                        msg.channel.send("The Magic 8-Ball needs time to cool down.\nTime remaining: " + timeStr.substring(0, 2) + " seconds.");
+                    }
+                } else {
+                    command();
+                }
+            }
+        }
     }
 }
