@@ -130,7 +130,7 @@ function processCmd(msg) {
         commands.diceRoll(msg, argJoin);
     }
     else if (primaryCmd === "8ball") {
-        msg.channel.send("This command is currently disabled to be fixed. Sorry!")
+        commands.eBall(msg, argJoin);
     }
 }
 
