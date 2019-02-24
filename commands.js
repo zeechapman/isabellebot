@@ -261,8 +261,11 @@ module.exports = {
             console.log("Seems like it just initiated.\n" + ballBetween);
             ballCD = true;
             ballLast = date.getTime();
-        } else if (ballCD === true) {
+        } else if (ballCD === true && ballBetween <= 20000) {
             console.log("\n\n!! Cool down in effect !!\n\n");
+        } else {
+            console.log("\n\n** Command initiated **\n\n");
+            ballLast = date.getTime();
         }
 
         // if (ballLast === 0) { // When no time is set
