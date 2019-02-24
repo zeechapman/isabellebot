@@ -251,60 +251,44 @@ module.exports = {
         };
 
         /* Cooldown control */
-        
         let date = new Date();
         let ballNow = date.getTime();
         let ballBetween = ballNow - ballLast;
-
         if (ballCD === false && ballBetween <= 20000) {
-            // If CD is false AND it's under 20 seconds
-            console.log("Seems like it just initiated.\n" + ballBetween);
+            // If CD is false AND it's under 20 seconds (usually happens when App is initiated)
             ballCD = true;
-            ballLast = date.getTime();
+            ballLast = date.getTime(); // Get the time the command was initiated and set it globally
+            // Generate a random number between 0 and 5
+            let ran = Math.floor(Math.random() * 6);
+
+            let desc = ""; // Blank on purpose
+
+            if (arg.length === 0) { // If user didn't ask anything
+                msg.channel.send("You got to ask the 8-Ball a question, silly!\n\`!8ball <Question>\`");
+            } else {
+                if (ran >= 0) { // If number is between 0 and 1
+                    let i = Math.floor(Math.random() * outcomes.pos.length);
+                    desc = outcomes.pos[i];
+                } else if (ran >= 2 && ran <= 3) { // If number is between 2 and 3
+                    let i = Math.floor(Math.random() * outcomes.neu.length);
+                    desc = outcomes.neu[i];
+                } else if (ran >= 4 && ran <= 5) { // If number is between 4 and 5
+                    let i = Math.floor(Math.random() * outcomes.neg.length);
+                    desc = outcomes.neg[i];
+                }
+                let pre = ["*Shaking the Magic 8-Ball to reveal*", "Let's see what it says!"]
+                let j = Math.floor(Math.random() * pre.length);
+                msg.channel.send(pre[j] + "\n\"*" + desc + "*\"");
+            }
         } else if (ballCD === true && ballBetween <= 20000) {
-            console.log("\n\n!! Cool down in effect !!\n\n");
-        } else {
-            console.log("\n\n** Command initiated **\n\n");
-            ballLast = date.getTime();
+            // Something is not correct here in terms of seconds vs MS, so I will have to come back later and fix it
+            let timeRemaining = 20000 - ballBetween;
+            let timeStr = timeRemaining.toString();
+            if (timeRemaining <= 10000) {
+                msg.channel.send("The Magic 8-Ball needs time to cool down.\nTime remaining: " + timeStr.substring(0, 1) + " seconds.");
+            } else {
+                msg.channel.send("The Magic 8-Ball needs time to cool down.\nTime remaining: " + timeStr.substring(0, 2) + " seconds.");
+            }
         }
-
-        // if (ballLast === 0) { // When no time is set
-        //     ballLast = date.getTime();
-        //     console.log("\n\nNo past time set. Setting current time\n\n");
-        // } else { // When time is set
-        //     let ballNow = date.getTime();
-        //     let ballBetween = ballNow - ballLast;
-        //     if (ballBetween <= 20000) { // If 20 seconds haven't passed
-        //         let tStr = ballBetween.toString();
-        //         let timeRemaining = tStr.substring(0, 1);
-        //         console.log("Cool down is still in effect");
-        //         msg.channel.send("The Magic 8-Ball needs to cool down for about 20 seconds\nTime remaining: " + ballBetween + " seconds.");
-        //     } else {
-        //         // Generate a random number between 0 and 5
-        //         let ran = Math.floor(Math.random() * 6);
-
-        //         let desc = "";
-
-        //         if (arg.length === 0) {
-        //             msg.channel.send("You got to ask the 8-Ball a question, silly!\n\`!8ball <Question>\`");
-        //         } else {
-
-        //             if (ran >= 0) { // If number is between 0 and 1
-        //                 let i = Math.floor(Math.random() * outcomes.pos.length);
-        //                 desc = outcomes.pos[i];
-        //             } else if (ran >= 2 && ran <= 3) { // If number is between 2 and 3
-        //                 let i = Math.floor(Math.random() * outcomes.neu.length);
-        //                 desc = outcomes.neu[i];
-        //             } else if (ran >= 4 && ran <= 5) { // If number is between 4 and 5
-        //                 let i = Math.floor(Math.random() * outcomes.neg.length);
-        //                 desc = outcomes.neg[i];
-        //             }
-        //             let pre = ["*Shaking the Magic 8-Ball to reveal*", "Let's see what it says!"]
-        //             let j = Math.floor(Math.random() * pre.length);
-        //             msg.channel.send(pre[j] + "\"\n*" + desc + "*\"");
-        //         }
-
-        //     }
-        // }
     }
 }
