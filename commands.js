@@ -47,14 +47,16 @@ module.exports = {
     info: function (msg) {
         let embed = new Discord.RichEmbed()
             .setTitle("Oh, info?  About me? \u{1F495}")
-            .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by <@518190826933977099> (aka Bound).  Enjoying my company?  I'm glad!")
+            .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by <@518190826933977099> (aka Bound).  Enjoying my company?  I'm glad!\nIf you're a curious type, you can view how I'm coded here: https://github.com/zeechapman/isabellebot")
             .setThumbnail("https://raw.githubusercontent.com/zeechapman/isabellebot/master/isabelle-pic.png");
         msg.channel.send(embed);
     },
     update: function (msg) {
-        let str = '*** I was updated! ***\n' +
-            '*New command*\n' +
-            ' - !8ball --- Consult the Magic 8-Ball!';
+        let str = '*** I was updated! Here\'s what changed ***\n' +
+            '***New command***\n' +
+            '- !8ball <Question> --- Consult the Magic 8-Ball!' +
+            '\n***Fixes***\n' +
+            '!8ball\n- Error in logic check where 8 (highest RNG number) would be considered neither greater than, or less than, or equal. Sources say: Bound derped\n- Fixed blank answers. Previous iteration would have Isabelle not respond at all. Newest iteration would respond with empty responses.';
         let embed = new Discord.RichEmbed()
             .setTitle("Updates! (02/23/19)")
             .setDescription(str)
@@ -251,26 +253,39 @@ module.exports = {
         // Generate a random number between 0 and 8
         let ran = Math.floor(Math.random() * 9);
 
-        // For use later on RichEmbed
         let desc = "";
+
+
 
         if (arg.length === 0) {
             msg.channel.send("You got to ask the 8-Ball a question, silly!\n\`!8ball <Question>\`");
         } else {
-            if (ran <= 2) { // If number is between 0 and 2
+            
+            console.log("Entering now. Current number is " + ran);
+
+            if (ran >= 0) { // If number is between 0 and 2
                 let i = Math.floor(Math.random() * outcomes.pos.length);
                 desc = outcomes.pos[i];
-            } else if (ran <= 3 && ran <= 5) { // If number is between 3 and 5
+
+                console.log("Positives\ni = " + i + "\ndesc = " + desc);
+
+            } else if (ran >= 3 && ran <= 5) { // If number is between 3 and 5
                 let i = Math.floor(Math.random() * outcomes.neu.length);
                 desc = outcomes.neu[i];
-            } else if (ran <= 6 && ran <= 8) { // If number is between 6 and 8
+
+                console.log("Neuturals\ni = " + i + "\ndesc = " + desc);
+
+            } else if (ran >= 6 && ran <= 8) { // If number is between 6 and 8
                 let i = Math.floor(Math.random() * outcomes.neg.length);
                 desc = outcomes.neg[i];
+
+                console.log("Negatives\ni = " + i + "\ndesc = " + desc);
+
+
             }
             let pre = ["*Shaking the Magic 8-Ball to reveal*", "Let's see what it says!"]
-            let i = Math.floor(Math.random() * pre.length);
-            msg.channel.send(pre[i] + "\n*\"" + desc + "*\"");
-        }
-
+            let j = Math.floor(Math.random() * pre.length);
+            msg.channel.send(pre[j] + "\n*" + desc + "*");
+        }    
     }
 }
