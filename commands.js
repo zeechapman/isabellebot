@@ -268,9 +268,8 @@ module.exports = {
                 let i = Math.floor(Math.random() * outcomes.neg.length);
                 desc = outcomes.neg[i];
             }
-            let pre = ["*Shaking the Magic 8-Ball to reveal*", "Let's see what it says!"]
-            let j = Math.floor(Math.random() * pre.length);
-            msg.channel.send(pre[j] + "\n\"*" + desc + "*\"");
+            let pre = arg.toString();
+            msg.channel.send("\"" + arg + "\"\n8-Ball says: *" + desc + "*");
         };
 
         /* Cooldown control */
