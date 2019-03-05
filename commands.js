@@ -283,9 +283,9 @@ module.exports = {
             if (ballCD === false) {
                 command();
             } else if (ballCD === true) {
-                if (ballBetween <= 20000) {
+                if (ballBetween <= 30000) {
                     // Something is not correct here in terms of seconds vs MS, so I will have to come back later and fix it
-                    let timeRemaining = 20000 - ballBetween;
+                    let timeRemaining = 30000 - ballBetween;
                     let timeStr = timeRemaining.toString();
                     if (timeRemaining <= 10000) {
                         msg.channel.send("The Magic 8-Ball needs time to cool down.\nTime remaining: " + timeStr.substring(0, 1) + " seconds.");
