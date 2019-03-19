@@ -1,13 +1,22 @@
+// TODO: Make cooldown a function to shorthand everything
 const Discord = require('discord.js');
-const client = new Discord.Client(); // Just in case I need this.  Looked cute, but might delete later
 
 // Global variables
 let isabelle = "<@523039317036368105>"; // Identify itself
 let chara = false;
 let critHappened = false;
+
 let ballCD = false;
 let ballDate = new Date();
 let ballLast = ballDate.getTime();
+
+let connorCD = false;
+let connorDate = new Date();
+let connorLast = connorDate.getTime();
+
+// let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/master/';
+let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
+let stab = Math.floor(Math.random() * 5); // Index of stab image, randomly decided
 
 module.exports = {
     // ---!sa commands
@@ -15,10 +24,10 @@ module.exports = {
      * Show a list of commands
      */
     showCommands: function (msg) {
-        let str = "\n\n- !sa help --- A list of commands.  I'm sorry, I'm a bit repetitve sometimes!  Haha\n- !sa sendhelp --- If you or someone is feeling a bit down, I'll do what I can to help!\n- !sa info --- Information about me!"
-        let footer = "There's this weird blue guy that took my exclamation, so remember to use \"!sa\" at the start to call me!";
+        let str = "\n\n- !sa help --- A list of commands.  I'm sorry, I'm a bit repetitve sometimes!  Haha\n- !sa sendhelp --- If you or someone is feeling a bit down, I'll do what I can to help.\n- !sa info --- Information about me."
+        let footer = "There's this weird blue guy that is using exclamations, so remember to use \"!sa\" at the start to call me!";
         let embed = new Discord.RichEmbed().setTitle("Oh, hello!").setDescription("Good to see you!  I'm Isabelle, and I'm here to help when you need it!\nWhenever you need me, you can always say:" + str).setColor(0xB5E8F2).setFooter(footer);
-        let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :bird:\n- !fliptable --- For mobile users who need to flip a table, or a person (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke <person> --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects\n- !trip --- Pay respects for Josh Jrs' typo\n- !nani --- NANI??\n- !rave --- Summon a quick rave (careful with it...)\n- !hug <person> --- Give someone a hug! \u{1F495}\n- !isawthat --- Call out a ninja edit.\n- !8ball (question ) --- Consult the magic 8Ball!").setFooter("The blue man didn't take those, thank goodness.");
+        let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :bird:\n- !fliptable --- For mobile users who need to flip a table, or a person (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke <person> --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects\n- !trip --- Pay respects for Josh Jrs' typo\n- !nani --- NANI??\n- !rave --- Summon a quick rave\n- !hug <person> --- Give someone a hug! \u{1F495}\n- !isawthat --- Call out a ninja edit.\n- !8ball (question) --- Consult the magic 8Ball! (30 sec cooldown)\n- !stab --- **28 STAB WOUNDS** (one min cooldown)").setFooter("The blue man didn't take those, thank goodness.");
         msg.channel.send(embed);
         setTimeout(() => {
             msg.channel.startTyping();
@@ -51,17 +60,17 @@ module.exports = {
         let embed = new Discord.RichEmbed()
             .setTitle("Oh, info?  About me? \u{1F495}")
             .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by <@518190826933977099> (aka Bound).  Enjoying my company?  I'm glad!\nIf you're a curious type, you can view how I'm coded here: https://github.com/zeechapman/isabellebot")
-            .setThumbnail("https://raw.githubusercontent.com/zeechapman/isabellebot/master/isabelle-pic.png");
+            .setThumbnail(imgPath + "isabelle-pic.png");
         msg.channel.send(embed);
     },
     update: function (msg) {
-        let str = '*** I was updated! Here\'s what changed ***\n' +
+        let str = '** I was updated! Here\'s what changed **\n' +
             '***New command***\n' +
-            '- !8ball <Question> --- Consult the Magic 8-Ball!' +
-            '\n***Fixes***\n' +
-            '!8ball\n- Error in logic check where 8 (highest RNG number) would be considered neither greater than, or less than, or equal. Sources say: Bound derped\n- Fixed blank answers. Previous iteration would have Isabelle not respond at all. Newest iteration would respond with empty responses.';
+            '- !stab --- **28 STAB WOUNDS** (To prevent this command from being too spammy, a one minute cooldown will be placed on it)\n' +
+            '***Other updates***\n' +
+            '- !rave --- Removed the chance of Chara\n'
         let embed = new Discord.RichEmbed()
-            .setTitle("Updates! (02/23/19)")
+            .setTitle("Updates! (03/18/19)")
             .setDescription(str)
             .setColor(0x00b300);
         msg.channel.send(embed);
@@ -140,23 +149,9 @@ module.exports = {
         let left = "<:glo1:524424654065238026>";
         let right = "<:glo2:524424686122041365>";
         // List of emojis in the server
-        let emotes = ["<:LadyG:426153954703835137>", "<:caw:477160191029280769>", "<:pusheenblob:406307734267494410>", "<:halo:491761775440560138>", "<:grump:491761231711961120>", "<:frisk:467196742438354969>", "<:Isabelle:512143594187128832>", "<:bongo:505545336274550806>", "<:derp:406307417584959489>", "<:chara:524041640948531210>"];
+        let emotes = ["<:LadyG:426153954703835137>", "<:caw:477160191029280769>", "<:pusheenblob:406307734267494410>", "<:halo:491761775440560138>", "<:grump:491761231711961120>", "<:frisk:467196742438354969>", "<:Isabelle:512143594187128832>", "<:bongo:505545336274550806>", "<:derp:406307417584959489>"];
         let ran = Math.floor(Math.random() * emotes.length); // Randomly generate a number between 0 and (length of emotes array)
-        // If Frisk is the picked emote, then replace with nothing as he's dead
-        if (ran === 5 && chara === true) {
-            msg.channel.send(left + right + "\n*but nobody came...*");
-        } else {
-            msg.channel.send(left + emotes[ran] + right);
-        }
-        // If Chara is picked, plant the seed
-        if (ran === 9 && chara === false) {
-            chara = true; // The seed
-            setTimeout(() => {
-                // Warn the user
-                emb = new Discord.RichEmbed().setColor(0x8D0000).setDescription("The seed...has been planted...").setImage('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/chara-wide.png');
-                msg.channel.send(emb);
-            }, 1000);
-        }
+        msg.channel.send(left + emotes[ran] + right);
     },
     hugCommand: function (msg, arg) {
         let sender = msg.member;
@@ -294,6 +289,32 @@ module.exports = {
                 } else {
                     command();
                 }
+            }
+        }
+    },
+    // Detroit: Become Human commands
+    stabWounds: function (msg) {
+        // Maybe one of these days, I will find 28 pictures to do
+        let img = ['connor0.png', 'connor1.png', 'connor2.gif', 'connor3.png', 'connor4.png'];
+        let date = new Date();
+        let command = () => {
+            connorLast = date.getTime();
+            connorCD = true;
+            let rich = new Discord.RichEmbed().setImage(imgPath + img[stab]).setDescription("**28 STAB WOUNDS**");
+            if (stab < 4) {
+                stab++; // Increment the stab image index counter
+            } else stab = 0;
+            msg.channel.send(rich);
+        }
+        let connorNow = date.getTime();
+        let connorBetween = connorNow - connorLast;
+        if (connorCD === false) {
+            command();
+        } else if (connorCD === true) {
+            if (connorBetween <= 60000) {
+                msg.channel.send("I can't *PRESSURE* too much. Just wait a bit.\n*Cooldown lasts for a minute*");
+            } else {
+                command();
             }
         }
     }
