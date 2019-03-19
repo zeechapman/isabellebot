@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const client = new Discord.Client(); // Just in case I need this.  Looked cute, but might delete later
 
 // Global variables
 let isabelle = "<@523039317036368105>"; // Identify itself
@@ -296,5 +295,12 @@ module.exports = {
                 }
             }
         }
+    },
+    // Detroit: Become Human commands
+    stabWounds: function(msg) {
+        let ran = Math.floor(Math.random() * 5); // There are a total of 5 pics
+        // TODO: Add pics
+        let re = "Hi";
+        msg.channel.send(re);
     }
 }
