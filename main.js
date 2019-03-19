@@ -72,7 +72,7 @@ function specialCommand(msg) {
         commands.update(msg);
     }
     else if (primaryCmd === "hh") {
-        msg.channel.send("\u{1F38A} Happy New Years! \u{1F38A}");
+        msg.channel.send("Happy day!\n*T-t-there isn't even a holiday going on, yet.*");
     }
 }
 
