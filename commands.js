@@ -7,6 +7,8 @@ let critHappened = false;
 let ballCD = false;
 let ballDate = new Date();
 let ballLast = ballDate.getTime();
+// let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/master/';
+let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
 
 module.exports = {
     // ---!sa commands
@@ -50,7 +52,7 @@ module.exports = {
         let embed = new Discord.RichEmbed()
             .setTitle("Oh, info?  About me? \u{1F495}")
             .setDescription("I'm from Lady Goggle's lovely stream, here to help out the best that I can!  I was developed by <@518190826933977099> (aka Bound).  Enjoying my company?  I'm glad!\nIf you're a curious type, you can view how I'm coded here: https://github.com/zeechapman/isabellebot")
-            .setThumbnail("https://raw.githubusercontent.com/zeechapman/isabellebot/master/isabelle-pic.png");
+            .setThumbnail(imgPath + "isabelle-pic.png");
         msg.channel.send(embed);
     },
     update: function (msg) {
@@ -152,7 +154,7 @@ module.exports = {
             chara = true; // The seed
             setTimeout(() => {
                 // Warn the user
-                emb = new Discord.RichEmbed().setColor(0x8D0000).setDescription("The seed...has been planted...").setImage('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/chara-wide.png');
+                emb = new Discord.RichEmbed().setColor(0x8D0000).setDescription("The seed...has been planted...").setImage(imgPath + 'chara-wide.png');
                 msg.channel.send(emb);
             }, 1000);
         }
@@ -299,8 +301,9 @@ module.exports = {
     // Detroit: Become Human commands
     stabWounds: function(msg) {
         let ran = Math.floor(Math.random() * 5); // There are a total of 5 pics
-        // TODO: Add pics
-        let re = "Hi";
-        msg.channel.send(re);
+        let img = [ 'connor0.png', 'connor1.png', 'connor2.gif', 'connor3.png', 'connor4.png' ];
+        let rich = new Discord.RichEmbed().setImage(imgPath + img[ran]).setDescription("**28 STAB WOUNDS**");
+        console.log(imgPath + img[ran]);
+        msg.channel.send(rich);
     }
 }
