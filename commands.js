@@ -9,7 +9,7 @@ let ballDate = new Date();
 let ballLast = ballDate.getTime();
 // let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/master/';
 let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
-let stab = 0; // Index of stab image
+let stab = Math.floor(Math.random() * 5); // Index of stab image, randomly decided
 
 module.exports = {
     // ---!sa commands
