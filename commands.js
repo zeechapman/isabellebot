@@ -9,6 +9,7 @@ let ballDate = new Date();
 let ballLast = ballDate.getTime();
 // let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/master/';
 let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
+let stab = 0; // Index of stab image
 
 module.exports = {
     // ---!sa commands
@@ -300,10 +301,12 @@ module.exports = {
     },
     // Detroit: Become Human commands
     stabWounds: function(msg) {
-        let ran = Math.floor(Math.random() * 5); // There are a total of 5 pics
+        // Maybe one of these days, I will find 28 pictures to do
         let img = [ 'connor0.png', 'connor1.png', 'connor2.gif', 'connor3.png', 'connor4.png' ];
-        let rich = new Discord.RichEmbed().setImage(imgPath + img[ran]).setDescription("**28 STAB WOUNDS**");
-        console.log(imgPath + img[ran]);
+        let rich = new Discord.RichEmbed().setImage(imgPath + img[stab]).setDescription("**28 STAB WOUNDS**");
+        if (stab < 4) {
+            stab++; // Increment the stab image index counter
+        } else stab = 0;
         msg.channel.send(rich);
     }
 }
