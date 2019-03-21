@@ -14,9 +14,9 @@ let connorCD = false;
 let connorDate = new Date();
 let connorLast = connorDate.getTime();
 
-// let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/master/';
-let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
-let stab = Math.floor(Math.random() * 5); // Index of stab image, randomly decided
+// let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/master/img/stab/';
+let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/stab/';
+let stab = Math.floor(Math.random() * 8); // Index of stab image, randomly decided
 
 module.exports = {
     // ---!sa commands
@@ -295,13 +295,13 @@ module.exports = {
     // Detroit: Become Human commands
     stabWounds: function (msg) {
         // Maybe one of these days, I will find 28 pictures to do
-        let img = ['pic0.png', 'pic1.png', 'pic2.gif', 'pic3.png', 'pic4.png', 'pic5.gif', 'pic6.png', 'pic7.gif'];
+        let img = ['pic0.png', 'pic1.gif', 'pic2.png', 'pic3.png', 'pic4.png', 'pic5.gif', 'pic6.png', 'pic7.gif'];
         let date = new Date();
         let command = () => {
             connorLast = date.getTime();
             connorCD = true;
             let rich = new Discord.RichEmbed().setImage(imgPath + img[stab]).setDescription("**28 STAB WOUNDS**");
-            if (stab < 4) {
+            if (stab < img.length - 1) {
                 stab++; // Increment the stab image index counter
             } else stab = 0;
             msg.channel.send(rich);
@@ -312,7 +312,14 @@ module.exports = {
             command();
         } else if (connorCD === true) {
             if (connorBetween <= 60000) {
-                msg.channel.send("I can't *PRESSURE* too much. Just wait a bit.\n*Cooldown lasts for a minute*");
+                let timeRemaining = 60000 - connorBetween;
+                let timeStr = timeRemaining.toString();
+
+                if (timeRemaining < 10000) {
+                    msg.channel.send("I can't *PRESSURE* too much. Just wait a bit.\n*Time remaining: " + timeStr.substring(0,1) + " seconds*");
+                } else {
+                    msg.channel.send("I can't *PRESSURE* too much. Just wait a bit.\n*Time remaining: " + timeStr.substring(0,2) + " seconds*");
+                }
             } else {
                 command();
             }
