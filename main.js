@@ -72,7 +72,7 @@ function specialCommand(msg) {
         commands.update(msg);
     }
     else if (primaryCmd === "hh") {
-        msg.channel.send("\u{1F38A} Happy New Years! \u{1F38A}");
+        msg.channel.send("Happy day!\n*T-t-there isn't even a holiday going on, yet.*");
     }
 }
 
@@ -85,7 +85,7 @@ function processCmd(msg) {
     let splitCmd = fullCmd.split(" "); // same as the other function
     let primaryCmd = splitCmd[0]; // Yup, still the same
     let args = splitCmd.slice(1); // Look, just take a peek at specialCommand because I don't want to have to re-write it (write a function for it) what was that?
-    
+
     let argJoin = args.join().replace(/,/g, ' ');
 
     console.log("Command seen: " + primaryCmd);
@@ -93,51 +93,41 @@ function processCmd(msg) {
 
     if (primaryCmd === "caw") {
         commands.cawCaw(msg);
-    }
-    else if (primaryCmd === "phil") {
+    } else if (primaryCmd === "phil") {
         commands.phil(msg);
-    }
-    else if (primaryCmd === "poke") {
+    } else if (primaryCmd === "poke") {
         commands.poke(msg, argJoin);
-    }
-    else if (primaryCmd === "fliptable" || primaryCmd === "tableflip") {
+    } else if (primaryCmd === "fliptable" || primaryCmd === "tableflip") {
         commands.flipTable(msg, argJoin);
-    }
-    else if (primaryCmd === "fixtable" || primaryCmd === "tablefix") {
+    } else if (primaryCmd === "fixtable" || primaryCmd === "tablefix") {
         commands.fixTable(msg);
-    }
-    else if (primaryCmd === "rip") {
+    } else if (primaryCmd === "rip") {
         commands.payRespects(msg);
-    }
-    else if (primaryCmd === "trip" || primaryCmd === "t") {
+    } else if (primaryCmd === "trip" || primaryCmd === "t") {
         commands.tripCommand(msg);
-    }
-    else if (primaryCmd === "nani") {
+    } else if (primaryCmd === "nani") {
         commands.naniCommand(msg);
-    }
-    else if (primaryCmd === "rave") {
+    } else if (primaryCmd === "rave") {
         commands.raveCommand(msg);
-    }
-    else if (primaryCmd === "hug") {
+    } else if (primaryCmd === "hug") {
         commands.hugCommand(msg, argJoin);
-    }
-    else if (primaryCmd === "isawthat" || primaryCmd === "sawthat") {
+    } else if (primaryCmd === "isawthat" || primaryCmd === "sawthat") {
         commands.iSawThat(msg);
-    }
-    else if (primaryCmd === "thisisfine") {
+    } else if (primaryCmd === "thisisfine") {
         commands.thisIsFine(msg);
     } else if (primaryCmd === "diceroll") {
         commands.diceRoll(msg, argJoin);
-    }
-    else if (primaryCmd === "8ball") {
+    } else if (primaryCmd === "8ball") {
         commands.eBall(msg, argJoin);
+    } else if (primaryCmd === "stab") {
+        commands.stabWounds(msg);
     }
 }
 
 // Grab the token and log in.
 let token = process.env.TOKEN;
 // Check to see if it's running on the server.  If not, switch to local token
-if (token == ''|| token == null) {
+if (token == '' || token == null) {
     console.info("Switching token");
     const data = require('./data.js');
     token = data;
