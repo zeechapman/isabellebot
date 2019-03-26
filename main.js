@@ -5,6 +5,7 @@ const keepAlive = require('./keepAlive');
 const express = require('express');
 const app = express();
 
+
 // Check if running on server.  If not, then use a port for local testing
 let port = process.env.PORT;
 if (port == null || port == '') {
@@ -137,4 +138,3 @@ if (token == '' || token == null) {
 }
 
 client.login(token); // "I'm in"
-
