@@ -4,7 +4,14 @@ const commands = require('./commands');
 const keepAlive = require('./keepAlive');
 const express = require('express');
 const app = express();
+const mdb = require('./firebase/index');
 
+// Keep the mod list a secret
+let mods = process.env.MODLIST;
+if (mods === undefined) {
+    console.log("Switching to local list of mods");
+    mods = require('./modList');
+}
 
 // Check if running on server.  If not, then use a port for local testing
 let port = process.env.PORT;
@@ -122,6 +129,26 @@ function processCmd(msg) {
         commands.eBall(msg, argJoin);
     } else if (primaryCmd === "stab") {
         commands.stabWounds(msg);
+    } else if (primaryCmd === "strike") {
+        let strSpl = argJoin.split(' ');
+        let name = strSpl[0];
+        let reason = '';
+        for (let i = 0; i < mods.module.length; i++) {
+            if (name.length < 1) {
+                msg.author.send("\`!strike <name (with @)> <reason>\`\n\nJust as a reminder on how the command works :)\n\n**(also please do this in #staff-room so users don't try to use it themselves, even though it only works with select people)**");
+                msg.delete();
+            } else {
+                if (mods.module[i] === msg.author.id) {
+                    for (let i = 1; i < strSpl.length; i++) {
+                        reason += strSpl[i] + " ";
+                    }
+                    mdb(name, msg, reason);
+                } else {
+                    // If not mod, delet this
+                    msg.delete();
+                }
+            }
+        }
     }
 }
 
