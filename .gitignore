@@ -77,9 +77,3 @@ typings/
 
 # Protection
 data.js
-
-# Firebase API token
-firebase/firebaseData.js
-
-# Better safe than sorry
-modList.js
