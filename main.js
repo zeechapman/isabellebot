@@ -72,7 +72,7 @@ function specialCommand(msg) {
         commands.update(msg);
     }
     else if (primaryCmd === "hh") {
-        msg.channel.send("Happy day!\n*T-t-there isn't even a holiday going on, yet.*");
+        msg.channel.send("What's that? Is today Goggle's Birthday?\n\n\u{1F38A}**Happy Birthday to our lovely Lady Goggles!**\u{1F38A}\n\n~Isabelle Bot \u{1F495}\n\n\u{1F382}");
     }
 }
 
@@ -122,6 +122,32 @@ function processCmd(msg) {
     } else if (primaryCmd === "stab") {
         commands.stabWounds(msg);
     }
+    // TODO: Make it check only once, instead of repeating (have it return true, then execute command)
+    // Also, this is not ready yet!
+    // else if (primaryCmd === "strike") {
+    //     let ids = ['290203577236848640', '166672575915753473', '365970141768450058', '518190826933977099'];
+    //     let strSpl = argJoin.split(' ');
+    //     let name = strSpl[0];
+    //     let reason = '';
+    //     for (let i = 0; i < ids.length; i++) {
+    //         console.log("Checking if anything matches the list\n\n\n");
+    //         if (ids[i] === msg.author.id) {
+    //             console.log("Yes");
+    //             //     if (name.length < 1) {
+    //             //         // If matching, send DM
+    //             //         msg.author.send("\`!strike <name (with @)> <reason>\`\n\nJust as a reminder on how the command works :)\n\n**(also please do this in #staff-room so users don't try to use it themselves, even though it only works with select people)**");
+    //             //         msg.delete();
+    //             //     } else {
+    //             //         for (let i = 1; i < strSpl.length; i++) {
+    //             //             reason += strSpl[i] + " ";
+    //             //         }
+    //             //         msg.channel.send(reason);
+    //             //     }
+    //             // } else {
+    //             //     msg.delete();
+    //         }
+    //     }
+    // }
 }
 
 // Grab the token and log in.
@@ -137,4 +163,3 @@ if (token == '' || token == null) {
 }
 
 client.login(token); // "I'm in"
-
