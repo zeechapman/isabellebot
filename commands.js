@@ -27,10 +27,31 @@ module.exports = {
      * Show a list of commands
      */
     showCommands: function (msg) {
-        let str = "\n\n- !sa help --- A list of commands.  I'm sorry, I'm a bit repetitve sometimes!  Haha\n- !sa sendhelp --- If you or someone is feeling a bit down, I'll do what I can to help.\n- !sa info --- Information about me."
-        let footer = "There's this weird blue guy that is using exclamations, so remember to use \"!sa\" at the start to call me!";
-        let embed = new Discord.RichEmbed().setTitle("Oh, hello!").setDescription("Good to see you!  I'm Isabelle, and I'm here to help when you need it!\nWhenever you need me, you can always say:" + str).setColor(0xB5E8F2).setFooter(footer);
-        let embed2 = new Discord.RichEmbed().setColor(0xB5E8F2).setTitle("Oh, I almost forgot!  You can also use:\n").setDescription("- !caw --- Caw caw, baby! :bird:\n- !fliptable --- For mobile users who need to flip a table, or a person (not for real please)\n- !fixtable --- Fix a flipped table\n- !phil --- Needs more Phil\n- !poke <person> --- Poke your friends!  Or me \u{1F628}\n- !rip --- Press F to pay respects\n- !trip --- Pay respects for Josh Jrs' typo\n- !nani --- NANI??\n- !rave --- Summon a quick rave\n- !hug <person> --- Give someone a hug! \u{1F495}\n- !isawthat --- Call out a ninja edit.\n- !8ball (question) --- Consult the magic 8Ball! (30 sec cooldown)\n- !stab --- **28 STAB WOUNDS** (one min cooldown)").setFooter("The blue man didn't take those, thank goodness.");
+        let isaCommands = "- !sa help --- A list of commands" +
+            "\n- !sa sendhelp --- If you, or someone is feeling down, I have some resources that might help." +
+            // "\n- !sa info --- Information about me!";
+            "\n- !sa info --- Information about me...or rather, Isabelle.";
+
+        let commands = "- !caw --- Caw caw, baby <:caw:477160191029280769>" +
+            "\n- !fliptable / !tableflip --- For mobile users that want to flip a table. Not for real please." +
+            "\n- !fixtable / !tablefix --- For mobile users that want to fix a table. Do it for real please, if one's flipped." +
+            "\n- !phil --- Needs more Phil" +
+            "\n- !poke <person> --- Poke your friends!  Or me \u{1F628}" +
+            "\n- !rip --- Press F to pay respects" +
+            "\n- !trip --- Pay respects for Josh Jrs' typo" +
+            "\n- !nani --- NANI??" + 
+            "\n- !rave --- Summon a quick rave" + 
+            "\n- !hug <person> --- Give someone a hug! \u{1F495}" +
+            "\n- !isawthat / !sawthat --- Call out a ninja edit." + 
+            "\n- !8ball <question> --- Consult the magic 8Ball! (30 sec cooldown)" +
+            "\n- !stab --- **28 STAB WOUNDS** (one min cooldown)";
+        // let footer = "There's this weird blue guy that is using exclamations, so remember to use \"!sa\" at the start to call me!";
+        // let embed = new Discord.RichEmbed().setColor(0xffcc00).setTitle("Oh, hello!").setDescription("Good to see you! I'm Isabelle, and I'm here to help in any way I can! Some commands you can use:\n" + isaCommands);
+        // let embed2 = new Discord.RichEmbed().setColor(0xffcc00).setTitle("Oh, by the way!").setDescription("I almost forgot! You can also use:\n" + commands);
+
+        // April Fools
+        let embed = new Discord.RichEmbed().setTitle("Oh um...hello!").setDescription("Hello, I'm Digby; Isabelle's brother. She wanted to take a break for a day, so I came in to help. I'll help where I can!\nAccording to my notes, there are a few commands I should mention, such as...\n" + isaCommands).setColor(0xcc0000);
+        let embed2 = new Discord.RichEmbed().setTitle("Oh wait!").setDescription("Hold on, these notes were double-sided! Other commands you can do are...\n" + commands).setColor(0xcc0000);
         msg.channel.send(embed);
         setTimeout(() => {
             msg.channel.startTyping();
