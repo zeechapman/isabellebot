@@ -106,10 +106,9 @@ module.exports = {
     // Normal commands.  Usually reflects Goggle's stream
     // Caw caw, baby! \u{1F426}
     cawCaw: function (msg) {
-        // Before April Fools
         // msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
-
-        // AFTER AF
+        
+        // April Fools
         let outcomes = ['<:caw:477160191029280769> ybab, wac wac', 'Woof woof, baby \u{1F436}', 'Quack quack, baby \u{1F986}', 'Hoot hoot, baby \u{1F989}', 'SCREEEEECH, baby \u{1F985}', '!caw \u{1F99C}'];
         msg.channel.send(outcomes[animalIndex]);
         console.log(animalIndex);
