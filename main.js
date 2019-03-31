@@ -121,7 +121,7 @@ function processCmd(msg) {
     } else if (primaryCmd === "8ball") {
         commands.eBall(msg, argJoin);
     } else if (primaryCmd === "stab") {
-        commands.stabWounds();
+        commands.stabWounds(msg);
     } else if (primaryCmd === "stop") {
         commands.thisDoesNotWork(msg);
     }
