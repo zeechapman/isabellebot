@@ -14,9 +14,12 @@ let connorCD = false;
 let connorDate = new Date();
 let connorLast = connorDate.getTime();
 
-// let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/master/img/stab/';
 let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/stab/';
 let stab = Math.floor(Math.random() * 8); // Index of stab image, randomly decided
+
+// APRIL FOOLS DAY
+let animalIndex = 0;
+let stopCount = 0;
 
 module.exports = {
     // ---!sa commands
@@ -64,22 +67,35 @@ module.exports = {
         msg.channel.send(embed);
     },
     update: function (msg) {
-        let str = '** I was updated! Here\'s what changed **\n' +
-            '***New command***\n' +
-            '- !stab --- **28 STAB WOUNDS** (To prevent this command from being too spammy, a one minute cooldown will be placed on it)\n' +
-            '***Other updates***\n' +
-            '- !rave --- Removed the chance of Chara\n'
+        let str = '** I was...updated? **\n' +
+            '*Digby is here!*\n' +
+            '- Isabelle needed a break. So I\'m here instead! I...don\'t know who any of you are...\n' +
+            '- I went ahead and fixed a few commands:\n' +
+            '** FIXED COMMANDS **\n' +
+            '- !caw\n' +
+            '- !8ball\n' +
+            '- !stop *(I guess this was never finished. Notes says it stopped working)*'
         let embed = new Discord.RichEmbed()
-            .setTitle("Updates! (03/18/19)")
+            .setTitle("Updates! (04/20/69)")
             .setDescription(str)
             .setColor(0x00b300);
         msg.channel.send(embed);
     },
     // Normal commands.  Usually reflects Goggle's stream
-
     // Caw caw, baby! \u{1F426}
     cawCaw: function (msg) {
-        msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
+        // Before April Fools
+        // msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
+
+        // AFTER AF
+        let outcomes = ['<:caw:477160191029280769> ybab, wac wac', 'Woof woof, baby \u{1F436}', 'Quack quack, baby \u{1F986}', 'Hoot hoot, baby \u{1F989}', 'SCREEEEECH, baby \u{1F985}', '!caw \u{1F99C}'];
+        msg.channel.send(outcomes[animalIndex]);
+        console.log(animalIndex);
+        if (animalIndex < (outcomes.length - 1)) {
+            animalIndex++;
+        } else {
+            animalIndex = 0;
+        }
     },
     // Table flip (anger)
     flipTable: function (msg, arg) {
@@ -219,31 +235,47 @@ module.exports = {
     },
     eBall: function (msg, arg) {
         // Most 8 Balls don't have this many outcomes, so this may be changed in the future.
+        // let outcomes = {
+        //     "pos": [
+        //         "It is certain.",
+        //         "It is decidedly so.",
+        //         "Without a doubt.",
+        //         "Yes - definitely.",
+        //         "You may rely on it.",
+        //         "As I see it, yes.",
+        //         "Most likely.",
+        //         "Outlook good.",
+        //         "Yes.",
+        //         "Signs point to yes."],
+        //     "neu": [
+        //         "Reply hazy, try again.",
+        //         "Ask again later.",
+        //         "Better not tell you now.",
+        //         "Cannot predict now.",
+        //         "Concentrate and ask again."],
+        //     "neg": [
+        //         "Don't count on it.",
+        //         "My reply is no.",
+        //         "My sources say no.",
+        //         "Outlook not so good.",
+        //         "Very doubtful."]
+        // };
+
+        // APRIL FOOLS
         let outcomes = {
-            "pos": [
-                "It is certain.",
-                "It is decidedly so.",
-                "Without a doubt.",
-                "Yes - definitely.",
-                "You may rely on it.",
-                "As I see it, yes.",
-                "Most likely.",
-                "Outlook good.",
-                "Yes.",
-                "Signs point to yes."],
+            'pos': [
+                "Yeah, it looks like it.",
+                "Wait, M. Bison says \"YESSSSSS\""
+            ],
             "neu": [
-                "Reply hazy, try again.",
-                "Ask again later.",
-                "Better not tell you now.",
-                "Cannot predict now.",
-                "Concentrate and ask again."],
+                "I dunno. ¯\\_(ツ)_/¯",
+                "Ummm...ask again in 30 seconds."
+            ],
             "neg": [
-                "Don't count on it.",
-                "My reply is no.",
-                "My sources say no.",
-                "Outlook not so good.",
-                "Very doubtful."]
-        };
+                "Negative Option #22",
+                "Signs point to a stop sign"
+            ]
+        }
 
         let command = () => {
             ballCD = true;
@@ -316,13 +348,21 @@ module.exports = {
                 let timeStr = timeRemaining.toString();
 
                 if (timeRemaining < 10000) {
-                    msg.channel.send("I can't *PRESSURE* too much. Just wait a bit.\n*Time remaining: " + timeStr.substring(0,1) + " seconds*");
+                    msg.channel.send("I can't *PRESSURE* too much. Just wait a bit.\n*Time remaining: " + timeStr.substring(0, 1) + " seconds*");
                 } else {
-                    msg.channel.send("I can't *PRESSURE* too much. Just wait a bit.\n*Time remaining: " + timeStr.substring(0,2) + " seconds*");
+                    msg.channel.send("I can't *PRESSURE* too much. Just wait a bit.\n*Time remaining: " + timeStr.substring(0, 2) + " seconds*");
                 }
             } else {
                 command();
             }
         }
+    },
+    // APRIL FOOLS
+    thisDoesNotWork: () => {
+        stopCount++;
+    },
+    countTheStops: (msg) => {
+        msg.delete(); // Assuming Goggle's did give Isabell--I mean Digby administrator privellages
+        msg.channel.send("April Fools day, everyone!\nEveryone in chat: IT'S TIME TO STOP! *x" + stopCount + "*\n");
     }
 }

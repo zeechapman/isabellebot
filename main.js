@@ -72,7 +72,10 @@ function specialCommand(msg) {
         commands.update(msg);
     }
     else if (primaryCmd === "hh") {
-        msg.channel.send("What's that? Is today Goggle's Birthday?\n\n\u{1F38A}**Happy Birthday to our lovely Lady Goggles!**\u{1F38A}\n\n~Isabelle Bot \u{1F495}\n\n\u{1F382}");
+        msg.channel.send("Today is Monday, April 2nd, 2018. Nothing super special here.");
+    }
+    else if (primaryCmd === "c") {
+        commands.countTheStops(msg);
     }
 }
 
@@ -115,12 +118,12 @@ function processCmd(msg) {
         commands.iSawThat(msg);
     } else if (primaryCmd === "thisisfine") {
         commands.thisIsFine(msg);
-    } else if (primaryCmd === "diceroll") {
-        commands.diceRoll(msg, argJoin);
     } else if (primaryCmd === "8ball") {
         commands.eBall(msg, argJoin);
     } else if (primaryCmd === "stab") {
-        commands.stabWounds(msg);
+        commands.stabWounds();
+    } else if (primaryCmd === "stop") {
+        commands.thisDoesNotWork(msg);
     }
     // TODO: Make it check only once, instead of repeating (have it return true, then execute command)
     // Also, this is not ready yet!
