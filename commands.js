@@ -17,9 +17,6 @@ let connorLast = connorDate.getTime();
 let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/stab/';
 let stab = Math.floor(Math.random() * 8); // Index of stab image, randomly decided
 
-// APRIL FOOLS DAY
-let animalIndex = 0;
-let stopCount = 0;
 
 module.exports = {
     // ---!sa commands
@@ -29,8 +26,7 @@ module.exports = {
     showCommands: function (msg) {
         let isaCommands = "- !sa help --- A list of commands" +
             "\n- !sa sendhelp --- If you, or someone is feeling down, I have some resources that might help." +
-            // "\n- !sa info --- Information about me!";
-            "\n- !sa info --- Information about me...or rather, Isabelle.";
+            "\n- !sa info --- Information about me!";
 
         let commands = "- !caw --- Caw caw, baby <:caw:477160191029280769>" +
             "\n- !fliptable / !tableflip --- For mobile users that want to flip a table. Not for real please." +
@@ -45,13 +41,9 @@ module.exports = {
             "\n- !isawthat / !sawthat --- Call out a ninja edit." + 
             "\n- !8ball <question> --- Consult the magic 8Ball! (30 sec cooldown)" +
             "\n- !stab --- **28 STAB WOUNDS** (one min cooldown)";
-        // let footer = "There's this weird blue guy that is using exclamations, so remember to use \"!sa\" at the start to call me!";
-        // let embed = new Discord.RichEmbed().setColor(0xffcc00).setTitle("Oh, hello!").setDescription("Good to see you! I'm Isabelle, and I'm here to help in any way I can! Some commands you can use:\n" + isaCommands);
-        // let embed2 = new Discord.RichEmbed().setColor(0xffcc00).setTitle("Oh, by the way!").setDescription("I almost forgot! You can also use:\n" + commands);
+        let embed = new Discord.RichEmbed().setColor(0xffcc00).setTitle("Oh, hello!").setDescription("Good to see you! I'm Isabelle, and I'm here to help in any way I can! Some commands you can use:\n" + isaCommands);
+        let embed2 = new Discord.RichEmbed().setColor(0xffcc00).setTitle("Oh, by the way!").setDescription("I almost forgot! You can also use:\n" + commands);
 
-        // April Fools
-        let embed = new Discord.RichEmbed().setTitle("Oh um...hello!").setDescription("Hello, I'm Digby; Isabelle's brother. She wanted to take a break for a day, so I came in to help. I'll help where I can!\nAccording to my notes, there are a few commands I should mention, such as...\n" + isaCommands).setColor(0xcc0000);
-        let embed2 = new Discord.RichEmbed().setTitle("Oh wait!").setDescription("Hold on, these notes were double-sided! Other commands you can do are...\n" + commands).setColor(0xcc0000);
         msg.channel.send(embed);
         setTimeout(() => {
             msg.channel.startTyping();
@@ -89,16 +81,16 @@ module.exports = {
         msg.channel.send(embed);
     },
     update: function (msg) {
-        let str = '** I was...updated? **\n' +
-            '*Digby is here!*\n' +
-            '- Isabelle needed a break. So I\'m here instead! I...don\'t know who any of you are...\n' +
-            '- I went ahead and fixed a few commands:\n' +
-            '** FIXED COMMANDS **\n' +
-            '- !caw\n' +
-            '- !8ball\n' +
-            '- !stop *(I guess this was never finished. Notes says it stopped working)*'
+        let str = '** I have returned! **\n' +
+            'Sorry about that, my brother, Digby, needed me to take care of something and--oh...I guess he tried to take over...\n' + 
+            '* --- Fixes ---*\n' +
+            '- !caw, and !8ball have been fixed.\n' + 
+            '- !stop was fixed...though I don\'t remember adding it.\n' + 
+            '* --- New commands ---*\n' +
+            '- !stop --- It\'s time to stop!\n' +
+            '- !cati --- Summon the Illumicati';
         let embed = new Discord.RichEmbed()
-            .setTitle("Updates! (04/20/69)")
+            .setTitle("Updates! (04/02/19)")
             .setDescription(str)
             .setColor(0x00b300);
         msg.channel.send(embed);
@@ -106,17 +98,7 @@ module.exports = {
     // Normal commands.  Usually reflects Goggle's stream
     // Caw caw, baby! \u{1F426}
     cawCaw: function (msg) {
-        // msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
-        
-        // April Fools
-        let outcomes = ['<:caw:477160191029280769> ybab, wac wac', 'Woof woof, baby \u{1F436}', 'Quack quack, baby \u{1F986}', 'Hoot hoot, baby \u{1F989}', 'SCREEEEECH, baby \u{1F985}', '!caw \u{1F99C}'];
-        msg.channel.send(outcomes[animalIndex]);
-        console.log(animalIndex);
-        if (animalIndex < (outcomes.length - 1)) {
-            animalIndex++;
-        } else {
-            animalIndex = 0;
-        }
+        msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
     },
     // Table flip (anger)
     flipTable: function (msg, arg) {
@@ -256,47 +238,31 @@ module.exports = {
     },
     eBall: function (msg, arg) {
         // Most 8 Balls don't have this many outcomes, so this may be changed in the future.
-        // let outcomes = {
-        //     "pos": [
-        //         "It is certain.",
-        //         "It is decidedly so.",
-        //         "Without a doubt.",
-        //         "Yes - definitely.",
-        //         "You may rely on it.",
-        //         "As I see it, yes.",
-        //         "Most likely.",
-        //         "Outlook good.",
-        //         "Yes.",
-        //         "Signs point to yes."],
-        //     "neu": [
-        //         "Reply hazy, try again.",
-        //         "Ask again later.",
-        //         "Better not tell you now.",
-        //         "Cannot predict now.",
-        //         "Concentrate and ask again."],
-        //     "neg": [
-        //         "Don't count on it.",
-        //         "My reply is no.",
-        //         "My sources say no.",
-        //         "Outlook not so good.",
-        //         "Very doubtful."]
-        // };
-
-        // APRIL FOOLS
         let outcomes = {
-            'pos': [
-                "Yeah, it looks like it.",
-                "Wait, M. Bison says \"YESSSSSS\""
-            ],
+            "pos": [
+                "It is certain.",
+                "It is decidedly so.",
+                "Without a doubt.",
+                "Yes - definitely.",
+                "You may rely on it.",
+                "As I see it, yes.",
+                "Most likely.",
+                "Outlook good.",
+                "Yes.",
+                "Signs point to yes."],
             "neu": [
-                "I dunno. ¯\\_(ツ)_/¯",
-                "Ummm...ask again in 30 seconds."
-            ],
+                "Reply hazy, try again.",
+                "Ask again later.",
+                "Better not tell you now.",
+                "Cannot predict now.",
+                "Concentrate and ask again."],
             "neg": [
-                "Negative Option #22",
-                "Signs point to a stop sign"
-            ]
-        }
+                "Don't count on it.",
+                "My reply is no.",
+                "My sources say no.",
+                "Outlook not so good.",
+                "Very doubtful."]
+        };
 
         let command = () => {
             ballCD = true;
