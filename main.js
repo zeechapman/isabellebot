@@ -72,7 +72,10 @@ function specialCommand(msg) {
         commands.update(msg);
     }
     else if (primaryCmd === "hh") {
-        msg.channel.send("\u{1F38A} Happy New Years! \u{1F38A}");
+        msg.channel.send("Today is Monday, April 2nd, 2018. Nothing super special here.");
+    }
+    else if (primaryCmd === "c") {
+        commands.countTheStops(msg);
     }
 }
 
@@ -85,7 +88,7 @@ function processCmd(msg) {
     let splitCmd = fullCmd.split(" "); // same as the other function
     let primaryCmd = splitCmd[0]; // Yup, still the same
     let args = splitCmd.slice(1); // Look, just take a peek at specialCommand because I don't want to have to re-write it (write a function for it) what was that?
-    
+
     let argJoin = args.join().replace(/,/g, ' ');
 
     console.log("Command seen: " + primaryCmd);
@@ -93,51 +96,69 @@ function processCmd(msg) {
 
     if (primaryCmd === "caw") {
         commands.cawCaw(msg);
-    }
-    else if (primaryCmd === "phil") {
+    } else if (primaryCmd === "phil") {
         commands.phil(msg);
-    }
-    else if (primaryCmd === "poke") {
+    } else if (primaryCmd === "poke") {
         commands.poke(msg, argJoin);
-    }
-    else if (primaryCmd === "fliptable" || primaryCmd === "tableflip") {
+    } else if (primaryCmd === "fliptable" || primaryCmd === "tableflip") {
         commands.flipTable(msg, argJoin);
-    }
-    else if (primaryCmd === "fixtable" || primaryCmd === "tablefix") {
+    } else if (primaryCmd === "fixtable" || primaryCmd === "tablefix") {
         commands.fixTable(msg);
-    }
-    else if (primaryCmd === "rip") {
+    } else if (primaryCmd === "rip") {
         commands.payRespects(msg);
-    }
-    else if (primaryCmd === "trip" || primaryCmd === "t") {
+    } else if (primaryCmd === "trip" || primaryCmd === "t") {
         commands.tripCommand(msg);
-    }
-    else if (primaryCmd === "nani") {
+    } else if (primaryCmd === "nani") {
         commands.naniCommand(msg);
-    }
-    else if (primaryCmd === "rave") {
+    } else if (primaryCmd === "rave") {
         commands.raveCommand(msg);
-    }
-    else if (primaryCmd === "hug") {
+    } else if (primaryCmd === "hug") {
         commands.hugCommand(msg, argJoin);
-    }
-    else if (primaryCmd === "isawthat" || primaryCmd === "sawthat") {
+    } else if (primaryCmd === "isawthat" || primaryCmd === "sawthat") {
         commands.iSawThat(msg);
-    }
-    else if (primaryCmd === "thisisfine") {
+    } else if (primaryCmd === "thisisfine") {
         commands.thisIsFine(msg);
-    } else if (primaryCmd === "diceroll") {
-        commands.diceRoll(msg, argJoin);
-    }
-    else if (primaryCmd === "8ball") {
+    } else if (primaryCmd === "8ball") {
         commands.eBall(msg, argJoin);
+    } else if (primaryCmd === "stab") {
+        commands.stabWounds(msg);
+    } else if (primaryCmd === "stop") {
+        commands.timeToStop(msg);
+    } else if (primaryCmd === "cati") {
+        commands.cati(msg);
     }
+    // TODO: Make it check only once, instead of repeating (have it return true, then execute command)
+    // Also, this is not ready yet!
+    // else if (primaryCmd === "strike") {
+    //     let ids = ['290203577236848640', '166672575915753473', '365970141768450058', '518190826933977099'];
+    //     let strSpl = argJoin.split(' ');
+    //     let name = strSpl[0];
+    //     let reason = '';
+    //     for (let i = 0; i < ids.length; i++) {
+    //         console.log("Checking if anything matches the list\n\n\n");
+    //         if (ids[i] === msg.author.id) {
+    //             console.log("Yes");
+    //             //     if (name.length < 1) {
+    //             //         // If matching, send DM
+    //             //         msg.author.send("\`!strike <name (with @)> <reason>\`\n\nJust as a reminder on how the command works :)\n\n**(also please do this in #staff-room so users don't try to use it themselves, even though it only works with select people)**");
+    //             //         msg.delete();
+    //             //     } else {
+    //             //         for (let i = 1; i < strSpl.length; i++) {
+    //             //             reason += strSpl[i] + " ";
+    //             //         }
+    //             //         msg.channel.send(reason);
+    //             //     }
+    //             // } else {
+    //             //     msg.delete();
+    //         }
+    //     }
+    // }
 }
 
 // Grab the token and log in.
 let token = process.env.TOKEN;
 // Check to see if it's running on the server.  If not, switch to local token
-if (token == ''|| token == null) {
+if (token == '' || token == null) {
     console.info("Switching token");
     const data = require('./data.js');
     token = data;
@@ -147,4 +168,3 @@ if (token == ''|| token == null) {
 }
 
 client.login(token); // "I'm in"
-
