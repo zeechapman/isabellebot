@@ -123,7 +123,9 @@ function processCmd(msg) {
     } else if (primaryCmd === "stab") {
         commands.stabWounds(msg);
     } else if (primaryCmd === "stop") {
-        commands.thisDoesNotWork(msg);
+        commands.timeToStop(msg);
+    } else if (primaryCmd === "cati") {
+        commands.cati(msg);
     }
     // TODO: Make it check only once, instead of repeating (have it return true, then execute command)
     // Also, this is not ready yet!
