@@ -264,6 +264,12 @@ module.exports = {
                 "Very doubtful."]
         };
 
+        let command = () => {
+            ballCD = true;
+            ballLast = date.getTime(); // Get the time the command was initiated and set it globally
+            // Generate a random number between 0 and 7
+            let ran = Math.floor(Math.random() * 12);
+
             let desc = ""; // Blank on purpose
 
             if (ran <= 4) { // If number is between 0 and 1
@@ -278,6 +284,7 @@ module.exports = {
             }
             let pre = arg.toString();
             msg.channel.send("\"" + arg + "\"\n8-Ball says: *" + desc + "*");
+        };
 
         /* Cooldown control */
         let date = new Date();
