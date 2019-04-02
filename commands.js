@@ -109,7 +109,7 @@ module.exports = {
         // msg.channel.send("Caw caw, baby! <:caw:477160191029280769>");
         
         // April Fools
-        let outcomes = ['<:caw:477160191029280769> ybab, wac wac', 'Woof woof, baby \u{1F436}', 'Quack quack, baby \u{1F986}', 'Hoot hoot, baby \u{1F989}', 'SCREEEEECH, baby \u{1F985}', '!caw \u{1F99C}'];
+        let outcomes = ['<:caw:477160191029280769> ybab, wac wac', 'Woof woof, baby \u{1F436}', 'Quack quack, baby \u{1F986}', 'Hoot hoot, baby \u{1F989}', 'SCREEEEECH, baby \u{1F985}', '!caw *Parrot emoji*'];
         msg.channel.send(outcomes[animalIndex]);
         console.log(animalIndex);
         if (animalIndex < (outcomes.length - 1)) {
@@ -282,68 +282,57 @@ module.exports = {
         //         "Very doubtful."]
         // };
 
+        
+        // let command = () => {
+        //     ballCD = true;
+        //     ballLast = date.getTime(); // Get the time the command was initiated and set it globally
+        //     // Generate a random number between 0 and 7
+        //     let ran = Math.floor(Math.random() * 12);
+
+        //     let desc = ""; // Blank on purpose
+
+        //     if (ran <= 4) { // If number is between 0 and 1
+        //         let i = Math.floor(Math.random() * outcomes.pos.length);
+        //         desc = outcomes.pos[i];
+        //     } else if (ran >= 5 && ran <= 9) { // If number is between 2 and 3
+        //         let i = Math.floor(Math.random() * outcomes.neu.length);
+        //         desc = outcomes.neu[i];
+        //     } else if (ran >= 10 && ran <= 11) { // If number is between 4 and 5
+        //         let i = Math.floor(Math.random() * outcomes.neg.length);
+        //         desc = outcomes.neg[i];
+        //     }
+        //     let pre = arg.toString();
+        //     msg.channel.send("\"" + arg + "\"\n8-Ball says: *" + desc + "*");
+        // };
+
+        // /* Cooldown control */
+        // let date = new Date();
+        // let ballNow = date.getTime();
+        // let ballBetween = ballNow - ballLast;
+        // if (arg.length === 0) { // If user didn't ask anything
+        //     msg.channel.send("You got to ask the 8-Ball a question, silly!\n\`!8ball <Question>\`");
+        // } else {
+        //     if (ballCD === false) {
+        //         command();
+        //     } else if (ballCD === true) {
+        //         if (ballBetween <= 30000) {
+        //             // Something is not correct here in terms of seconds vs MS, so I will have to come back later and fix it
+        //             let timeRemaining = 30000 - ballBetween;
+        //             let timeStr = timeRemaining.toString();
+        //             if (timeRemaining <= 10000) {
+        //                 msg.channel.send("The Magic 8-Ball needs time to cool down.\nTime remaining: " + timeStr.substring(0, 1) + " seconds.");
+        //             } else {
+        //                 msg.channel.send("The Magic 8-Ball needs time to cool down.\nTime remaining: " + timeStr.substring(0, 2) + " seconds.");
+        //             }
+        //         } else {
+        //             command();
+        //         }
+        //     }
+        // }
+
         // APRIL FOOLS
-        let outcomes = {
-            'pos': [
-                "Yeah, it looks like it.",
-                "Wait, M. Bison says \"YESSSSSS\""
-            ],
-            "neu": [
-                "I dunno. ¯\\_(ツ)_/¯",
-                "Ummm...ask again in 30 seconds."
-            ],
-            "neg": [
-                "Negative Option #22",
-                "Signs point to a stop sign"
-            ]
-        }
-
-        let command = () => {
-            ballCD = true;
-            ballLast = date.getTime(); // Get the time the command was initiated and set it globally
-            // Generate a random number between 0 and 7
-            let ran = Math.floor(Math.random() * 12);
-
-            let desc = ""; // Blank on purpose
-
-            if (ran <= 4) { // If number is between 0 and 1
-                let i = Math.floor(Math.random() * outcomes.pos.length);
-                desc = outcomes.pos[i];
-            } else if (ran >= 5 && ran <= 9) { // If number is between 2 and 3
-                let i = Math.floor(Math.random() * outcomes.neu.length);
-                desc = outcomes.neu[i];
-            } else if (ran >= 10 && ran <= 11) { // If number is between 4 and 5
-                let i = Math.floor(Math.random() * outcomes.neg.length);
-                desc = outcomes.neg[i];
-            }
-            let pre = arg.toString();
-            msg.channel.send("\"" + arg + "\"\n8-Ball says: *" + desc + "*");
-        };
-
-        /* Cooldown control */
-        let date = new Date();
-        let ballNow = date.getTime();
-        let ballBetween = ballNow - ballLast;
-        if (arg.length === 0) { // If user didn't ask anything
-            msg.channel.send("You got to ask the 8-Ball a question, silly!\n\`!8ball <Question>\`");
-        } else {
-            if (ballCD === false) {
-                command();
-            } else if (ballCD === true) {
-                if (ballBetween <= 30000) {
-                    // Something is not correct here in terms of seconds vs MS, so I will have to come back later and fix it
-                    let timeRemaining = 30000 - ballBetween;
-                    let timeStr = timeRemaining.toString();
-                    if (timeRemaining <= 10000) {
-                        msg.channel.send("The Magic 8-Ball needs time to cool down.\nTime remaining: " + timeStr.substring(0, 1) + " seconds.");
-                    } else {
-                        msg.channel.send("The Magic 8-Ball needs time to cool down.\nTime remaining: " + timeStr.substring(0, 2) + " seconds.");
-                    }
-                } else {
-                    command();
-                }
-            }
-        }
+        let outcome = ['*ALL HAIL THE HYPNO TOAD*', 'M. Bison says...hold on, I gotta leave a voice message, he went home for the day.']
+        msg.channel.send(outcome[Math.floor(Math.random() * outcome.length)]);
     },
     // Detroit: Become Human commands
     stabWounds: function (msg) {
