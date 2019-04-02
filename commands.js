@@ -35,10 +35,10 @@ module.exports = {
             "\n- !poke <person> --- Poke your friends!  Or me \u{1F628}" +
             "\n- !rip --- Press F to pay respects" +
             "\n- !trip --- Pay respects for Josh Jrs' typo" +
-            "\n- !nani --- NANI??" + 
-            "\n- !rave --- Summon a quick rave" + 
+            "\n- !nani --- NANI??" +
+            "\n- !rave --- Summon a quick rave" +
             "\n- !hug <person> --- Give someone a hug! \u{1F495}" +
-            "\n- !isawthat / !sawthat --- Call out a ninja edit." + 
+            "\n- !isawthat / !sawthat --- Call out a ninja edit." +
             "\n- !8ball <question> --- Consult the magic 8Ball! (30 sec cooldown)" +
             "\n- !stab --- **28 STAB WOUNDS** (one min cooldown)";
         let embed = new Discord.RichEmbed().setColor(0xffcc00).setTitle("Oh, hello!").setDescription("Good to see you! I'm Isabelle, and I'm here to help in any way I can! Some commands you can use:\n" + isaCommands);
@@ -82,10 +82,10 @@ module.exports = {
     },
     update: function (msg) {
         let str = '** I have returned! **\n' +
-            'Sorry about that, my brother, Digby, needed me to take care of something and--oh...I guess he tried to take over...\n' + 
+            'Sorry about that, my brother, Digby, needed me to take care of something and--oh...I guess he tried to take over...\n' +
             '--- Fixes ---\n' +
-            '- !caw, and !8ball have been fixed.\n' + 
-            '- !stop was fixed...though I don\'t remember adding it.\n' + 
+            '- !caw, and !8ball have been fixed.\n' +
+            '- !stop was fixed...though I don\'t remember adding it.\n' +
             '--- New commands ---\n' +
             '- !stop --- It\'s time to stop!\n' +
             '- !cati --- Summon the Illumicati';
@@ -346,16 +346,10 @@ module.exports = {
     },
     timeToStop: (msg) => {
         let embed = new Discord.RichEmbed().setImage(imgPath + "stop.gif");
-        msg.delete();
-        setTimeout(() => {
-            msg.channel.send(embed);
-        }, 250);
+        msg.channel.send(embed);
     },
     cati: (msg) => {
         let embed = new Discord.RichEmbed().setImage(imgPath + "illumicati.gif");
-        msg.delete();
-        setTimeout(() => {
-            msg.channel.send(embed);
-        }, 250);
+        msg.channel.send(embed);
     }
 }
