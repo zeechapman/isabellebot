@@ -14,7 +14,7 @@ let connorCD = false;
 let connorDate = new Date();
 let connorLast = connorDate.getTime();
 
-let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/stab/';
+let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
 let stab = Math.floor(Math.random() * 8); // Index of stab image, randomly decided
 
 
@@ -83,10 +83,10 @@ module.exports = {
     update: function (msg) {
         let str = '** I have returned! **\n' +
             'Sorry about that, my brother, Digby, needed me to take care of something and--oh...I guess he tried to take over...\n' + 
-            '* --- Fixes ---*\n' +
+            '--- Fixes ---\n' +
             '- !caw, and !8ball have been fixed.\n' + 
             '- !stop was fixed...though I don\'t remember adding it.\n' + 
-            '* --- New commands ---*\n' +
+            '--- New commands ---\n' +
             '- !stop --- It\'s time to stop!\n' +
             '- !cati --- Summon the Illumicati';
         let embed = new Discord.RichEmbed()
@@ -319,7 +319,7 @@ module.exports = {
         let command = () => {
             connorLast = date.getTime();
             connorCD = true;
-            let rich = new Discord.RichEmbed().setImage(imgPath + img[stab]).setDescription("**28 STAB WOUNDS**");
+            let rich = new Discord.RichEmbed().setImage(imgPath + 'stab/' + img[stab]).setDescription("**28 STAB WOUNDS**");
             if (stab < img.length - 1) {
                 stab++; // Increment the stab image index counter
             } else stab = 0;
@@ -344,12 +344,18 @@ module.exports = {
             }
         }
     },
-    // APRIL FOOLS
-    thisDoesNotWork: () => {
-        stopCount++;
+    timeToStop: (msg) => {
+        let embed = new Discord.RichEmbed().setImage(imgPath + "stop.gif");
+        msg.delete();
+        setTimeout(() => {
+            msg.channel.send(embed);
+        }, 250);
     },
-    countTheStops: (msg) => {
-        msg.delete(); // Assuming Goggle's did give Isabell--I mean Digby administrator privellages
-        msg.channel.send("April Fools day, everyone!\nEveryone in chat: IT'S TIME TO STOP! *x" + stopCount + "*\n");
+    cati: (msg) => {
+        let embed = new Discord.RichEmbed().setImage(imgPath + "illumicati.gif");
+        msg.delete();
+        setTimeout(() => {
+            msg.channel.send(embed);
+        }, 250);
     }
 }
