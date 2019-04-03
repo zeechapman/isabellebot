@@ -28,6 +28,7 @@ client.on('message', (msg) => {
         return;
     }
 
+    // While checking for input for commands, catch any errors (incorrect commands)
     try {
         if (msg.content.startsWith("!sa ")) {
             processCommand(msg, 4, isaCommands);
