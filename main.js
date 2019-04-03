@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const commands = require('./commands');
+const regCommands = require('./commands/reg.commands');
+const isaCommands = require('./commands/isa.commands');
 const keepAlive = require('./keepAlive');
 const express = require('express');
 const app = express();
