@@ -11,6 +11,7 @@
 */
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const guild = new Discord.Guild();
 const isaCommands = require('./commands/isa.commands');
 const regCommands = require('./commands/reg.commands');
 const token = require('./data');
@@ -29,15 +30,32 @@ client.on('message', (msg) => {
         return;
     }
 
-    // While checking for input for commands, catch any errors (incorrect commands)
+    // While checking for input for commands, catch any errors (incorrect commands, or errors in general)
     try {
         if (msg.content.startsWith("!sa ")) {
             processCommand(msg, 4, isaCommands);
         } else if (msg.content.startsWith("!")) {
             processCommand(msg, 1, regCommands);
+        } else if (msg.content.startsWith("https://clips.twitch.tv")) {
+            // If someone posted a clip outside of the clips channel, send it to the clip channel
+            let clip = msg.content;
+            let sender = msg.author;
+            let chName = 'goggles-clips';
+            let clipsChannel = msg.guild.channels.find(val => {
+                return val.name === 'goggles-clips';
+            });
+
+            if (msg.channel.name === chName) {
+                // If the channel is the clips channel, do nothing
+                return;
+            } else {
+                // If it is not the clips channel, delete the post, then send it to the correct channel
+                clipsChannel.send('Originally posted by ' + sender + '\n' + clip);
+                msg.delete();
+            }
         }
     } catch (err) {
-        console.log("Bad command: " + msg.content);
+        console.log("Bad command, or an error has happened.\nCommand: " + msg.content + "\nError: " + err);
     }
 
 });
