@@ -1,3 +1,6 @@
+// Discord still needs to be imported here
+const Discord = require('discord.js');
+
 // List of useable emotes
 let emotes = {
     "caw": '<:caw:477160191029280769>',
@@ -15,7 +18,9 @@ let stabCD = {
     cdLast: new Date().getTime()
 }
 
+let stabIndex = 0; // The index of the current stab image
 let critRoll = false;
+let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
 
 
 
@@ -177,6 +182,20 @@ exports.module = {
             }
 
             coolDownControl(msg, ballCD, "Sorry, the Magic 8Ball needs time to cool down!", 30, command);
+        }
+    },
+    "stab": {
+        fn: msg => {
+            let imgs = ['pic0.png', 'pic1.gif', 'pic2.png', 'pic3.png', 'pic4.png', 'pic5.gif', 'pic6.png', 'pic7.png'];
+            let command = () => {
+                let embed = new Discord.RichEmbed().setImage(imgPath + 'stab/' + imgs[stabIndex]);
+                console.log(imgPath + 'stab/' + imgs[stabIndex]);
+                if (stabIndex < imgs.length - 1) {
+                    stabIndex++;
+                } else stab = 0;
+                msg.channel.send(embed);
+            }
+            coolDownControl(msg, stabCD, "I can't PRESSURE too quickly!", 60, command);
         }
     }
 }
