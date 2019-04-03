@@ -1,12 +1,13 @@
 /*
-    [ ] - Condense code by adding functions for some actions
-    [ ] - Condense code by adding cooldown function control
-    [ ] - Remove references when platformed on Heroku (Procfile, etc)
+    [X] - Condense code by adding functions for some actions
+        - Kinda pointless.
+    [X] - Condense code by adding cooldown function control
+    [X] - Remove references when platformed on Heroku (Procfile, etc)
         - Once local server is set up, remove it, anyways.
     [X] - Try to make being able to tell from ! and !sa in one function instead of seperating it (not possible at the moment)
     [X] - Try to automate the process of adding commands.
     [ ] - Incorporate MongoDB
-    [ ] - Error handle if command does not exist
+    [X] - Error handle if command does not exist
 */
 const Discord = require('discord.js');
 const client = new Discord.Client();
