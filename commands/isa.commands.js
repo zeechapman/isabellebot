@@ -70,5 +70,18 @@ exports.module = {
             let embed = new Discord.RichEmbed().setTitle(update.date).setDescription(update.description).setColor(0x19bc00);
             msg.channel.send(embed);
         }
+    },
+    "sendhelp": {
+        fn: msg => {
+            let str = "Oh my!  Are you okay?  I'll do my best to help!  Please refer to these resources:\n- Suicide prevention hotline: 1-800-273-8255\n- Crisis Text Line: Text HOME to 751-751, or for more options, go to https://www.crisistextline.org/faq\n- https://suicidepreventionlifeline.org/\n- http://www.takethis.org/mental-health-resources/\n- https://www.imalive.org/\n- https://drive.google.com/file/d/0B6A2F5ky9SELU0Zfd05YMEpyNUk/view\n- http://philome.la/jace_harr/you-feel-like-shit-an-interactive-self-care-guide\n- https://checkpoint.org.au/global/\nYou are very much loved, and I apperciate you being here.  We all do! \u{1F495}";
+            let embed = new Discord.RichEmbed().setTitle("Need Help?").setColor(0xE7525D).setDescription(str);
+            msg.channel.send(embed);
+        }
+    },
+    "info": {
+        fn: msg => {
+            let embed = new Discord.RichEmbed().setTitle("Info? About me?").setDescription("I was developed by <@518190826933977099>, aka Bound. The Twitch version? That's Lady Goggles. If you're the curious type and want to see behind the scenes on me, checkout: https://github.com/zeechapman/isabellebot").setColor(0xb7ab01).setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/isabelle-pic.png');
+            msg.channel.send(embed);
+        }
     }
 }
