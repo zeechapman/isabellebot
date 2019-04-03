@@ -42,7 +42,7 @@ function processCommand(msg, length, commandGroup) {
 
     let argJoin = args.join().replace(/,/g, ' ');
 
-    commandGroup.module[primaryCmd].fn(msg);
+    commandGroup.module[primaryCmd].fn(msg, argJoin);
 
 }
 
