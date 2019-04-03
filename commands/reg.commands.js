@@ -65,24 +65,13 @@ exports.module = {
     "fliptable": {
         fn: msg => {
             let faces = ['(╯°□°）╯︵ ┻━┻', '(╯˘ ᵕ˘）╯︵ ┻━┻', '(╯˘꒳˘）╯︵ ┻━┻', '(/¯◡ ‿ ◡)/¯ ~ ┻━┻', '┬─┬ ︵ /(.□. ﾉ）(wait wut)'];
-            let critRoll = Math.floor(Math.random() * 6);
-            if (critRoll === 5) {
-                critHappened = true;
-                msg.channel.send("**CRIT**\n┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻");
-            } else {
-                let faceChoice = faces[Math.floor(Math.random() * faces.length)]
-                msg.channel.send(faceChoice);
-            }
+            let faceChoice = faces[Math.floor(Math.random() * faces.length)]
+            msg.channel.send(faceChoice);
         }
     },
     "fixtable": {
         fn: msg => {
-            if (critHappened === true) {
-                msg.channel.send("**COUNTER**\n┬──┬ ︵ヽ( ゜- ゜)ﾉ︵ ┬──┬");
-                critHappened = false;
-            } else {
-                msg.channel.send("┬──┬ ノ( ゜-゜ノ)");
-            }
+            msg.channel.send("┬──┬ ノ( ゜-゜ノ)");
         }
     },
     "phil": {
