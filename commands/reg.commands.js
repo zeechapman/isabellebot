@@ -178,7 +178,6 @@ exports.module = {
             let imgs = ['pic0.png', 'pic1.gif', 'pic2.png', 'pic3.png', 'pic4.png', 'pic5.gif', 'pic6.png', 'pic7.png'];
             let command = () => {
                 let embed = new Discord.RichEmbed().setImage(imgPath + 'stab/' + imgs[stabIndex]);
-                console.log(imgPath + 'stab/' + imgs[stabIndex]);
                 if (stabIndex < imgs.length - 1) {
                     stabIndex++;
                 } else stab = 0;
