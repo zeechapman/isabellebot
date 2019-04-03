@@ -197,5 +197,17 @@ exports.module = {
             }
             coolDownControl(msg, stabCD, "I can't PRESSURE too quickly!", 60, command);
         }
+    },
+    "stop": {
+        fn: msg => {
+            let embed = new Discord.RichEmbed().setImage(imgPath + 'stop.gif');
+            msg.channel.send(embed);
+        }
+    },
+    "cati": {
+        fn: msg => {
+            let embed = new Discord.RichEmbed().setImage(imgPath + 'illumicati.gif');
+            msg.channel.send(embed);
+        }
     }
 }
