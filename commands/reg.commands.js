@@ -105,7 +105,7 @@ exports.module = {
             }
         }
     },
-    "isawthat": {
+    "sawthat": {
         fn: msg => {
             let preMsg = ['I saw that edit! ', 'Is that a...NINJA EDIT? ', 'Nice edit you did there...'];
             let lennys = ['(͠≖ ͜ʖ͠≖)', '( ͡~ ͜ʖ ͡°)', '( ͡◉ ͜ʖ ͡◉)', '( ͡° ͜ʖ ͡°)']

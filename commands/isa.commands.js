@@ -25,7 +25,7 @@ let regCommands = [
 ]
 
 let update = {
-    date: "04/03/19",
+    date: "04/13/19",
     description:
         "**A big update!**\n" +
         "I got **new shoes**! Oh, and I was re-worked a lot behind the scenes. I'll spare the boring details, and share the big changes.\n\n" +
