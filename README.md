@@ -5,7 +5,7 @@ This is a bot built specifically for a Discord.  So essentially, this is for pri
 ## TODO:
 - [ ] Migrate to local server
 - [ ] Set up MongoDB server on local server
-- [ ] Refactor/clean up code
+- [X] Refactor/clean up code
 - [ ] Set up a strike system
-- [ ] Set up April Fools
-    - [ ] Remove April Fools
+- [X] Set up April Fools
+    - [X] Remove April Fools
