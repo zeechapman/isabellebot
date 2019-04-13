@@ -40,7 +40,7 @@ client.on('message', (msg) => {
             // If someone posted a clip outside of the clips channel, send it to the clip channel
             let clip = msg.content;
             let sender = msg.author;
-            let chName = 'goggles-clips';
+            let chName = 'goggles-clips'; // What it's called on Goggle's Discord
             let clipsChannel = msg.guild.channels.find(val => {
                 return val.name === 'goggles-clips';
             });
@@ -74,6 +74,3 @@ function processCommand(msg, length, commandGroup) {
 
 // Login
 client.login(token);
-
-// Scheme: Get the inputted command, then perform said command
-// commands.module["test"].fn();
