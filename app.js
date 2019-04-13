@@ -44,7 +44,7 @@ client.on('message', (msg) => {
             }
         }
     } catch (err) {
-        console.log("Bad command, or an error has happened.\nCommand: " + msg.content + "\nError: " + err);
+        console.log("Bad command, or an error has happened.\nError: " + err + "\n");
     }
 
 });
@@ -56,6 +56,8 @@ function processCommand(msg, length, commandGroup) {
     let args = splitCmd.slice(1);
 
     let argJoin = args.join().replace(/,/g, ' ');
+
+    console.log("Command read: " + primaryCmd + "\n----------");
 
     commandGroup.module[primaryCmd].fn(msg, argJoin);
 
