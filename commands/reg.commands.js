@@ -1,5 +1,7 @@
 // Discord still needs to be imported here
 const Discord = require('discord.js');
+// const fs = require('fs');
+const usr = require('../strikes.json');
 
 // List of useable emotes
 let emotes = {
@@ -196,6 +198,30 @@ exports.module = {
         fn: msg => {
             let embed = new Discord.RichEmbed().setImage(imgPath + 'illumicati.gif');
             msg.channel.send(embed);
+        }
+    },
+    "strike": {
+        fn: (msg, args) => {
+            let ids = ['290203577236848640', '166672575915753473', '365970141768450058', '518190826933977099']
+            let str = args.split(' ');
+            let name = str[0];
+            let reason = '';
+            let match = false;
+            for (let i = 0; i < ids.length; i++) {
+                if (ids[i] === msg.author.id) {
+                    match = true;
+                    console.log("Matched");
+                }
+            }
+            if (match) {
+                console.log("going");
+                for (let i = 1; i < str.length; i++) {
+                    reason += str[i] + ' ';
+                }
+            } else {
+                msg.delete();
+            }
+
         }
     }
 }
