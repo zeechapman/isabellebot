@@ -1,7 +1,6 @@
 // Discord still needs to be imported here
 const Discord = require('discord.js');
-// const fs = require('fs');
-const usr = require('../strikes.json');
+
 
 // List of useable emotes
 let emotes = {
@@ -213,12 +212,14 @@ exports.module = {
                     console.log("Matched");
                 }
             }
+            // If the user who did the strike matched, allow them to perform the strike
             if (match) {
-                console.log("going");
                 for (let i = 1; i < str.length; i++) {
                     reason += str[i] + ' ';
                 }
+                msg.mentions.users.first().send("Greetings,\nSorry to bother you, but you just recieved a strike. The reason given:\n`" + reason + "`\nIf you have questions, please message one of the members of the server. Thank you, and apologies.");
             } else {
+                // If not, delete the message. Pretend it never happened.
                 msg.delete();
             }
 
