@@ -77,4 +77,4 @@ typings/
 
 # Protection
 data.js
-strikes.json
+serviceAccountKey.json
