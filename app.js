@@ -4,9 +4,11 @@ const guild = new Discord.Guild();
 const isaCommands = require('./commands/isa.commands');
 const regCommands = require('./commands/reg.commands');
 const token = require('./data');
+const firebase = require('firebase');
 
 // When the bot is on, prepare
 client.on('ready', () => {
+    console.log('\033c'); // Clear console
     console.log("\nIsabelle Bot is on, and ready to go!\n");
     client.user.setActivity("the mayor", { type: "LISTENING" });
 });

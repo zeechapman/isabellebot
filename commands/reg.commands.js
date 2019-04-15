@@ -1,5 +1,6 @@
 // Discord still needs to be imported here
 const Discord = require('discord.js');
+const database = require('./firebase/firebase');
 
 // List of useable emotes
 let emotes = {
@@ -196,6 +197,34 @@ exports.module = {
         fn: msg => {
             let embed = new Discord.RichEmbed().setImage(imgPath + 'illumicati.gif');
             msg.channel.send(embed);
+        }
+    },
+    "strike": {
+        fn: (msg, args) => {
+            let ids = ['290203577236848640', '166672575915753473', '365970141768450058', '518190826933977099']
+            let str = args.split(' ');
+            let id = str[0];
+            let tag;
+            let reason = '';
+            let match = false;
+            for (let i = 0; i < ids.length; i++) {
+                if (ids[i] === msg.author.id) {
+                    match = true;
+                    console.log("Matched");
+                }
+            }
+            // If the user who did the strike matched, allow them to perform the strike
+            if (match) {
+                tag = msg.mentions.users.first().tag;
+                for (let i = 1; i < str.length; i++) {
+                    reason += str[i] + ' ';
+                }
+                database.addStrike(msg, id, tag, reason); // Add the strike
+            } else {
+                // If not, delete the message. Pretend it never happened.
+                msg.delete();
+                console.log("Unauthorized used of !strike. Removing.");
+            }
         }
     }
 }
