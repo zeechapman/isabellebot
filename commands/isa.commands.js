@@ -1,5 +1,12 @@
 const Discord = require('discord.js');
 
+// As soon as the app starts, get the time it was first booted.
+let date = new Date();
+let hour = date.getHours();
+let minutes = date.getMinutes();
+let month = date.getMonth() + 1;
+let day = date.getDate();
+
 let isaCommands = [
     "- !sa help --- To bring up the commands list!",
     "- !sa sendhelp -- If you, or someone is feeling down, I can provide resources to help!",
@@ -82,6 +89,13 @@ exports.module = {
         fn: msg => {
             let embed = new Discord.RichEmbed().setTitle("Info? About me?").setDescription("I was developed by <@518190826933977099>, aka Bound. The Twitch version? That's Lady Goggles. If you're the curious type and want to see behind the scenes on me, checkout: https://github.com/zeechapman/isabellebot").setColor(0xb7ab01).setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/isabelle-pic.png');
             msg.channel.send(embed);
+        }
+    },
+    "test": {
+        fn: msg => {
+            let bootDay = month + "/" + day;
+            let bootTime = hour + ":" + minutes;
+            msg.channel.send("I've been running since:\n" + bootDay + " at " + bootTime);
         }
     }
 }
