@@ -57,16 +57,30 @@ client.on('messageDelete', msg => {
     if (msg.author === client.user) {
         return;
     }
-
+    
+    let delDate = getDateTime();
     let chName = 'event-logs';
+    let authorOriginal = msg.author.tag;
+    let author = authorOriginal.substr(0, authorOriginal.length - 5);
     let logsChannel = msg.guild.channels.find(val => {
         return val.name === chName;
     });
-    let delDate = getDateTime();
 
-    let embed = new Discord.RichEmbed().setTitle("Message deleted on " + delDate).setDescription(msg.content).setColor(0xFFD700);
+    let embed = new Discord.RichEmbed().setColor(0xFFD700).setAuthor(author).setDescription(msg.content).setFooter("Message deleted on " + delDate);
 
     logsChannel.send(embed);
+});
+
+// Whenever a message is edited, report the changes
+client.on('messageUpdate', msg => {
+    let editDate = getDateTime();
+    let chName = 'event-logs';
+    let authorOriginal = msg.author.tag;
+    let author = authorOriginal.substr(0, authorOriginal.length - 5);
+    let logsChannel = msg.guild.channels.find(val => {
+        return val.name === chName;
+    });
+    
 });
 
 function processCommand(msg, length, commandGroup) {
@@ -89,7 +103,7 @@ function getDateTime() {
     let minute = date.getMinutes();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    return hour + ":" + minute + " " + month + "/" + day;
+    return month + "/" + day + " " + hour + ":" + minute + " MST";
 }
 
 // Login
