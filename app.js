@@ -57,8 +57,7 @@ client.on('messageDelete', msg => {
     if (msg.author === client.user) {
         return;
     }
-    
-    let delDate = getDateTime();
+
     let chName = 'event-logs';
     let authorOriginal = msg.author.tag;
     let author = authorOriginal.substr(0, authorOriginal.length - 5);
@@ -66,23 +65,39 @@ client.on('messageDelete', msg => {
         return val.name === chName;
     });
 
-    let embed = new Discord.RichEmbed().setColor(0xFFD700).setAuthor(author).setDescription(msg.content).setFooter("Message deleted on " + delDate);
+    let embed = new Discord.RichEmbed()
+        .setColor(0xc60b07)
+        .setAuthor(author)
+        .addField("Deleted message:", msg.content)
 
     logsChannel.send(embed);
 });
 
 // Whenever a message is edited, report the changes
-client.on('messageUpdate', msg => {
-    let editDate = getDateTime();
+client.on('messageUpdate', (msg, nMsg) => {
+    if (msg.author === client.user) {
+        return;
+    }
+
     let chName = 'event-logs';
     let authorOriginal = msg.author.tag;
     let author = authorOriginal.substr(0, authorOriginal.length - 5);
     let logsChannel = msg.guild.channels.find(val => {
         return val.name === chName;
     });
+
+    let embed = new Discord.RichEmbed()
+        .setColor(0xFFD700)
+        .setTitle("Message edited")
+        .setAuthor(author)
+        .addField("Old message:", msg.content)
+        .addField("Edited message:", nMsg.content);
     
+    logsChannel.send(embed);
 });
 
+
+// Process the commands
 function processCommand(msg, length, commandGroup) {
     let fullCmd = msg.content.substr(length);
     let splitCmd = fullCmd.split(" ");
@@ -95,15 +110,6 @@ function processCommand(msg, length, commandGroup) {
 
     commandGroup.module[primaryCmd].fn(msg, argJoin);
 
-}
-
-function getDateTime() {
-    let date = new Date();
-    let hour = date.getHours();
-    let minute = date.getMinutes();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    return month + "/" + day + " " + hour + ":" + minute + " MST";
 }
 
 // Login
