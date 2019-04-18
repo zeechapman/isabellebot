@@ -51,6 +51,24 @@ client.on('message', (msg) => {
 
 });
 
+// When a message is deleted, send it to the logs channel
+client.on('messageDelete', msg => {
+    // Don't log itself
+    if (msg.author === client.user) {
+        return;
+    }
+
+    let chName = 'event-logs';
+    let logsChannel = msg.guild.channels.find(val => {
+        return val.name === chName;
+    });
+    let delDate = getDateTime();
+
+    let embed = new Discord.RichEmbed().setTitle("Message deleted on " + delDate).setDescription(msg.content).setColor(0xFFD700);
+
+    logsChannel.send(embed);
+});
+
 function processCommand(msg, length, commandGroup) {
     let fullCmd = msg.content.substr(length);
     let splitCmd = fullCmd.split(" ");
@@ -63,6 +81,15 @@ function processCommand(msg, length, commandGroup) {
 
     commandGroup.module[primaryCmd].fn(msg, argJoin);
 
+}
+
+function getDateTime() {
+    let date = new Date();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return hour + ":" + minute + " " + month + "/" + day;
 }
 
 // Login
