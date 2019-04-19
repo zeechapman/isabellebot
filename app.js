@@ -74,27 +74,27 @@ client.on('messageDelete', msg => {
 });
 
 // Whenever a message is edited, report the changes
-client.on('messageUpdate', (msg, nMsg) => {
-    if (msg.author === client.user) {
-        return;
-    }
+// client.on('messageUpdate', (msg, nMsg) => {
+//     if (msg.author === client.user) {
+//         return;
+//     }
 
-    let chName = 'event-logs';
-    let authorOriginal = msg.author.tag;
-    let author = authorOriginal.substr(0, authorOriginal.length - 5);
-    let logsChannel = msg.guild.channels.find(val => {
-        return val.name === chName;
-    });
+//     let chName = 'event-logs';
+//     let authorOriginal = msg.author.tag;
+//     let author = authorOriginal.substr(0, authorOriginal.length - 5);
+//     let logsChannel = msg.guild.channels.find(val => {
+//         return val.name === chName;
+//     });
 
-    let embed = new Discord.RichEmbed()
-        .setColor(0xFFD700)
-        .setTitle("Message edited")
-        .setAuthor(author)
-        .addField("Old message:", msg.content)
-        .addField("Edited message:", nMsg.content);
+//     let embed = new Discord.RichEmbed()
+//         .setColor(0xFFD700)
+//         .setTitle("Message edited")
+//         .setAuthor(author)
+//         .addField("Old message:", msg.content)
+//         .addField("Edited message:", nMsg.content);
     
-    logsChannel.send(embed);
-});
+//     logsChannel.send(embed);
+// });
 
 
 // Process the commands
