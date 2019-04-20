@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const isaCommands = require('./commands/isa.commands');
 const regCommands = require('./commands/reg.commands');
 const token = require('./data');
-const firebase = require('firebase');
 
 // When the bot is on, prepare
 client.on('ready', () => {
@@ -13,7 +12,7 @@ client.on('ready', () => {
 });
 
 // Whenever a message is sent
-client.on('message', (msg) => {
+client.on('message', msg => {
     // Do not allow the bots to respond to themselves.
     // The world will be in ruin if they do
     if (msg.author === client.user) {
@@ -50,7 +49,9 @@ client.on('message', (msg) => {
 
 });
 
-// When a message is deleted, send it to the logs channel
+/**
+ * Whenever a message is deleted, log it
+ */
 client.on('messageDelete', msg => {
     // Don't log itself
     if (msg.author === client.user) {
@@ -68,14 +69,21 @@ client.on('messageDelete', msg => {
     // Instead of allowing it to say nothing (original issue),
     // simply let them know that it's a embedded image (or URL)
     if (msg.content === '') {
-        logsChannel.send("**__MESSAGE DELETED__**\n\n" + author + "\n```It contained an embedded image, or a URL.```");
+        logsChannel.send("**__MESSAGE DELETED__**\n\n" + author + "\n```It contained an embedded image, or a URL.```\n---------------");
+    } else if (msg.content === 'p!next' || msg.content === 'p!prev') {
+        return; // Do nothing, because it's just Pokecord doing it's thing
     } else {
-        logsChannel.send("**__MESSAGE DELETED__**\n\n" + author + "\n```" + msg.content + "```")
+        logsChannel.send("**__MESSAGE DELETED__**\n\n" + author + "\n```" + msg.content + "```\n---------------")
     }
 });
 
-// Whenever a message is edited, report the changes
+
+ 
+/**
+ * Whenever a message is edited, log it
+ */
 client.on('messageUpdate', (msg, nMsg) => {
+    console.log("Edited message");
     if (msg.author === client.user) {
         return;
     }
@@ -113,7 +121,7 @@ client.on('messageUpdate', (msg, nMsg) => {
                 "\`\`\`" + msg.content + "\`\`\`\n" +
                 "**UPDATED**\n" +
                 "\`\`\`" + nMsg.content + "\`\`\`\n" +
-                author + "\n--------");
+                author + "\n---------------");
         }
     }
 });
