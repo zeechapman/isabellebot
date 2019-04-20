@@ -69,11 +69,11 @@ client.on('messageDelete', msg => {
     // Instead of allowing it to say nothing (original issue),
     // simply let them know that it's a embedded image (or URL)
     if (msg.content === '') {
-        logsChannel.send("**__MESSAGE DELETED__**\n\n" + author + "\n```It contained an embedded image, or a URL.```\n---------------");
+        logsChannel.send("**__MESSAGE DELETED__**\n\n```It contained an embedded image, or a URL.```" +  author + "\n---------------");
     } else if (msg.content === 'p!next' || msg.content === 'p!back') {
         return; // Do nothing, because it's just Pokecord doing it's thing
     } else {
-        logsChannel.send("**__MESSAGE DELETED__**\n\n" + author + "\n```" + msg.content + "```\n---------------")
+        logsChannel.send("**__MESSAGE DELETED__**\n\n```" + msg.content + "```" + author + "\n---------------");
     }
 });
 
