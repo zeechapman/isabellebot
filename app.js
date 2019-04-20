@@ -7,8 +7,7 @@ const firebase = require('firebase');
 
 // When the bot is on, prepare
 client.on('ready', () => {
-    console.log('\033c'); // Clear console
-    console.log("\nIsabelle Bot is on, and ready to go!\n");
+    console.log('\033cIsabelle Bot is on, and ready to go!\n'); // Clear console
     client.user.setActivity("the mayor", { type: "LISTENING" });
 
 });
@@ -59,42 +58,44 @@ client.on('messageDelete', msg => {
     }
 
     let chName = 'event-logs';
+    let logsChannel = msg.guild.channels.find(val => {
+        return val.name === chName;
+    });
+    let authorOriginal = msg.author.tag;
+    let author = authorOriginal.substr(0, authorOriginal.length - 5);
+
+    // There's a weird issue with embedded images.
+    // Instead of allowing it to say nothing (original issue),
+    // simply let them know that it's a embedded image (or URL)
+    if (msg.content === '') {
+        logsChannel.send("**__MESSAGE DELETED__**\n\n" + author + "\n```It contained an embedded image, or a URL.```");
+    } else {
+        logsChannel.send("**__MESSAGE DELETED__**\n\n" + author + "\n```" + msg.content + "```")
+    }
+});
+
+// Whenever a message is edited, report the changes
+client.on('messageUpdate', (msg, nMsg) => {
+    if (msg.author === client.user) {
+        return;
+    }
+
+    let chName = 'event-logs';
     let authorOriginal = msg.author.tag;
     let author = authorOriginal.substr(0, authorOriginal.length - 5);
     let logsChannel = msg.guild.channels.find(val => {
         return val.name === chName;
     });
 
-    let embed = new Discord.RichEmbed()
-        .setColor(0xc60b07)
-        .setAuthor(author)
-        .addField("Deleted message:", msg.content)
+    // Discord itself will edit a message to make into a embedded message when a URL is present.
+    // Ignore it if it does happen to start with it.
+    if (msg.content.startsWith('https://')) {
+        return;
+    } else {
+        logsChannel.send("**__EDITED__**\n\n**Original**\n```" + msg.content + "```\n**UPDATED**\n```" + nMsg.content + "```\n" + author);
+    }
 
-    logsChannel.send(embed);
 });
-
-// Whenever a message is edited, report the changes
-// client.on('messageUpdate', (msg, nMsg) => {
-//     if (msg.author === client.user) {
-//         return;
-//     }
-
-//     let chName = 'event-logs';
-//     let authorOriginal = msg.author.tag;
-//     let author = authorOriginal.substr(0, authorOriginal.length - 5);
-//     let logsChannel = msg.guild.channels.find(val => {
-//         return val.name === chName;
-//     });
-
-//     let embed = new Discord.RichEmbed()
-//         .setColor(0xFFD700)
-//         .setTitle("Message edited")
-//         .setAuthor(author)
-//         .addField("Old message:", msg.content)
-//         .addField("Edited message:", nMsg.content);
-    
-//     logsChannel.send(embed);
-// });
 
 
 // Process the commands
