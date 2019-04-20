@@ -80,6 +80,12 @@ client.on('messageUpdate', (msg, nMsg) => {
         return;
     }
 
+    // Exclude certain users from logging. Mainly, Pokecord and MEE6
+    let exclude = [
+        '159985870458322944',
+        '365975655608745985'
+    ];
+    let match = false;
     let chName = 'event-logs';
     let authorOriginal = msg.author.tag;
     let author = authorOriginal.substr(0, authorOriginal.length - 5);
@@ -87,14 +93,29 @@ client.on('messageUpdate', (msg, nMsg) => {
         return val.name === chName;
     });
 
+    for (let i = 0; i < exclude.length; i++) {
+        if (msg.author.id === exclude[i]) {
+            match = true;
+        }
+    }
+
     // Discord itself will edit a message to make into a embedded message when a URL is present.
     // Ignore it if it does happen to start with it.
     if (msg.content.startsWith('https://')) {
         return;
     } else {
-        logsChannel.send("**__EDITED__**\n\n**Original**\n```" + msg.content + "```\n**UPDATED**\n```" + nMsg.content + "```\n" + author);
+        if (match)
+            return;
+        else {
+            logsChannel.send(
+                "**__EDITED__**\n\n" +
+                "**Original**\n" +
+                "\`\`\`" + msg.content + "\`\`\`\n" +
+                "**UPDATED**\n" +
+                "\`\`\`" + nMsg.content + "\`\`\`\n" +
+                author + "\n--------");
+        }
     }
-
 });
 
 
