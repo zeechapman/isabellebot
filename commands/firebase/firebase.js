@@ -26,10 +26,10 @@ exports.addStrike = (msg, id, tag, reason) => {
                     name: tag,
                     strikes: currStrike
                 });
-                msg.mentions.users.first().send("Greetings,\nYou are recieving this message beause you have recieved a strike." + outcome + "You currently have " + currStrike + "/3 strikes.\nPlease remember that we may be laid back, we still have rules. If you have any questions, please message one of the mods, Squid, or Goggles. Apologies, and have a good day.");
+                msg.mentions.users.first().send("Greetings,\nYou are recieving this message because you have recieved a strike." + outcome + "You currently have " + currStrike + "/3 strikes.\nPlease remember that we still have rules. If you have any questions, please message one of the mods, Squid, or Goggles. Apologies, and have a good day.");
             } else {
                 console.log("Maximum number of strikes reached for " + tag + ". Booting from server.");
-                msg.mentions.users.first().send("Greetings,\nI apologize, but you have been booted from the server. There have been mulitple attemps to warn you, and this is your last one.\nHave a good day.")
+                msg.mentions.users.first().send("Greetings,\nI apologize, but you have been banned from the server.\n\nHave a good day.")
                 setTimeout(() => {
                     msg.guild.ban(msg.mentions.users.first(), {
                         reason: reason
@@ -43,7 +43,7 @@ exports.addStrike = (msg, id, tag, reason) => {
                 name: tag,
                 strikes: 1
             });
-            msg.mentions.users.first().send("Greetings,\nYou are recieving this message beause you have recieved a strike." + outcome + "You currently have 1/3 strikes..\nPlease remember that we may be laid back, we still have rules. If you have any questions, please message one of the mods, Squid, or Goggles. Apologies, and have a good day.");
+            msg.mentions.users.first().send("Greetings,\nYou are recieving this message because you have recieved a strike." + outcome + "You currently have 1/3 strikes..\nPlease remember that we still have rules. If you have any questions, please message one of the mods, Squid, or Goggles. Apologies, and have a good day.");
         }
     });
 }
