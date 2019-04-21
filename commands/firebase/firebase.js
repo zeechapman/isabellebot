@@ -13,7 +13,7 @@ exports.addStrike = (msg, id, tag, reason) => {
     if (reason === '') {
         outcome = '\n'
     } else {
-        outcome = 'The reason given:\n`' + reason + '`\n';
+        outcome = 'The reason given:\n\n```' + reason + '```\n';
     }
     db.ref('users/' + id).once('value').then(snap => {
         if (snap.exists()) {
@@ -21,15 +21,15 @@ exports.addStrike = (msg, id, tag, reason) => {
             if (snap.val().strikes < 2) {
                 // If number of strikes is less than 3
                 let currStrike = (snap.val().strikes) + 1;
-                console.log("Addeding a strike to " + tag);
+                console.log("Addding a strike to " + tag);
                 db.ref('users/' + id).set({
                     name: tag,
                     strikes: currStrike
                 });
-                msg.mentions.users.first().send("Greetings,\nYou are recieving this message because you have recieved a strike." + outcome + "You currently have " + currStrike + "/3 strikes.\nPlease remember that we still have rules. If you have any questions, please message one of the mods, Squid, or Goggles. Apologies, and have a good day.");
+                msg.mentions.users.first().send("Greetings,\nYou are recieving this message because you have recieved a strike." + outcome + "You currently have " + currStrike + "/3 strikes.\n\nPlease remember that we still have rules. If you have any questions, please message one of the mods, Squid, or Goggles. Apologies, and have a good day.\n\n");
             } else {
                 console.log("Maximum number of strikes reached for " + tag + ". Booting from server.");
-                msg.mentions.users.first().send("Greetings,\nI apologize, but you have been banned from the server.\n\nHave a good day.")
+                msg.mentions.users.first().send("Greetings,\nI apologize, but this is your third strike. Unfortunately, we have to ban you.\n\nHave a good day.")
                 setTimeout(() => {
                     msg.guild.ban(msg.mentions.users.first(), {
                         reason: reason
@@ -43,7 +43,7 @@ exports.addStrike = (msg, id, tag, reason) => {
                 name: tag,
                 strikes: 1
             });
-            msg.mentions.users.first().send("Greetings,\nYou are recieving this message because you have recieved a strike." + outcome + "You currently have 1/3 strikes..\nPlease remember that we still have rules. If you have any questions, please message one of the mods, Squid, or Goggles. Apologies, and have a good day.");
+            msg.mentions.users.first().send("Greetings,\nYou are recieving this message because you have recieved a strike." + outcome + "You currently have 1/3 strikes..\n\nPlease remember that we still have rules. If you have any questions, please message one of the mods, Squid, or Goggles. Apologies, and have a good day.\n\n");
         }
     });
 }
