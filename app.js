@@ -3,6 +3,10 @@ const client = new Discord.Client();
 const isaCommands = require('./commands/isa.commands');
 const regCommands = require('./commands/reg.commands');
 const token = require('./data');
+const fs = require('fs');
+
+// TODO: Tokenize strings, then check if any of it start with https
+
 
 // When the bot is on, prepare
 client.on('ready', () => {
@@ -38,7 +42,8 @@ client.on('message', msg => {
                 // If the channel is the clips channel, do nothing
                 return;
             } else {
-                // If it is not the clips channel, delete the post, then send it to the correct channel
+                // If it is not the clips channel, delete the post, then send it to the correct channel, tagging the user
+                // at the same time.
                 clipsChannel.send('Originally posted by ' + sender + '\n' + clip);
                 msg.delete();
             }
@@ -69,11 +74,11 @@ client.on('messageDelete', msg => {
     // Instead of allowing it to say nothing (original issue),
     // simply let them know that it's a embedded image (or URL)
     if (msg.content === '') {
-        logsChannel.send("**__MESSAGE DELETED__**\n\n```It contained an embedded image, or a URL.```" +  author + "\n---------------");
+        logsChannel.send("**__MESSAGE DELETED__**\n\n\`\`\`It contained an embedded image, or a URL.\`\`\`\nDeleted from: #" + msg.channel.name + "\nAuthor of message: " + author + "\n---------------");
     } else if (msg.content === 'p!next' || msg.content === 'p!back') {
-        return; // Do nothing, because it's just Pokecord doing it's thing
+        return; // Do nothing, because it's just Pokecord doing its thing
     } else {
-        logsChannel.send("**__MESSAGE DELETED__**\n\n```" + msg.content + "```" + author + "\n---------------");
+        logsChannel.send("**__MESSAGE DELETED__**\n\n\`\`\`" + msg.content + "\`\`\`\nDeleted from: #" + msg.channel.name + "\nAuthor of message: " + author + "\n---------------");
     }
 });
 
@@ -83,7 +88,6 @@ client.on('messageDelete', msg => {
  * Whenever a message is edited, log it
  */
 client.on('messageUpdate', (msg, nMsg) => {
-    console.log("Edited message");
     if (msg.author === client.user) {
         return;
     }
@@ -121,11 +125,23 @@ client.on('messageUpdate', (msg, nMsg) => {
                 "\`\`\`" + msg.content + "\`\`\`\n" +
                 "**UPDATED**\n" +
                 "\`\`\`" + nMsg.content + "\`\`\`\n" +
+                "Edited on #" + msg.channel.name + "\n" +
                 author + "\n---------------");
         }
     }
 });
 
+
+// When the bot errors, log it
+client.on('error', (err) => {
+    console.log("Oops! An error has occured:\n" + err);
+    fs.writeFileSync('/error', err, error => {
+        if (error)
+            return console.log("Error writing to file");
+        
+        console.log("The file was saved");
+    })
+});
 
 // Process the commands
 function processCommand(msg, length, commandGroup) {
