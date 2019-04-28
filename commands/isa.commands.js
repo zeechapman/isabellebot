@@ -32,18 +32,11 @@ let regCommands = [
 ]
 
 let update = {
-    date: "04/13/19",
+    date: "04/27/19",
     description:
-        "**A big update!**\n" +
-        "I got **new shoes**! Oh, and I was re-worked a lot behind the scenes. I'll spare the boring details, and share the big changes.\n\n" +
-        "**REMOVED COMMANDS**\n\n\`\`" +
-        "- !rave --- It just wasn't used that often.\n" +
-        "- !diceroll --- Rod took over, and that's okay!\`\`\n\n" +
-        "**NEW COMMANDS**\n\n\`\`" +
-        "- !badum --- Ba dum, tss.\n" +
-        "- !thisisfine --- This is fine...\n" +
-        "-- It's been in, but I forgot to mention it. Oops...\`\`\n\n" +
-        "So there you have it. You can always view the full list by using \`!sa help\`. Have a good day, everybody!"
+        "**A bit of an update!**\n" +
+        "- New command! `!snap`\n" +
+        "- Small changes to `!hug` and `!nani`"
 }
 
 exports.module = {
