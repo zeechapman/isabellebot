@@ -215,15 +215,26 @@ exports.module = {
             }
             // If the user who did the strike matched, allow them to perform the strike
             if (match) {
-                tag = msg.mentions.users.first().tag;
-                for (let i = 1; i < str.length; i++) {
-                    reason += str[i] + ' ';
+                if (args === '') {
+                    let staffChannel = msg.guild.channels.find(val => {
+                        return val.name === 'staff_room';
+                    });
+                    msg.delete();
+                    staffChannel.send("Oops, looks like a little accident happened! You got to make sure to include a @user when issuing a strike.\nAs a reminder, the command is:\n\`\`\`!strike <@username#0000> Reason (optional).\`\`\`\nAlso, post it in #staff_room so no one can be yelled at specifically for issuing a strike. Thank you :)");
+                    
+                } else {
+                    tag = msg.mentions.users.first().tag;
+                    for (let i = 1; i < str.length; i++) {
+                        reason += str[i] + ' ';
+                    }
+                    database.addStrike(msg, id, tag, reason); // Add the strike
                 }
-                database.addStrike(msg, id, tag, reason); // Add the strike
             } else {
-                // If not, delete the message. Pretend it never happened.
-                msg.delete();
-                console.log("Unauthorized used of !strike. Removing.");
+                setTimeout(() => {
+                    // If not, delete the message. Pretend it never happened.
+                    msg.delete();
+                    console.log("Unauthorized used of !strike. Removing.");
+                }, 100);
             }
         }
     }
