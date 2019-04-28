@@ -202,6 +202,9 @@ exports.module = {
         }
     },
     "strike": {
+        /**
+         * Give a mentioned user a strike
+         */
         fn: (msg, args) => {
             let ids = ['290203577236848640', '166672575915753473', '365970141768450058', '518190826933977099', '266755300206313473']
             let str = args.split(' ');
@@ -238,6 +241,18 @@ exports.module = {
                     console.log("Unauthorized used of !strike. Removing.");
                 }, 100);
             }
+        }
+    },
+    "snap": {
+        fn: msg => {
+            let senderTag = msg.author.tag;
+            let sender = senderTag.substr(0, senderTag.length - 5);
+            let phrase = 'feel so good';
+            let spaced = '';
+            for (let i = 0; i < phrase.length; i++) {
+                spaced += phrase[i] + " ".repeat(i);
+            }
+            msg.channel.send("Ummm, " + sender + ", I don't " + spaced);
         }
     }
 }
