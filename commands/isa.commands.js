@@ -37,7 +37,8 @@ let update = {
     description:
         "**A bit of an update!**\n" +
         "- New command! `!snap`\n" +
-        "- Small changes to `!hug` and `!nani`"
+        "- Small changes to `!hug` and `!nani`\n" +
+        "- __HOTIFX__ - Reverted tags from `!hug` and `!nani` due to potential privacy concerns. Sorry about that :/"
 }
 
 exports.module = {
