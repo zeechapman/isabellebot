@@ -92,19 +92,15 @@ exports.module = {
     },
     "nani": {
         fn: msg => {
-            let senderTag = msg.author.tag;
-            let sender = senderTag.substr(0, senderTag.length - 5);
-            msg.channel.send("*" + sender + " steps back in shock.*\nNANI??");
+            msg.channel.send("*" + msg.member + " steps back in shock.*\nNANI??");
         }
     },
     "hug": {
         fn: (msg, args) => {
-            let senderTag = msg.author.tag;
-            let sender = senderTag.substr(0, senderTag.length - 5);
             if (args.length > 0) {
-                msg.channel.send(sender + " gives a big hug to " + args + "\n(.づ◡﹏◡)づ.");
+                msg.channel.send(msg.member + " gives a big hug to " + args + "\n(.づ◡﹏◡)づ.");
             } else {
-                msg.channel.send(sender + " gives a big hug to everyone!\n(.づ◡﹏◡)づ.");
+                msg.channel.send(msg.member + " gives a big hug to everyone!\n(.づ◡﹏◡)づ.");
             }
         }
     },
@@ -226,7 +222,7 @@ exports.module = {
                     });
                     msg.delete();
                     staffChannel.send("Oops, looks like a little accident happened! You got to make sure to include a @user when issuing a strike.\nAs a reminder, the command is:\n\`\`\`!strike <@username#0000> Reason (optional).\`\`\`\nAlso, post it in #staff_room so no one can be yelled at specifically for issuing a strike. Thank you :)");
-                    
+
                 } else {
                     tag = msg.mentions.users.first().tag;
                     for (let i = 1; i < str.length; i++) {
@@ -245,14 +241,12 @@ exports.module = {
     },
     "snap": {
         fn: msg => {
-            let senderTag = msg.author.tag;
-            let sender = senderTag.substr(0, senderTag.length - 5);
             let phrase = 'feel so good';
             let spaced = '';
             for (let i = 0; i < phrase.length; i++) {
                 spaced += phrase[i] + " ".repeat(i);
             }
-            msg.channel.send("Ummm, " + sender + ", I don't " + spaced);
+            msg.channel.send("Ummm, " + msg.member + ", I don't " + spaced);
         }
     }
 }

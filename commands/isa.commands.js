@@ -28,7 +28,8 @@ let regCommands = [
     "- !8ball <question> --- Consult the magic 8Ball! (30 sec cooldown)",
     "- !stab --- **28 STAB WOUNDS** (one min cooldown)",
     "- !stop --- It's time to stop!",
-    "- !cati --- Summon the Illumicati!"
+    "- !cati --- Summon the Illumicati!",
+    "- !snap --- Don't do it \u{1F628}"
 ]
 
 let update = {
