@@ -63,6 +63,8 @@ client.on('messageDelete', msg => {
         return;
     }
 
+    console.log("Deleted");
+
     let chName = 'event-logs';
     let logsChannel = msg.guild.channels.find(val => {
         return val.name === chName;
@@ -88,6 +90,7 @@ client.on('messageDelete', msg => {
  * Whenever a message is edited, log it
  */
 client.on('messageUpdate', (msg, nMsg) => {
+    // Bot can't respond to itself
     if (msg.author === client.user) {
         return;
     }
@@ -112,8 +115,8 @@ client.on('messageUpdate', (msg, nMsg) => {
     }
 
     // Discord itself will edit a message to make into a embedded message when a URL is present.
-    // Ignore it if it does happen to start with it.
-    if (msg.content.startsWith('https://')) {
+    // Ignore it if it does contain a URL
+    if (regex.test(msg.content)) {
         return;
     } else {
         if (match)
@@ -125,7 +128,7 @@ client.on('messageUpdate', (msg, nMsg) => {
                 "\`\`\`" + msg.content + "\`\`\`\n" +
                 "**UPDATED**\n" +
                 "\`\`\`" + nMsg.content + "\`\`\`\n" +
-                "Edited on #" + msg.channel.name + "\n" +
+                "Message from:  #" + msg.channel.name + "\n" +
                 author + "\n---------------");
         }
     }
