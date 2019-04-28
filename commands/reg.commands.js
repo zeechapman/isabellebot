@@ -19,7 +19,7 @@ let stabCD = {
     cdLast: new Date().getTime()
 }
 
-let stabIndex = 0; // The index of the current stab image
+let stabIndex = Math.floor(Math.random() * 3); // The index of the current stab image
 let critRoll = false;
 let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
 
@@ -92,13 +92,15 @@ exports.module = {
     },
     "nani": {
         fn: msg => {
-            let sender = msg.member;
+            let senderTag = msg.author.tag;
+            let sender = senderTag.substr(0, senderTag.length - 5);
             msg.channel.send("*" + sender + " steps back in shock.*\nNANI??");
         }
     },
     "hug": {
         fn: (msg, args) => {
-            let sender = msg.member;
+            let senderTag = msg.author.tag;
+            let sender = senderTag.substr(0, senderTag.length - 5);
             if (args.length > 0) {
                 msg.channel.send(sender + " gives a big hug to " + args + "\n(.づ◡﹏◡)づ.");
             } else {
