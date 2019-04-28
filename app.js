@@ -5,8 +5,8 @@ const regCommands = require('./commands/reg.commands');
 const token = require('./data');
 const fs = require('fs');
 
-// TODO: Tokenize strings, then check if any of it start with https
-
+// Global variables
+let regex = /(https)|(http)/; // Capture if 'https' is in the string or 'http'
 
 // When the bot is on, prepare
 client.on('ready', () => {
@@ -23,7 +23,7 @@ client.on('message', msg => {
         return;
     }
 
-    // While checking for input for commands, catch any errors (incorrect commands, or errors in general)
+    // While checking for input for commands, catch any errors (incorrect commands, or errors from a post)
     try {
         if (msg.content.startsWith("!sa ")) {
             processCommand(msg, 4, isaCommands);
