@@ -6,7 +6,8 @@ const token = require('./data');
 const fs = require('fs');
 
 // Global variables
-let regex = /(https)|(http)/; // Capture if 'https' is in the string or 'http'
+let http = /(https)|(http)/; // Capture if 'https' is in the string or 'http'
+let twitchClipsUrl = /(https:\/\/clips.twitch.tv)/;
 
 // When the bot is on, prepare
 client.on('ready', () => {
@@ -29,7 +30,7 @@ client.on('message', msg => {
             processCommand(msg, 4, isaCommands);
         } else if (msg.content.startsWith("!")) {
             processCommand(msg, 1, regCommands);
-        } else if (msg.content.startsWith("https://clips.twitch.tv")) {
+        } else if (twitchClipsUrl.test(msg.content)) {
             // If someone posted a clip outside of the clips channel, send it to the clip channel
             let clip = msg.content;
             let sender = msg.author;
@@ -116,7 +117,7 @@ client.on('messageUpdate', (msg, nMsg) => {
 
     // Discord itself will edit a message to make into a embedded message when a URL is present.
     // Ignore it if it does contain a URL
-    if (regex.test(msg.content)) {
+    if (http.test(msg.content)) {
         return;
     } else {
         if (match)
