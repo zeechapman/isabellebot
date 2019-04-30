@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const isaCommands = require('./commands/isa.commands');
 const regCommands = require('./commands/reg.commands');
 const token = require('./data');
-const fs = require('fs');
 
 // Global variables
 let http = /(https)|(http)/; // Capture if 'https' is in the string or 'http'
@@ -138,13 +137,8 @@ client.on('messageUpdate', (msg, nMsg) => {
 
 // When the bot errors, log it
 client.on('error', (err) => {
-    console.log("Oops! An error has occured:\n" + err);
-    fs.writeFileSync('/error', err, error => {
-        if (error)
-            return console.log("Error writing to file");
-        
-        console.log("The file was saved");
-    })
+	let date = new Date();
+    console.log("Oops! An error has occured on " + date.getHours() + ":" + date.getMinutes() + ":\n" + err);
 });
 
 // Process the commands
