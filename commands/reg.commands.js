@@ -255,8 +255,12 @@ exports.module = {
             // List of random songs to select from
             let songs = [
                 'https://www.youtube.com/watch?v=ZbZSe6N_BXs',
+                'https://www.youtube.com/watch?v=L3HQMbQAWRc',
+                'https://www.youtube.com/watch?v=wRWq53IFXVQ',
+                'https://www.youtube.com/watch?v=V1bFr2SWP1I',
                 'https://www.youtube.com/watch?v=s7dTBoW5H9k',
-                'https://www.youtube.com/watch?v=L3HQMbQAWRc'
+                'https://www.youtube.com/watch?v=n0pezsVK8gQ',
+                'https://www.youtube.com/watch?v=tHJbQ5NH2c4'
             ];
             msg.channel.send('Oh! Someone need a happy song? I got one!\n' + songs[musicIndex]);
             if (musicIndex < songs.length - 1)
