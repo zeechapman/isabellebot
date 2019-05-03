@@ -29,16 +29,17 @@ let regCommands = [
     "- !stab --- **28 STAB WOUNDS** (one min cooldown)",
     "- !stop --- It's time to stop!",
     "- !cati --- Summon the Illumicati!",
-    "- !snap --- Don't do it \u{1F628}"
+    "- !snap --- Don't do it \u{1F628}",
+    "- !happy --- Randomly picks a happy song"
 ]
 
 let update = {
-    date: "04/27/19",
+    date: "05/02/19",
     description:
-        "**A bit of an update!**\n" +
-        "- New command! `!snap`\n" +
-        "- Small changes to `!hug` and `!nani`\n" +
-        "- __HOTIFX__ - Reverted tags from `!hug` and `!nani` due to potential privacy concerns. Sorry about that :/"
+        "**Update, update, update!**\n" +
+        "- New command!\n" +
+        "``!happy --- Randomly picks a happy song``\n" +
+        "*(suggestions for songs would be appreciated, as only 3 were put in)*"
 }
 
 exports.module = {
