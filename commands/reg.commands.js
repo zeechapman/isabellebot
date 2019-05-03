@@ -20,6 +20,7 @@ let stabCD = {
 }
 
 let stabIndex = Math.floor(Math.random() * 5); // The index of the current stab image
+let musicIndex = Math.floor(Math.random() * 2);
 let critRoll = false;
 let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
 
@@ -256,10 +257,12 @@ exports.module = {
                 'https://www.youtube.com/watch?v=ZbZSe6N_BXs',
                 'https://www.youtube.com/watch?v=s7dTBoW5H9k',
                 'https://www.youtube.com/watch?v=L3HQMbQAWRc'
-            ]
-            let len = songs.length;
-            let ran = Math.floor(Math.random() * len);
-            msg.channel.send('Oh! Someone need a happy song? I got one!\n' + songs[ran]);
+            ];
+            msg.channel.send('Oh! Someone need a happy song? I got one!\n' + songs[musicIndex]);
+            if (musicIndex < songs.length - 1)
+                musicIndex++;
+            else
+                musicIndex = 0;
         }
     }
 }
