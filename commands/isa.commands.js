@@ -30,7 +30,7 @@ let regCommands = [
     "- !stop --- It's time to stop!",
     "- !cati --- Summon the Illumicati!",
     "- !snap --- Don't do it \u{1F628}",
-    "- !happy --- Randomly picks a happy song"
+    "- !happy --- Picks a happy song"
 ]
 
 let update = {
@@ -38,7 +38,7 @@ let update = {
     description:
         "**Update, update, update!**\n" +
         "- New command!\n" +
-        "``!happy --- Randomly picks a happy song``\n" +
+        "``!happy --- Picks a happy song``\n" +
         "*(suggestions for songs would be appreciated, as only 3 were put in)*"
 }
 
