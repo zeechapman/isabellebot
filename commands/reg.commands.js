@@ -241,7 +241,7 @@ exports.module = {
     },
     'snap': {
         fn: msg => {
-            let phrase = 'feel so good';
+            let phrase = 'feelsogood';
             let spaced = '';
             for (let i = 0; i < phrase.length; i++) {
                 spaced += phrase[i] + ' '.repeat(i);
