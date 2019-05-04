@@ -37,7 +37,8 @@ let update = {
     date: "05/04/19",
     description:
         "**Psst...update!**\n" +
-        "- `!happy` includes more songs! Also, it will be DM'd to you instead of spamming chat. Also, it will include a list of songs instead of picking randomly."
+        "- `!happy` includes more songs! Also, it will be DM'd to you instead of spamming chat. Also, it will include a list of songs instead of picking randomly." +
+        "- `!joy` --- Did you remember to take your Joy today?"
 }
 
 exports.module = {
