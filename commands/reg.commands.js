@@ -261,5 +261,10 @@ exports.module = {
                 return string;
             }).join(''));
         }
+    },
+    'joy': {
+        fn: msg => {
+            msg.channel.send("Did you remember to take your J͢ǫ̵y͞ t̛ǫ̕d̵͠ą̶y̷̨͠?̶");
+        }
     }
 }
