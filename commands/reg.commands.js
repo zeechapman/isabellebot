@@ -1,6 +1,7 @@
 // Discord still needs to be imported here
 const Discord = require('discord.js');
 const database = require('./firebase/firebase');
+const songList = require('./songs');
 
 // List of useable emotes
 let emotes = {
@@ -252,21 +253,13 @@ exports.module = {
     },
     'happy': {
         fn: msg => {
-            // List of random songs to select from
-            let songs = [
-                'https://www.youtube.com/watch?v=ZbZSe6N_BXs',
-                'https://www.youtube.com/watch?v=L3HQMbQAWRc',
-                'https://www.youtube.com/watch?v=wRWq53IFXVQ',
-                'https://www.youtube.com/watch?v=V1bFr2SWP1I',
-                'https://www.youtube.com/watch?v=s7dTBoW5H9k',
-                'https://www.youtube.com/watch?v=n0pezsVK8gQ',
-                'https://www.youtube.com/watch?v=tHJbQ5NH2c4'
-            ];
-            msg.channel.send('Oh! Someone need a happy song? I got one!\n' + songs[musicIndex]);
-            if (musicIndex < songs.length - 1)
-                musicIndex++;
-            else
-                musicIndex = 0;
+            let sender = msg.author; // Person who sent the command !happy
+            // First send it in the channel.
+            msg.channel.send(sender + ", check yo DM's");
+            sender.send("Oh! Happy songs? I got a few!\n" + songList.map(i => {
+                let string = i.song + " by " + i.artist + " " + i.link + "\n"
+                return string;
+            }).join(''));
         }
     }
 }
