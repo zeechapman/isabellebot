@@ -30,16 +30,14 @@ let regCommands = [
     "- !stop --- It's time to stop!",
     "- !cati --- Summon the Illumicati!",
     "- !snap --- Don't do it \u{1F628}",
-    "- !happy --- Picks a happy song"
+    "- !happy --- Get a DM of a list of happy songs!"
 ]
 
 let update = {
-    date: "05/02/19",
+    date: "05/04/19",
     description:
-        "**Update, update, update!**\n" +
-        "- New command!\n" +
-        "``!happy --- Picks a happy song``\n" +
-        "*(suggestions for songs would be appreciated, as only 3 were put in)*"
+        "**Psst...update!**\n" +
+        "- `!happy` includes more songs! Also, it will be DM'd to you instead of spamming chat. Also, it will include a list of songs instead of picking randomly."
 }
 
 exports.module = {
