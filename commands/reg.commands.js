@@ -251,17 +251,17 @@ exports.module = {
             msg.channel.send('Ummm, ' + msg.member + ', I don\'t ' + spaced);
         }
     },
-    'happy': {
-        fn: msg => {
-            let sender = msg.author; // Person who sent the command !happy
-            // First send it in the channel.
-            msg.channel.send(sender + ", check yo DM's");
-            sender.send("Oh! Happy songs? I got a few!\n" + songList.map(i => {
-                let string = i.song + " by " + i.artist + " " + i.link + "\n"
-                return string;
-            }).join(''));
-        }
-    },
+    // 'happy': {
+    //     fn: msg => {
+    //         let sender = msg.author; // Person who sent the command !happy
+    //         // First send it in the channel.
+    //         msg.channel.send(sender + ", check yo DM's");
+    //         sender.send("Oh! Happy songs? I got a few!\n" + songList.map(i => {
+    //             let string = i.song + " by " + i.artist + " " + i.link + "\n"
+    //             return string;
+    //         }).join(''));
+    //     }
+    // },
     'joy': {
         fn: msg => {
             msg.channel.send("Did you remember to take your J͢ǫ̵y͞ t̛ǫ̕d̵͠ą̶y̷̨͠?̶");
