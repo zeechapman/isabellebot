@@ -257,25 +257,29 @@ exports.module = {
     },
     'happy': {
         fn: msg => {
-            // This will initiate in any case
-            function msgChannel() {
-                let songChoice = songList[songIndex];
-                msg.channel.send("Oh! Happy songs? I got one!\n" + songChoice.song + " - " + songChoice.artist + " (" + songChoice.link + ")");
-                if (songIndex < songList.length - 1)
-                    songIndex++;
-                else
-                    songIndex = 0;
+            // Encapsulate to make sure it stays on cooldown
+            let command = () => {
+                // This will initiate in any case
+                function msgChannel() {
+                    let songChoice = songList[songIndex];
+                    msg.channel.send("Oh! Happy songs? I got one!\n" + songChoice.song + " - " + songChoice.artist + " (" + songChoice.link + ")");
+                    if (songIndex < songList.length - 1)
+                        songIndex++;
+                    else
+                        songIndex = 0;
+                }
+    
+                // This will run if the user does not exist in the database
+                function userDoesNotExist() {
+                    msgChannel();
+                    msg.author.send("Psst. Here's a list of all of the songs if you're curious:\n" + songList.map(i => {
+                        return i.song + " - " + i.artist + " (" + i.link + ")\n"
+                    }).join(''));
+                }
+    
+                database.happyCheck(msg.author, msgChannel, userDoesNotExist);
             }
-
-            // This will run if the user does not exist in the database
-            function userDoesNotExist() {
-                msgChannel();
-                msg.author.send("Psst. Here's a list of all of the songs if you're curious:\n" + songList.map(i => {
-                    return i.song + " - " + i.artist + " (" + i.link + ")\n"
-                }).join(''));
-            }
-
-            database.happyCheck(msg.author, msgChannel, userDoesNotExist);
+            coolDownControl(msg, happyCD, "Hey hey, a bit too excited, huh?", 900, command)
         }
     },
     'joy': {
