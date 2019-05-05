@@ -1,5 +1,5 @@
-var admin = require("firebase-admin");
-var serviceAccount = require("./serviceAccountKey.json");
+const admin = require("firebase-admin");
+const serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -50,15 +50,20 @@ exports.addStrike = (msg, id, tag, reason) => {
 
 /**
  * Check to see if the user has initiated the !happy command before.
- * If not, then add them to the database and send them the DM
+ * If not, then add them to the database and send them the DM of the
+ * list of songs.
  */
-exports.happyCheck = (msg, id) => {
-    db.ref('happy/').once('value').then(snap => {
+exports.happyCheck = (msg, id, fn1, fn2) => {
+    const ref = db.ref('happy/' + id);
+    ref.once('value').then(snap => {
         if (snap.exists()) {
-            // What to do if someone already exists
-            
+            fn1();
         } else {
             // What to do if someone does not exist yet in database
+            ref.set({
+                init: true
+            });
+            fn2();
         }
     });
 }

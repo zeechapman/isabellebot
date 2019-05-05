@@ -26,7 +26,7 @@ let happyCD = {
 }
 
 let stabIndex = Math.floor(Math.random() * 5); // The index of the current stab image
-let musicIndex = Math.floor(Math.random() * 2);
+let musicIndex = Math.floor(Math.random() * songList.length);
 let critRoll = false;
 let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
 
@@ -228,8 +228,7 @@ exports.module = {
                         return val.name === 'staff_room';
                     });
                     msg.delete();
-                    staffChannel.send('Oops, looks like a little accident happened! You got to make sure to include a @user when issuing a strike.\nAs a reminder, the command is:\n\`\`\`!strike <@username#0000> Reason (optional).\`\`\`\nAlso, post it in #staff_room so no one can be yelled at specifically for issuing a strike. Thank you :)');
-
+                    staffChannel.send('Oops, looks like a little accident happened! You got to make sure to include a @user when issuing a strike.\nAs a reminder, the command is:\n\`\`\`!strike @username#0000 Reason (optional).\`\`\`\nAlso, post it in #staff_room so no one can be yelled at specifically for issuing a strike. Thank you :)');
                 } else {
                     tag = msg.mentions.users.first().tag;
                     for (let i = 1; i < str.length; i++) {
@@ -256,17 +255,11 @@ exports.module = {
             msg.channel.send('Ummm, ' + msg.member + ', I don\'t ' + spaced);
         }
     },
-    // 'happy': {
-    //     fn: msg => {
-    //         let sender = msg.author; // Person who sent the command !happy
-    //         // First send it in the channel.
-    //         msg.channel.send(sender + ", check yo DM's");
-    //         sender.send("Oh! Happy songs? I got a few!\n" + songList.map(i => {
-    //             let string = i.song + " by " + i.artist + " " + i.link + "\n"
-    //             return string;
-    //         }).join(''));
-    //     }
-    // },
+    'happy': {
+        fn: msg => {
+            database.happyCheck(msg, msg.author, () => { console.log("User already exists") }, () => {console.log("User does not exist")});
+        }
+    },
     'joy': {
         fn: msg => {
             msg.channel.send("Did you remember to take your J͢ǫ̵y͞ t̛ǫ̕d̵͠ą̶y̷̨͠?̶");
