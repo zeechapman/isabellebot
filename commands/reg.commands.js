@@ -20,6 +20,11 @@ let stabCD = {
     cdLast: new Date().getTime()
 }
 
+let happyCD = {
+    onCD: false,
+    cdLast: new Date().getTime()
+}
+
 let stabIndex = Math.floor(Math.random() * 5); // The index of the current stab image
 let musicIndex = Math.floor(Math.random() * 2);
 let critRoll = false;
