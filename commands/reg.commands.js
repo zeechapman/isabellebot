@@ -259,8 +259,12 @@ exports.module = {
         fn: msg => {
             // This will initiate in any case
             function msgChannel() {
-                msg.channel.send("Oh! Happy songs? I got one!\n" + songList[songIndex]);
-                songIndex++;
+                let songChoice = songList[songIndex];
+                msg.channel.send("Oh! Happy songs? I got one!\n" + songChoice.song + " - " + songChoice.artist + " (" + songChoice.link + ")");
+                if (songIndex < songList.length - 1)
+                    songIndex++;
+                else
+                    songIndex = 0;
             }
 
             // This will run if the user does not exist in the database
@@ -271,7 +275,7 @@ exports.module = {
                 }).join(''));
             }
 
-            database.happyCheck(msg, msg.author, msgChannel(), userDoesNotExist());
+            database.happyCheck(msg.author, msgChannel, userDoesNotExist);
         }
     },
     'joy': {

@@ -53,7 +53,7 @@ exports.addStrike = (msg, id, tag, reason) => {
  * If not, then add them to the database and send them the DM of the
  * list of songs.
  */
-exports.happyCheck = (msg, id, fn1, fn2) => {
+exports.happyCheck = (id, fn1, fn2) => {
     const ref = db.ref('happy/' + id);
     ref.once('value').then(snap => {
         if (snap.exists()) {
