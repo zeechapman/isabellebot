@@ -26,7 +26,7 @@ let happyCD = {
 }
 
 let stabIndex = Math.floor(Math.random() * 5); // The index of the current stab image
-let musicIndex = Math.floor(Math.random() * songList.length);
+let songIndex = Math.floor(Math.random() * songList.length);
 let critRoll = false;
 let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
 
@@ -257,7 +257,21 @@ exports.module = {
     },
     'happy': {
         fn: msg => {
-            database.happyCheck(msg, msg.author, () => { console.log("User already exists") }, () => {console.log("User does not exist")});
+            // This will initiate in any case
+            function msgChannel() {
+                msg.channel.send("Oh! Happy songs? I got one!\n" + songList[songIndex]);
+                songIndex++;
+            }
+
+            // This will run if the user does not exist in the database
+            function userDoesNotExist() {
+                msgChannel();
+                msg.author.send("Psst. Here's a list of all of the songs if you're curious:\n" + songList.map(i => {
+                    return i.song + " - " + i.artist + " (" + i.link + ")\n"
+                }).join(''));
+            }
+
+            database.happyCheck(msg, msg.author, msgChannel(), userDoesNotExist());
         }
     },
     'joy': {
