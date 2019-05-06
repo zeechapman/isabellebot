@@ -89,7 +89,14 @@ exports.module = {
     },
     'rip': {
         fn: msg => {
-            msg.channel.send('Press F to pay respects');
+            // For now, there is only one channel to blacklist
+            let blackListChannels = 'the-soft-space';
+            if (msg.channel.name === blackListChannels)
+                // If the command is used in one of the blacklisted channels,
+                // then don't do anything.
+                return;
+            else
+                msg.channel.send('Press F to pay respects');
         }
     },
     'trip': {
@@ -173,7 +180,7 @@ exports.module = {
                     let i = Math.floor(Math.random() * outcomes.neg.length);
                     desc = outcomes.neg[i];
                 }
-                msg.channel.send('"' + args + '"\n8-Ball says: *' + desc + '*');
+                msg.channel.send('8-Ball says: *' + desc + '*');
             }
 
             coolDownControl(msg, ballCD, 'Sorry, the Magic 8Ball needs time to cool down!', 30, command);
