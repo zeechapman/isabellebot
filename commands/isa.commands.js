@@ -36,9 +36,8 @@ let regCommands = [
 let update = {
     date: "05/04/19",
     description:
-        "**Psst...update! (again)**\n" +
-        "- `!happy` is temporarily disabled to make it better. Don't worry, you'll be getting your happy soon.\n" +
-        "- *(That was not planned)*"
+        "**Update!**\n" +
+        "- !rip no longer works in #the-soft-space as it's not very appropriate."
 }
 
 exports.module = {
