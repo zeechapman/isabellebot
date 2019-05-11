@@ -319,7 +319,7 @@ exports.module = {
                 'lovely bundle of flowers',
                 'OwO',
                 'lovely Sunflower',
-                'A Whithered Sunflower',
+                'Whithered Sunflower',
                 'bundle of weeds',
                 'lovely bunch of coconuts',
                 'bouquet of Lavender',
@@ -328,7 +328,9 @@ exports.module = {
             let ran = Math.floor(Math.random() * seeds.length);
             if (msg.channel.name === whiteListChannel) {
                 msg.channel.send("You water the garden...");
-                msg.channel.send("What grew? A " + seeds[ran] + "!");
+                setTimeout(() => {
+                    msg.channel.send("What grew? A " + seeds[ran] + "!");
+                }, 1000);
             }
             else {
                 return;
