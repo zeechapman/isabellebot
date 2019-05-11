@@ -34,10 +34,10 @@ let regCommands = [
 ]
 
 let update = {
-    date: "05/04/19",
+    date: "05/10/19",
     description:
-        "**Update!**\n" +
-        "- !rip no longer works in #the-soft-space as it's not very appropriate."
+        "**WAAAAAAA! (update)**\n" +
+        "- New command: `!waa`"
 }
 
 exports.module = {
