@@ -30,8 +30,6 @@ let songIndex = Math.floor(Math.random() * songList.length);
 let critRoll = false;
 let imgPath = 'https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/';
 
-
-
 /**
  * Cooldown control
  * @param {Discord.Client()} msg Discord
@@ -51,22 +49,18 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
             let timeRemaining = (cdTime * 1000) - cdBetween;
             console.log(timeRemaining);
             let timeStr = timeRemaining.toString();
-            // if (timeRemaining < 1000) {
-            //     // Single digit
-            //     msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 1));
-            // } else if (timeRemaining < 100000) {
-            //     // Triple digit
-            //     msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 2));
-            // }  else {
-            //     msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 3));
-            // }
+
             if (timeRemaining < 10000) {
+                // If there's less than 10 seconds, or 10,000 MS
                 msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 1));
             } else if (timeRemaining < 100000) {
+                // If there's less than 100 seconds, or 100,000 MS
                 msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 2));
             } else if (timeRemaining < 1000000) {
+                // If there's less than 1000 seconds, or 1,000,000 MS
                 msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 3));
             } else {
+                // Otherwise, just display the first 4 digits (10,000,000 MS)
                 msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 4));
             }
         }
