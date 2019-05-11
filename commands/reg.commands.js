@@ -306,5 +306,17 @@ exports.module = {
         fn: msg => {
             msg.channel.send("Did you remember to take your J͢ǫ̵y͞ t̛ǫ̕d̵͠ą̶y̷̨͠?̶");
         }
+    },
+    'waa': msg => {
+        msg.channel.send('WAAAAAAAH!');
+    },
+    'water': msg => {
+        let seeds = [
+            'Lovely Sunflower',
+            'A Whithered Sunflower',
+            'A Blue Berry Bush'
+        ]
+        msg.channel.send("You water the garden...");
+        msg.channel.send("What grew? A " + + "!");
     }
 }
