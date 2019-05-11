@@ -336,5 +336,24 @@ exports.module = {
                 return;
             }
         }
+    },
+    'senpai': {
+        fn: msg => {
+            let faces = [
+                '(⌬̀⌄⌬́)',
+                '(´｡✪ω✪｡｀)',
+                '(๑>ᴗ<๑)',
+                '(｡◕‿◕｡)'
+            ];
+            let phrases = [
+                'Notice me, senpai~~',
+                'I hope senpai notices me today~~'
+            ];
+
+            let faceInd = Math.floor(Math.random() * faces.length);
+            let phraseInd = Math.floor(Math.random() * phrases.length);
+
+            msg.channel.send(phrases[phraseInd] + '\n' + faces[faceInd]);
+        }
     }
 }
