@@ -52,16 +52,16 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
 
             if (timeRemaining < 10000) {
                 // If there's less than 10 seconds, or 10,000 MS
-                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 1));
+                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 1) + " seconds left.");
             } else if (timeRemaining < 100000) {
                 // If there's less than 100 seconds, or 100,000 MS
-                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 2));
+                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 2) + " seconds left.");
             } else if (timeRemaining < 1000000) {
                 // If there's less than 1000 seconds, or 1,000,000 MS
-                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 3));
+                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 3) + " seconds left.");
             } else {
                 // Otherwise, just display the first 4 digits (10,000,000 MS)
-                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 4));
+                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 4) + " seconds left.");
             }
         }
         else {
@@ -101,8 +101,8 @@ exports.module = {
             let blackListChannels = 'the-soft-space';
             if (msg.channel.name === blackListChannels)
                 // If the command is used in one of the blacklisted channels,
-                // then don't do anything.
-                return;
+                // then delete the message
+                msg.delete();
             else
                 msg.channel.send('Press F to pay respects');
         }
@@ -175,6 +175,7 @@ exports.module = {
             };
 
             let command = () => {
+                console.log("Command itself ran.")
                 let ranIn = Math.floor(Math.random() * 12);
                 let desc = '';
 
@@ -188,10 +189,14 @@ exports.module = {
                     let i = Math.floor(Math.random() * outcomes.neg.length);
                     desc = outcomes.neg[i];
                 }
-                msg.channel.send('8-Ball says: *' + desc + '*');
+                msg.channel.send('"' + args + '"\n8-Ball says: *' + desc + '*');
             }
-
-            coolDownControl(msg, ballCD, 'Sorry, the Magic 8Ball needs time to cool down!', 30, command);
+            if (args.length === 0) {
+                msg.channel.send("You need to ask the Magic 8Ball a question, silly!");
+            } else {
+                console.log("Running cooldown control");
+                coolDownControl(msg, ballCD, 'Sorry, the Magic 8Ball needs time to cool down!', 30, command);
+            }
         }
     },
     'stab': {
