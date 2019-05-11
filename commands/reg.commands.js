@@ -288,7 +288,7 @@ exports.module = {
                     else
                         songIndex = 0;
                 }
-    
+
                 // This will run if the user does not exist in the database
                 function userDoesNotExist() {
                     msgChannel();
@@ -296,7 +296,7 @@ exports.module = {
                         return i.song + " - " + i.artist + " (" + i.link + ")\n"
                     }).join(''));
                 }
-    
+
                 database.happyCheck(msg.author, msgChannel, userDoesNotExist);
             }
             coolDownControl(msg, happyCD, "Hey hey, a bit too excited, huh?", 900, command)
@@ -307,16 +307,20 @@ exports.module = {
             msg.channel.send("Did you remember to take your J͢ǫ̵y͞ t̛ǫ̕d̵͠ą̶y̷̨͠?̶");
         }
     },
-    'waa': msg => {
-        msg.channel.send('WAAAAAAAH!');
+    'waa': {
+        fn: msg => {
+            msg.channel.send('WAAAAAAAAH!');
+        }
     },
-    'water': msg => {
-        let seeds = [
-            'Lovely Sunflower',
-            'A Whithered Sunflower',
-            'A Blue Berry Bush'
-        ]
-        msg.channel.send("You water the garden...");
-        msg.channel.send("What grew? A " + + "!");
+    'water': {
+        fn: msg => {
+            let seeds = [
+                'Lovely Sunflower',
+                'A Whithered Sunflower',
+                'A Blue Berry Bush'
+            ]
+            msg.channel.send("You water the garden...");
+            msg.channel.send("What grew? A " + + "!");
+        }
     }
 }
