@@ -314,13 +314,25 @@ exports.module = {
     },
     'water': {
         fn: msg => {
+            let whiteListChannel = 'secret-garden';
             let seeds = [
-                'Lovely Sunflower',
+                'lovely bundle of flowers',
+                'OwO',
+                'lovely Sunflower',
                 'A Whithered Sunflower',
-                'A Blue Berry Bush'
-            ]
-            msg.channel.send("You water the garden...");
-            msg.channel.send("What grew? A " + + "!");
+                'bundle of weeds',
+                'lovely bunch of coconuts',
+                'bouquet of Lavender',
+                'XP Orb'
+            ];
+            let ran = Math.floor(Math.random() * seeds.length);
+            if (msg.channel.name === whiteListChannel) {
+                msg.channel.send("You water the garden...");
+                msg.channel.send("What grew? A " + seeds[ran] + "!");
+            }
+            else {
+                return;
+            }
         }
     }
 }
