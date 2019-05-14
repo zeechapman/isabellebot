@@ -318,12 +318,16 @@ exports.module = {
             let seeds = [
                 'lovely bundle of flowers',
                 'OwO',
-                'lovely Sunflower',
-                'Whithered Sunflower',
+                'Blue Jazz',
+                'Ancient Fruit',
                 'bundle of weeds',
                 'lovely bunch of coconuts',
                 'bouquet of Lavender',
-                'XP Orb'
+                'XP Orb',
+                'Cabbage Patch Kids...?',
+                'Starfruit',
+                'Roses',
+                'Stardew Valley Farming Spreadsheet'
             ];
             let ran = Math.floor(Math.random() * seeds.length);
             if (msg.channel.name === whiteListChannel) {
