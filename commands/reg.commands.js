@@ -243,22 +243,30 @@ exports.module = {
             }
             // If the user who did the strike matched, allow them to perform the strike
             if (match) {
+                let staffChannel = msg.guild.channels.find(val => {
+                    return val.name === 'staff_room';
+                });
                 if (args === '') {
-                    let staffChannel = msg.guild.channels.find(val => {
-                        return val.name === 'staff_room';
-                    });
+                    
                     msg.delete();
-                    staffChannel.send('Oops, looks like a little accident happened! You got to make sure to include a @user when issuing a strike.\nAs a reminder, the command is:\n\`\`\`!strike @username#0000 Reason (optional).\`\`\`\nAlso, post it in #staff_room so no one can be yelled at specifically for issuing a strike. Thank you :)');
+                    staffChannel.send('Oops, looks like a little accident happened! You got to make sure to include a @user when issuing a strike.\nAs a reminder, the command is:\n\`\`\`!strike <@username#0000> <Reason (optional).>\`\`\`');
                 } else {
-                    tag = msg.mentions.users.first().tag;
-                    for (let i = 1; i < str.length; i++) {
-                        reason += str[i] + ' ';
+                    try {
+                        tag = msg.mentions.users.first().tag;
+                        for (let i = 1; i < str.length; i++) {
+                            reason += str[i] + ' ';
+                        }
+                        database.addStrike(msg, id, tag, reason); // Add the strike
+                    } catch (err) {
+                        console.log("Error with strike: " + err);
+                        msg.delete();
+                        staffChannel.send("Oops, looks like the user wasn't tagged, or something else happened.\nAs a reminder, the command goes:\n\`\`\`!strike <@user#0000> <Reason (optional>\`\`\`");
                     }
-                    database.addStrike(msg, id, tag, reason); // Add the strike
+
                 }
             } else {
+                // If not, delete the message. Pretend it never happened.
                 setTimeout(() => {
-                    // If not, delete the message. Pretend it never happened.
                     msg.delete();
                     console.log('Unauthorized used of !strike. Removing.');
                 }, 100);
@@ -316,18 +324,15 @@ exports.module = {
         fn: msg => {
             let whiteListChannel = 'secret-garden';
             let seeds = [
-                'lovely bundle of flowers',
                 'OwO',
                 'Blue Jazz',
                 'Ancient Fruit',
-                'bundle of weeds',
                 'lovely bunch of coconuts',
                 'bouquet of Lavender',
-                'XP Orb',
+                'Stardew Valley Farming Spreadsheet',
                 'Cabbage Patch Kids...?',
                 'Starfruit',
                 'Roses',
-                'Stardew Valley Farming Spreadsheet'
             ];
             let ran = Math.floor(Math.random() * seeds.length);
             if (msg.channel.name === whiteListChannel) {
