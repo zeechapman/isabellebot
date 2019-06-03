@@ -247,7 +247,6 @@ exports.module = {
                     return val.name === 'staff_room';
                 });
                 if (args === '') {
-                    
                     msg.delete();
                     staffChannel.send('Oops, looks like a little accident happened! You got to make sure to include a @user when issuing a strike.\nAs a reminder, the command is:\n\`\`\`!strike <@username#0000> <Reason (optional).>\`\`\`');
                 } else {
@@ -257,6 +256,10 @@ exports.module = {
                             reason += str[i] + ' ';
                         }
                         database.addStrike(msg, id, tag, reason); // Add the strike
+                        if (reason.length === 0) {
+                            reason = 'N/A';
+                        }
+                        staffChannel.send("A strike has been given by " + msg.author + " to " + tag + " for the following reason:\n\`\`\`" + reason + "\`\`\`");
                     } catch (err) {
                         console.log("Error with strike: " + err);
                         msg.delete();
