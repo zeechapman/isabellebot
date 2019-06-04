@@ -122,6 +122,8 @@ client.on('messageUpdate', (msg, nMsg) => {
         if (match)
             return;
         else {
+            console.log('\nOriginal message:\n' + msg.content);
+            console.log('\n\nUpdated:\n' + nMsg.content +'\n');
             logsChannel.send(
                 "**__EDITED__**\n\n" +
                 "**Original**\n" +
