@@ -335,7 +335,7 @@ exports.module = {
                 'Stardew Valley Farming Spreadsheet',
                 'Cabbage Patch Kids...?',
                 'Starfruit',
-                'Roses',
+                'Rose',
             ];
             let ran = Math.floor(Math.random() * seeds.length);
             if (msg.channel.name === whiteListChannel) {
