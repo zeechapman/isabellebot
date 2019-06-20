@@ -85,7 +85,7 @@ client.on('messageDelete', msg => {
 });
 
 
- 
+
 /**
  * Whenever a message is edited, log it
  */
@@ -123,7 +123,7 @@ client.on('messageUpdate', (msg, nMsg) => {
             return;
         else {
             console.log('\nOriginal message:\n' + msg.content);
-            console.log('\n\nUpdated:\n' + nMsg.content +'\n');
+            console.log('\n\nUpdated:\n' + nMsg.content + '\n');
             logsChannel.send(
                 "**__EDITED__**\n\n" +
                 "**Original**\n" +
@@ -136,10 +136,16 @@ client.on('messageUpdate', (msg, nMsg) => {
     }
 });
 
+// When a user enters the server
+client.on('guildMemberAdd', member => {
+    // This is going to be a text dump.
+    let welcome = "Welcome to Lady Goggles' Starry Night! **This server is 18+.**\n\n**VALUES**\n\nWe're an adult-oriented community where we strive to be positive, friendly, and have as much fun as possible. To that end, this is what we believe:\n\n* We have frank discussions about sensitive subjects, such as mental health, politics, and the like. Discussion is encouraged, as long as civility is forefront\n\n* We treat each other kindly here. Gentle ribbing is okay; insults and bullying are not. Look out for each other, and take care of yourself.\n\n* We're against racism, sexism, homophobia, and other forms of discrimination/prejudice. We don't encourage this behavior; if you witness this, please feel free to speak up in chat, or speak with one of the mods, Squid, or Goggles. RULES * No harassment, doxxing, trolling, or other forms of discrimination are allowed here.\n\m* We have a strike system implemented to avoid trolls and general disruptive behavior. Three strikes and you are banned from the discord.\n\n* Just as a heads up, we log edited and deleted messages for your and our safety.\n\n* No spamming.\n\n* If you are here, it's assumed that you agree to these conditions. If you have any questions, concerns, or suggestions, please contact/DM Lady Goggles herself, SquidCrowPro, or any of our moderators. **You can also submit anonymous feedback here https://forms.gle/yHhpXXML5b1uQXkVA**\n\n*(please note that these rules are subject to change, and I won't be able to update these messages if a change does occur. Announcements will be made on rule changes)*";
+    member.send(welcome);
+});
 
 // When the bot errors, log it
 client.on('error', (err) => {
-	let date = new Date();
+    let date = new Date();
     console.log("Oops! An error has occured on " + date.getHours() + ":" + date.getMinutes() + ":\n" + err);
 });
 

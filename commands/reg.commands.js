@@ -348,5 +348,5 @@ exports.module = {
                 return;
             }
         }
-    }
+    },
 }
