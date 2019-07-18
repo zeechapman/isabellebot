@@ -11,7 +11,8 @@ let isaCommands = [
     "- !sa help --- To bring up the commands list!",
     "- !sa sendhelp -- If you, or someone is feeling down, I can provide resources to help!",
     "- !sa update --- Patch notes for the latest update.",
-    "- !sa info --- Info about me, and credits!"
+    "- !sa info --- Info about me, and credits!",
+    "- !sa status --- Get the status of me, and see if I'm still working."
 ]
 
 let regCommands = [
@@ -30,14 +31,19 @@ let regCommands = [
     "- !stop --- It's time to stop!",
     "- !cati --- Summon the Illumicati!",
     "- !snap --- Don't do it \u{1F628}",
-    "- !happy --- Get a happy song! Feel like you're missing out? It will DM you the list too!"
+    "- !happy --- Get a happy song! Feel like you're missing out? It will DM you the list too!",
+    "- !deep --- *Deep Food*"
 ]
 
 let update = {
-    date: "05/10/19",
+    date: "07/18/19",
     description:
-        "**WAAAAAAA! (update)**\n" +
-        "- New command: `!waa`"
+        "New command added:\n" +
+        "`!deep` --- *Deep Food*\n\n" +
+        "I'm excited!\n" +
+        "```Hi, excited. I'm Dad!```\n\n" +
+        "Oh no..."
+
 }
 
 exports.module = {
