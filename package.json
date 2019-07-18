@@ -4,12 +4,12 @@
   "description": "A Discord bot for Lady Goggle's Discord server \"Goggles' Starry Night.\"",
   "main": "app.js",
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "express": "^4.16.4",
-    "firebase": "^5.9.4",
-    "firebase-admin": "^7.1.1",
+    "discord.js": "^11.5.1",
+    "express": "^4.17.1",
+    "firebase": "^6.3.0",
+    "firebase-admin": "^8.2.0",
     "mkdirp": "^0.5.1",
-    "pg": "^7.6.1"
+    "pg": "^7.11.0"
   },
   "devDependencies": {},
   "scripts": {
