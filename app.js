@@ -47,6 +47,21 @@ client.on('message', msg => {
                 clipsChannel.send('Originally posted by ' + sender + '\n' + clip);
                 msg.delete();
             }
+        // By the power of Necromancy, rise Dadbot...RIIISE!
+        } else if (msg.content.startsWith("im ") || msg.content.startsWith("I'm ") || msg.content.startsWith("i'm ")) {
+            let str = msg.content.split(' '); // Split the string
+            let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
+            for (let i = 1; i < str.length; i++) {
+                // If the end is reached, don't add a space
+                if (i === str.length - 1) {
+                    conStr += str[i];
+                } else {
+                    conStr += str[i] + ' ';
+                }
+            }
+            
+            // Send it
+            msg.channel.send('Hi, ' + conStr + ". I'm Dad!");
         }
     } catch (err) {
         console.log("Bad command, or an error has happened.\nError: " + err + "\n");
