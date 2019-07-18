@@ -47,11 +47,10 @@ client.on('message', msg => {
                 clipsChannel.send('Originally posted by ' + sender + '\n' + clip);
                 msg.delete();
             }
-        // By the power of Necromancy, rise Dadbot...RIIISE!
+        // By the power of Necromancy, rise Dad Bot...RIIISE!
         } else if (msg.content.startsWith("im ") || msg.content.startsWith("I'm ") || msg.content.startsWith("i'm ")) {
             let str = msg.content.split(' '); // Split the string
             let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
-            let embed = new Discord.RichEmbed().setThumbnail('');
             for (let i = 1; i < str.length; i++) {
                 // If the end is reached, don't add a space
                 if (i === str.length - 1) {
@@ -60,9 +59,9 @@ client.on('message', msg => {
                     conStr += str[i] + ' ';
                 }
             }
-            
             // Send it
-            msg.channel.send('Hi, ' + conStr + ". I'm Dad!");
+            let embed = new Discord.RichEmbed().setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/dadbot-thumbnail.png').setDescription('Hi, ' + conStr + ". I'm Dad!").setFooter("~Dad Bot");
+            msg.channel.send(embed);
         }
     } catch (err) {
         console.log("Bad command, or an error has happened.\nError: " + err + "\n");
