@@ -349,4 +349,9 @@ exports.module = {
             }
         }
     },
+    'deep': {
+        fn: msg => {
+            msg.channel.send("Deep Food.\nIt's food, but it's...\n***D E E P***");
+        }
+    }
 }
