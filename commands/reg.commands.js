@@ -86,9 +86,7 @@ exports.module = {
     // Just posts the message, and checks if it's not in soft-space
     'dad': {
         fn: msg => {
-            if (msg.channel.name === channels.softSpace) {
-                return;
-            } else {
+            let command = () => {
                 let str = msg.content.split(' '); // Split the string
                 let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
                 let result = ''; // Another blank
@@ -109,6 +107,12 @@ exports.module = {
                     result = 'Hello, ' + conStr + ". I'm Dad!";
                 }
                 msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/dadbot-thumbnail.png').setDescription(result).setFooter("~Dad Bot"));
+            }
+
+            if (msg.channel.name === channels.softSpace) {
+                return;
+            } else {
+                coolDownControl(msg, dadCD, null, 60, command);
             }
         }
     },
@@ -136,9 +140,7 @@ exports.module = {
     },
     'rip': {
         fn: msg => {
-            // For now, there is only one channel to blacklist
-            let blackListChannels = 'the-soft-space';
-            if (msg.channel.name === blackListChannels)
+            if (msg.channel.name === channels.softSpace)
                 // If the command is used in one of the blacklisted channels,
                 // then don't allow the bot to do anything
                 return;
