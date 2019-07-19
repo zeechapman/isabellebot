@@ -49,7 +49,7 @@ client.on('message', msg => {
             }
         // By the power of Necromancy, rise Dad Bot...RIIISE!
         } else if (msg.content.startsWith("im ") || msg.content.startsWith("I'm ") || msg.content.startsWith("i'm ")) {
-            
+            regCommands.module.dad.fn(msg);
         }
     } catch (err) {
         console.log("Bad command, or an error has happened.\nError: " + err + "\n");

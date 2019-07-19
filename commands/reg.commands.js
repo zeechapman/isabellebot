@@ -30,7 +30,9 @@ let dadCD = {
 }
 
 // Channels
-let chSS = 'the-soft-space';
+let channels = {
+    softSpace: 'the-soft-space'
+}
 
 let stabIndex = Math.floor(Math.random() * 5); // The index of the current stab image
 let songIndex = Math.floor(Math.random() * songList.length);
@@ -81,29 +83,33 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
 
 exports.module = {
     // Because of a special case, Dad Bot is being thrown in here
-    // Just initiates the command
+    // Just posts the message, and checks if it's not in soft-space
     'dad': {
         fn: msg => {
-            let str = msg.content.split(' '); // Split the string
-            let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
-            let result = ''; // Another blank
-            for (let i = 1; i < str.length; i++) {
-                // If the end is reached, don't add a space
-                if (i === str.length - 1) {
-                    conStr += str[i];
-                } else {
-                    conStr += str[i] + ' ';
-                }
-            }
-            let embed = new Discord.RichEmbed();
-            // Send it
-            if (conStr.toUpperCase() === 'DAD') {
-                console.log("Dad detected!");
-                result = "No you're not. I'm Dad!";
+            if (msg.channel.name === channels.softSpace) {
+                return;
             } else {
-                result = 'Hello, ' + conStr + ". I'm Dad!";
+                let str = msg.content.split(' '); // Split the string
+                let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
+                let result = ''; // Another blank
+                for (let i = 1; i < str.length; i++) {
+                    // If the end is reached, don't add a space
+                    if (i === str.length - 1) {
+                        conStr += str[i];
+                    } else {
+                        conStr += str[i] + ' ';
+                    }
+                }
+                let embed = new Discord.RichEmbed();
+                // Send it
+                if (conStr.toUpperCase() === 'DAD') {
+                    console.log("Dad detected!");
+                    result = "No you're not. I'm Dad!";
+                } else {
+                    result = 'Hello, ' + conStr + ". I'm Dad!";
+                }
+                msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/dadbot-thumbnail.png').setDescription(result).setFooter("~Dad Bot"));
             }
-            msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/dadbot-thumbnail.png').setDescription(result).setFooter("~Dad Bot"));
         }
     },
     'caw': {
@@ -344,11 +350,6 @@ exports.module = {
                 database.happyCheck(msg.author, msgChannel, userDoesNotExist);
             }
             coolDownControl(msg, happyCD, "Hey hey, a bit too excited, huh?", 900, command)
-        }
-    },
-    'joy': {
-        fn: msg => {
-            msg.channel.send("Did you remember to take your J͢ǫ̵y͞ t̛ǫ̕d̵͠ą̶y̷̨͠?̶");
         }
     },
     'waa': {

@@ -38,11 +38,15 @@ let regCommands = [
 let update = {
     date: "07/18/19",
     description:
-        "New command added:\n" +
-        "`!deep` --- *Deep Food*\n\n" +
-        "I'm excited!\n" +
-        "```Hi, excited. I'm Dad!```\n\n" +
-        "Oh no..."
+        "A quickie update this time.\n" +
+        "- Added cooldown for Dad Bot. Maybe now he won't blab as much\n" +
+        "- `!joy` removed. Not used frequently enough.\n" +
+        "**FOR SUBS IN #secret-garden**\n" +
+        "- `!water` is now more grammatically correct, and new seeds have been added!\n" + 
+        "- I'm done, I think.\n\n" +
+        "``Hi, done, I think. I'm Dad!``\n\n" +
+        "- ..."
+
 
 }
 
