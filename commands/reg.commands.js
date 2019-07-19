@@ -24,6 +24,13 @@ let happyCD = {
     cdLast: new Date().getTime()
 }
 
+let dadCD = {
+    onCD: false,
+    cdLast: new Date().getTime()
+}
+
+// Channels
+let chSS = 'the-soft-space';
 
 let stabIndex = Math.floor(Math.random() * 5); // The index of the current stab image
 let songIndex = Math.floor(Math.random() * songList.length);
@@ -73,6 +80,32 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
 
 
 exports.module = {
+    // Because of a special case, Dad Bot is being thrown in here
+    // Just initiates the command
+    'dad': {
+        fn: msg => {
+            let str = msg.content.split(' '); // Split the string
+            let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
+            let result = ''; // Another blank
+            for (let i = 1; i < str.length; i++) {
+                // If the end is reached, don't add a space
+                if (i === str.length - 1) {
+                    conStr += str[i];
+                } else {
+                    conStr += str[i] + ' ';
+                }
+            }
+            let embed = new Discord.RichEmbed();
+            // Send it
+            if (conStr.toUpperCase() === 'DAD') {
+                console.log("Dad detected!");
+                result = "No you're not. I'm Dad!";
+            } else {
+                result = 'Hello, ' + conStr + ". I'm Dad!";
+            }
+            msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/dadbot-thumbnail.png').setDescription(result).setFooter("~Dad Bot"));
+        }
+    },
     'caw': {
         fn: msg => {
             msg.channel.send('Caw caw, baby! ' + emotes.caw);
@@ -101,8 +134,8 @@ exports.module = {
             let blackListChannels = 'the-soft-space';
             if (msg.channel.name === blackListChannels)
                 // If the command is used in one of the blacklisted channels,
-                // then delete the message
-                msg.delete();
+                // then don't allow the bot to do anything
+                return;
             else
                 msg.channel.send('Press F to pay respects');
         }
@@ -327,21 +360,21 @@ exports.module = {
         fn: msg => {
             let whiteListChannel = 'secret-garden';
             let seeds = [
-                'OwO',
-                'Blue Jazz',
-                'Ancient Fruit',
-                'lovely bunch of coconuts',
-                'bouquet of Lavender',
-                'Stardew Valley Farming Spreadsheet',
-                'Cabbage Patch Kids...?',
-                'Starfruit',
-                'Rose',
+                'A...oh, what\'s this? OwO',
+                'Some Blue Jazz',
+                'An Ancient Fruit',
+                'A lovely bunch of coconuts',
+                'A bouquet of Lavender',
+                'A Stardew Valley Farming Spreadsheet',
+                'Um...Cabbage Patch Kids...?',
+                'XP Orb. +10 Experience!',
+                'A lost soul',
             ];
             let ran = Math.floor(Math.random() * seeds.length);
             if (msg.channel.name === whiteListChannel) {
                 msg.channel.send("You water the garden...");
                 setTimeout(() => {
-                    msg.channel.send("What grew? A " + seeds[ran] + "!");
+                    msg.channel.send("What grew? " + seeds[ran] + "!");
                 }, 1000);
             }
             else {
