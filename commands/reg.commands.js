@@ -58,19 +58,23 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
             let timeRemaining = (cdTime * 1000) - cdBetween;
             console.log(timeRemaining);
             let timeStr = timeRemaining.toString();
-
-            if (timeRemaining < 10000) {
-                // If there's less than 10 seconds, or 10,000 MS
-                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 1) + " seconds left.");
-            } else if (timeRemaining < 100000) {
-                // If there's less than 100 seconds, or 100,000 MS
-                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 2) + " seconds left.");
-            } else if (timeRemaining < 1000000) {
-                // If there's less than 1000 seconds, or 1,000,000 MS
-                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 3) + " seconds left.");
+            if (cdMsg === '' || cdMsg === null) {
+                // Don't do anything if no message was written
+                return;
             } else {
-                // Otherwise, just display the first 4 digits (10,000,000 MS)
-                msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 4) + " seconds left.");
+                if (timeRemaining < 10000) {
+                    // If there's less than 10 seconds, or 10,000 MS
+                    msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 1) + " seconds left.");
+                } else if (timeRemaining < 100000) {
+                    // If there's less than 100 seconds, or 100,000 MS
+                    msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 2) + " seconds left.");
+                } else if (timeRemaining < 1000000) {
+                    // If there's less than 1000 seconds, or 1,000,000 MS
+                    msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 3) + " seconds left.");
+                } else {
+                    // Otherwise, just display the first 4 digits (10,000,000 MS)
+                    msg.channel.send(cdMsg + '\nTime remaining: ' + timeStr.substr(0, 4) + " seconds left.");
+                }
             }
         }
         else {
