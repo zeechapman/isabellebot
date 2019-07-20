@@ -8,6 +8,13 @@ let emotes = {
     'thisisfine': '<:thisisfine:467198644823654402>'
 }
 
+// Dad Bot variables
+let dadReroll = () => {
+    return Math.floor(Math.random() * 25) + 15;
+}
+let dadCount = 0; // Number of times a dad joke could initiate
+let dadLimit = dadReroll();
+
 // Cooldowns
 let ballCD = {
     onCD: false,
@@ -20,11 +27,6 @@ let stabCD = {
 }
 
 let happyCD = {
-    onCD: false,
-    cdLast: new Date().getTime()
-}
-
-let dadCD = {
     onCD: false,
     cdLast: new Date().getTime()
 }
@@ -93,8 +95,8 @@ exports.module = {
             let command = () => {
                 let str = msg.content.split(' '); // Split the string
                 let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
-                let result = ''; // Another blank
-                let footer = ''; // For a joke
+                let result = '';
+                let footer = '~Dad';
                 for (let i = 1; i < str.length; i++) {
                     // If the end is reached, don't add a space
                     if (i === str.length - 1) {
@@ -125,7 +127,13 @@ exports.module = {
             if (msg.channel.name === channels.softSpace) {
                 return;
             } else {
-                coolDownControl(msg, dadCD, null, 60, command);
+                dadCount++;
+                console.log('Current: ' + dadCount);
+                console.log('Limit: ' + dadLimit);
+                if (dadCount > dadLimit) {
+                    command();
+                    dadLimit = dadReroll();
+                }
             }
         }
     },
