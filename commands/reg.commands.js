@@ -94,6 +94,7 @@ exports.module = {
                 let str = msg.content.split(' '); // Split the string
                 let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
                 let result = ''; // Another blank
+                let footer = ''; // For a joke
                 for (let i = 1; i < str.length; i++) {
                     // If the end is reached, don't add a space
                     if (i === str.length - 1) {
@@ -105,12 +106,20 @@ exports.module = {
                 let embed = new Discord.RichEmbed();
                 // Send it
                 if (conStr.toUpperCase() === 'DAD') {
-                    console.log("Dad detected!");
                     result = "No you're not. I'm Dad!";
+                } else if (conStr.toUpperCase() === 'MOM') {
+                    results = ['Mom...is that you?', 'MOMMAAAAAAAAAAAA\n*OOOO-OO-OOOOOOO*'];
+                    let ran = Math.floor(Math.random() * results.length);
+                    if (ran < results.length) {
+                        footer = '~Dad';
+                    } else {
+                        footer = '~Where the wind blows...'
+                    }
+                    result = results[ran];
                 } else {
                     result = 'Hello, ' + conStr + ". I'm Dad!";
                 }
-                msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/dadbot-thumbnail.png').setDescription(result).setFooter("~Dad Bot"));
+                msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/dadbot-thumbnail.png').setDescription(result).setFooter(footer));
             }
 
             if (msg.channel.name === channels.softSpace) {
