@@ -40,7 +40,8 @@ let update = {
     description:
         "Another quickie!\n" +
         "- Because the spirit of Dad Bot was infuriated, he has been excercised to only happen on a random counter. In other words, he can go off anywhere between 15 or 40 instances of \"I'ms\"\n\n" +
-        "- Please note: I was moved to a new home, so hopefully there won't be so many issues. Bound was getting mad that I wasn't able to pay rent and for the internet (that doesn't work anyways), so I have a new home somewhere in Ohio at Amazon.\n\n" +
+        "- iPhone users rejoice! Apparently Apple likes to be so different that they even use different apostraphes. Hoepfully this will work now.\n\n" + 
+        "- Please note: I had to move to a new home, so hopefully there won't be so many issues. Bound was getting mad that I wasn't able to pay rent and for the internet (that doesn't work anyways), so I have a new home somewhere in Ohio at Amazon.\n\n" +
         "- I'm liking this new place so far.\n\n" +
         "-...much better."
 

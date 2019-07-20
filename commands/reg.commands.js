@@ -13,8 +13,7 @@ let dadReroll = () => {
     return Math.floor(Math.random() * 25) + 15;
 }
 let dadCount = 0; // Number of times a dad joke could initiate 
-// let dadLimit = dadReroll();
-let dadLimit = 0;
+let dadLimit = dadReroll();
 
 // Cooldowns
 let ballCD = {
@@ -97,7 +96,9 @@ exports.module = {
                 let str = msg.content.split(' '); // Split the string
                 let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
                 let result = '';
+                let thumbnail = 'dadbot-thumbnail.png';
                 let footer = '~Dad';
+                
                 for (let i = 1; i < str.length; i++) {
                     // If the end is reached, don't add a space
                     if (i === str.length - 1) {
@@ -106,7 +107,9 @@ exports.module = {
                         conStr += str[i] + ' ';
                     }
                 }
+                
                 let embed = new Discord.RichEmbed();
+
                 // Send it
                 if (conStr.toUpperCase() === 'DAD') {
                     result = "No you're not. I'm Dad!";
@@ -122,11 +125,12 @@ exports.module = {
                 } else if (conStr.toUpperCase() === 'ISABELLE') {
                     result = "Hello! I'm Isabelle! Nice to meet you.";
                     footer = "~Isabelle Bot";
-                    msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/unspeakable.png'));;
+                    // This picture may change later. Can't decide if I want Isabelle on Dad Bot, or Dad Bot on Isabelle
+                    thumbnail = 'unspeakable.png';
                 } else {
                     result = 'Hello, ' + conStr + ". I'm Dad!";
                 }
-                msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/dadbot-thumbnail.png').setDescription(result).setFooter(footer));
+                msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/' + thumbnail).setDescription(result).setFooter(footer));
             }
 
             if (msg.channel.name === channels.softSpace) {
