@@ -12,7 +12,7 @@ let emotes = {
 let dadReroll = () => {
     return Math.floor(Math.random() * 25) + 15;
 }
-let dadCount = 0; // Number of times a dad joke could initiate
+let dadCount = 0; // Number of times a dad joke could initiate 
 let dadLimit = dadReroll();
 
 // Cooldowns
