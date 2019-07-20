@@ -36,17 +36,13 @@ let regCommands = [
 ]
 
 let update = {
-    date: "07/18/19",
+    date: "07/20/19",
     description:
-        "A quickie update this time.\n" +
-        "- Added cooldown for Dad Bot. Maybe now he won't blab as much\n" +
-        "- `!joy` removed. Not used frequently enough.\n" +
-        "**FOR SUBS IN #secret-garden**\n" +
-        "- `!water` is now more grammatically correct, and new seeds have been added!\n" + 
-        "- I'm done, I think.\n\n" +
-        "``Hi, done, I think. I'm Dad!``\n\n" +
-        "- ..."
-
+        "Another quickie!\n" +
+        "- Because the spirit of Dad Bot was infuriated, he has been excercised to only happen on a random counter. In other words, he can go off anywhere between 15 or 40 instances of \"I'ms\"\n\n" +
+        "- Please note: I was moved to a new home, so hopefully there won't be so many issues. Bound was getting mad that I wasn't able to pay rent and for the internet (that doesn't work anyways), so I have a new home somewhere in Ohio at Amazon.\n\n" +
+        "- I'm liking this new place so far.\n\n" +
+        "-...much better."
 
 }
 
