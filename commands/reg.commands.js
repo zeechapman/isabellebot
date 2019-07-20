@@ -13,7 +13,8 @@ let dadReroll = () => {
     return Math.floor(Math.random() * 25) + 15;
 }
 let dadCount = 0; // Number of times a dad joke could initiate 
-let dadLimit = dadReroll();
+// let dadLimit = dadReroll();
+let dadLimit = 0;
 
 // Cooldowns
 let ballCD = {
@@ -118,6 +119,10 @@ exports.module = {
                         footer = '~Where the wind blows...'
                     }
                     result = results[ran];
+                } else if (conStr.toUpperCase() === 'ISABELLE') {
+                    result = "Hello! I'm Isabelle! Nice to meet you.";
+                    footer = "~Isabelle Bot";
+                    msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/unspeakable.png'));;
                 } else {
                     result = 'Hello, ' + conStr + ". I'm Dad!";
                 }
@@ -137,6 +142,7 @@ exports.module = {
             }
         }
     },
+    // Caw caw, baby
     'caw': {
         fn: msg => {
             msg.channel.send('Caw caw, baby! ' + emotes.caw);
