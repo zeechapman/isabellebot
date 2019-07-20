@@ -48,7 +48,7 @@ client.on('message', msg => {
                 msg.delete();
             }
         // By the power of Necromancy, rise Dad Bot...RIIISE!
-        } else if (msg.content.startsWith("im ") || msg.content.startsWith("I'm ") || msg.content.startsWith("i'm ")) {
+        } else if (msg.content.startsWith("im ") || msg.content.startsWith("I'm ") || msg.content.startsWith("i'm ") || msg.content.startsWith('I’m ') || msg.content.startsWith('i’m ')) {
             regCommands.module.dad.fn(msg);
         }
     } catch (err) {
