@@ -55,6 +55,11 @@ client.on('message', msg => {
         console.log("Bad command, or an error has happened.\nError: " + err + "\n");
     }
 
+    // Whenever Isabelle recieves a DM, send it to a specific channel
+    // on the private Discord server
+    if (msg.channel.type === 'dm') {
+        console.log("--------\nDM recieved from " + msg.author.tag + "\n\n" + msg.content + '\n--------');
+    }
 });
 
 /**
