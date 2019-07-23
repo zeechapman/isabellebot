@@ -115,6 +115,9 @@ exports.module = {
                 }
             }
 
+            if (conStr.length > 100) {
+                return;
+            }
 
             // Bypassable limit. Will not break current limit or add to it
             if (conStr.toUpperCase() === 'DAD') {
