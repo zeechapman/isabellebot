@@ -10,7 +10,7 @@ let emotes = {
 
 // Dad Bot variables
 let dadReroll = () => {
-    return Math.floor(Math.random() * 10) + 15;
+    return Math.floor(Math.random() * 20) + 10;
 }
 let dadCount = 0; // Number of times a dad joke could initiate 
 let dadLimit = dadReroll();
@@ -115,10 +115,6 @@ exports.module = {
                 }
             }
 
-            if (conStr.length > 100) {
-                return;
-            }
-
             // Bypassable limit. Will not break current limit or add to it
             if (conStr.toUpperCase() === 'DAD') {
                 // If the user types in Dad
@@ -154,9 +150,13 @@ exports.module = {
                     dadCount++;
                     console.log("Dad moment happened!\nCount: " + dadCount + "\nLimit: " + dadLimit);
                     if (dadCount > dadLimit) {
-                        msgSend();
-                        dadCount = 0;
-                        dadLimit = dadReroll();
+                        if (conStr.length > 100) {
+                            return;
+                        } else {
+                            msgSend();
+                            dadCount = 0;
+                            dadLimit = dadReroll();
+                        }
                     }
                 } else {
                     msgSend();
