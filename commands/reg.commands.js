@@ -10,10 +10,11 @@ let emotes = {
 
 // Dad Bot variables
 let dadReroll = () => {
-    return Math.floor(Math.random() * 25) + 15;
+    return Math.floor(Math.random() * 10) + 15;
 }
 let dadCount = 0; // Number of times a dad joke could initiate 
 let dadLimit = dadReroll();
+let dadBypass = false; // Certain instances can cause Dad Bot to go off
 
 // Cooldowns
 let ballCD = {
@@ -92,56 +93,71 @@ exports.module = {
     // Just posts the message, and checks if it's not in soft-space
     'dad': {
         fn: msg => {
-            let command = () => {
-                let str = msg.content.split(' '); // Split the string
-                let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
-                let result = '';
-                let thumbnail = 'dadbot-thumbnail.png';
-                let footer = '~Dad';
-                
-                for (let i = 1; i < str.length; i++) {
-                    // If the end is reached, don't add a space
-                    if (i === str.length - 1) {
-                        conStr += str[i];
-                    } else {
-                        conStr += str[i] + ' ';
-                    }
-                }
-                
-                let embed = new Discord.RichEmbed();
+            // let command = () => {
+            let str = msg.content.split(' '); // Split the string
+            let conStr = ''; // Blank string to 'string' together (ha, get it? Dad joke)
+            let result = '';
+            let thumbnail = 'dadbot-thumbnail.png';
+            let footer = '~Dad';
 
-                // Send it
-                if (conStr.toUpperCase() === 'DAD') {
-                    result = "No you're not. I'm Dad!";
-                } else if (conStr.toUpperCase() === 'MOM') {
-                    results = ['Mom...is that you?', 'MOMMAAAAAAAAAAAA\n*OOOO-OO-OOOOOOO*'];
-                    let ran = Math.floor(Math.random() * results.length);
-                    if (ran < results.length) {
-                        footer = '~Dad';
-                    } else {
-                        footer = '~Where the wind blows...'
-                    }
-                    result = results[ran];
-                } else if (conStr.toUpperCase() === 'ISABELLE') {
-                    result = "Hello! I'm Isabelle! Nice to meet you.";
-                    footer = "~Isabelle Bot";
-                    // This picture may change later. Can't decide if I want Isabelle on Dad Bot, or Dad Bot on Isabelle
-                    thumbnail = 'unspeakable.png';
-                } else {
-                    result = 'Hello, ' + conStr + ". I'm Dad!";
-                }
+            let embed = new Discord.RichEmbed();
+
+            let msgSend = () => {
                 msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/' + thumbnail).setDescription(result).setFooter(footer));
+            }
+
+            for (let i = 1; i < str.length; i++) {
+                // If the end is reached, don't add a space
+                if (i === str.length - 1) {
+                    conStr += str[i];
+                } else {
+                    conStr += str[i] + ' ';
+                }
+            }
+
+
+            // Bypassable limit. Will not break current limit or add to it
+            if (conStr.toUpperCase() === 'DAD') {
+                // If the user types in Dad
+                result = "No you're not. I'm Dad!";
+                dadBypass = true;
+            } else if (conStr.toUpperCase() === 'MOM') {
+                // If the user types in Mom
+                results = ['Mom...is that you?', 'MOMMAAAAAAAAAAAA\n*OOOO-OO-OOOOOOO*'];
+                let ran = Math.floor(Math.random() * results.length);
+                if (ran === results.length - 1) {
+                    footer = '~Where the wind blows...'
+                } else {
+                    footer = '~Dad';
+                }
+                result = results[ran];
+                dadBypass = true;
+            } else if (conStr.toUpperCase() === 'ISABELLE') {
+                // If the user types in Isabelle
+                result = "Hello! I'm Isabelle! Nice to meet you.";
+                footer = "~Isabelle Bot";
+                // This picture may change later. Can't decide if I want Isabelle on Dad Bot, or Dad Bot on Isabelle
+                thumbnail = 'unspeakable.png';
+                dadBypass = true;
+            } else {
+                // Normal result
+                result = 'Hello, ' + conStr + ". I'm Dad!";
             }
 
             if (msg.channel.name === channels.softSpace) {
                 return;
             } else {
-                dadCount++;
-                console.log('Current: ' + dadCount);
-                console.log('Limit: ' + dadLimit);
-                if (dadCount > dadLimit) {
-                    command();
-                    dadLimit = dadReroll();
+                if (dadBypass === false) {
+                    dadCount++;
+                    console.log("Dad moment happened!\nCount: " + dadCount + "\nLimit: " + dadLimit);
+                    if (dadCount > dadLimit) {
+                        msgSend();
+                        dadCount = 0;
+                        dadLimit = dadReroll();
+                    }
+                } else {
+                    msgSend();
+                    dadBypass = false;
                 }
             }
         }
