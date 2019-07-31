@@ -99,8 +99,18 @@ exports.module = {
             let result = '';
             let thumbnail = 'dadbot-thumbnail.png';
             let footer = '~Dad';
-
             let embed = new Discord.RichEmbed();
+            
+            // As requested, blacklist Dad Bot from triggering on certain people.
+            let blacklist = ['256537367308009473'];
+            let blMatch = false;
+            
+            for (let i = 0; i < blacklist.length; i++) {
+                if (blacklist[i] === msg.author.id) {
+                    blMatch = true;
+                    console.log("\n\nDad Bot: Blacklisted count. Not counted for.\n\n")
+                }
+            }
 
             let msgSend = () => {
                 msg.channel.send(embed.setThumbnail('https://raw.githubusercontent.com/zeechapman/isabellebot/dev/img/' + thumbnail).setDescription(result).setFooter(footer));
@@ -142,8 +152,9 @@ exports.module = {
                 // Normal result
                 result = 'Hello, ' + conStr + ". I'm Dad!";
             }
-
-            if (msg.channel.name === channels.softSpace) {
+            if (blMatch) {
+                return;
+            } else if (msg.channel.name === channels.softSpace) {
                 return;
             } else {
                 if (dadBypass === false) {
