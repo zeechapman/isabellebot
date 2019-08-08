@@ -32,6 +32,10 @@ let happyCD = {
     cdLast: new Date().getTime()
 }
 
+// Randomization tracking
+let ranSeed = []; // Tracks which previous 4 seeds were used
+let ranTest = [];
+
 // Channels
 let channels = {
     softSpace: 'the-soft-space'
@@ -87,6 +91,59 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
     }
 }
 
+/**
+ * Checks to see if the same random object was already selected
+ * in the past 4 attemps
+ * @param {Array} arr The array to use to track what has been used 
+ * @param {String} curr Current array (index selected) to add into *arr*
+ */
+function patternCheck(arr, curr) {
+    this.roll = () => {
+        return Math.floor(Math.random() * arr.length);
+    }
+    this.ranNum = this.roll();
+    if (arr.length === 0) {
+        // If the array is empty, then fill it with the first option that it randomly picks
+        console.log("The array is not long at all.");
+        arr.push(curr[this.ranNum]);
+    } else {
+        for (let i = 0; i < curr.length; i++) {
+            console.log("Stepping into the loop");
+            if (arr[this.ranNum] === curr[i]) {
+                console.log("A match has been found. Rerolling");
+                this.roll();
+            } else {
+                console.log("No match found. Adding and breaking loop");
+            }
+        }
+    }
+    console.log("Result: " + arr);
+}
+
+// Nope
+// function ranTrack(arr, curr) {
+//     this.random = (size) => {
+//         return Math.floor(Math.random() * size);
+//     }
+//     this.ranNum = this.random(arr.length);
+//     if (arr.length === 0) {
+//         arr.push(curr);
+//     }
+//     else {
+//         for (let i = 0; i < arr.length; i++) {
+//             // Loop each array entry until something clicks
+//             if (arr[i] === curr) {
+//                 // If the index of the array matches any current selected option,
+//                 // then reroll
+//                 this.ranNum = this.random(arr.length);
+//             } else {
+//                 arr.push(curr);
+//                 console.log(arr);
+//                 return
+//             }
+//         }
+//     }
+// }
 
 exports.module = {
     // Because of a special case, Dad Bot is being thrown in here
@@ -132,14 +189,7 @@ exports.module = {
                 dadBypass = true;
             } else if (conStr.toUpperCase() === 'MOM') {
                 // If the user types in Mom
-                results = ['Mom...is that you?', 'MOMMAAAAAAAAAAAA\n*OOOO-OO-OOOOOOO*'];
-                let ran = Math.floor(Math.random() * results.length);
-                if (ran === results.length - 1) {
-                    footer = '~Where the wind blows...'
-                } else {
-                    footer = '~Dad';
-                }
-                result = results[ran];
+                result = 'MOMMAAAAAAAAAAAA\n*OOOO-OO-OOOOOOO*';
                 dadBypass = true;
             } else if (conStr.toUpperCase() === 'ISABELLE') {
                 // If the user types in Isabelle
@@ -433,12 +483,15 @@ exports.module = {
                 'Um...Cabbage Patch Kids...?',
                 'XP Orb. +10 Experience!',
                 'A lost soul',
+                'A Rare Candy. Level up!',
+                'A Banananana Nut',
+                ''
             ];
             let ran = Math.floor(Math.random() * seeds.length);
             if (msg.channel.name === whiteListChannel) {
                 msg.channel.send("You water the garden...");
                 setTimeout(() => {
-                    msg.channel.send("What grew? " + seeds[ran] + "!");
+                    msg.channel.send("What grew? " + seeds[ran]);
                 }, 1000);
             }
             else {
@@ -449,6 +502,13 @@ exports.module = {
     'deep': {
         fn: msg => {
             msg.channel.send("Deep Food.\nIt's food, but it's...\n***D E E P***");
+        }
+    },
+    'aaa': {
+        fn: msg => {
+            let ha = ['Test 1', 'Test 2', 'Test 3', 'Test 4'];
+            patternCheck(ranTest, ha);
+            console.log(ranTest);
         }
     }
 }
