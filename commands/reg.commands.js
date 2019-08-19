@@ -1,3 +1,20 @@
+/**
+ * Greetings, curious one. I appreciate you taking the time to look at my code.
+ * 
+ * As of 08/19/2019, I figured it was time to do yet another clean up of my code.
+ * As of right now, there isn't too many issues with what I have down. The big issue
+ * is mostly disorganized, and a lot of my code is repeated when I can easily make
+ * functions out of a lot of the code. Such as for example, the commonly used
+ * ```msg.channel.send()``` line of code.
+ * 
+ * For the time being though, I just got back into school, and a lot of irl drama
+ * is happening with me. It took me at least a couple of days the first time I
+ * re-did everything, but this may take a lot more work.
+ * 
+ * Feel free to browse for now. Just know that I do know that there's a lot I
+ * could condense my code down to.
+ */
+
 const Discord = require('discord.js');
 const database = require('./firebase/firebase');
 const songList = require('./songs');
@@ -32,10 +49,9 @@ let happyCD = {
     cdLast: new Date().getTime()
 }
 
-// Randomization tracking
-let ranSeed = []; // Tracks which previous 4 seeds were used
-let ranTest = [];
-
+// Pattern check
+let lastSeeds = [];
+let lastTest = [];
 // Channels
 let channels = {
     softSpace: 'the-soft-space'
@@ -92,58 +108,37 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
 }
 
 /**
- * Checks to see if the same random object was already selected
- * in the past 4 attemps
- * @param {Array} arr The array to use to track what has been used 
- * @param {String} curr Current array (index selected) to add into *arr*
+ * Prevent the same random entry from occuring consistently.
+ * Checks last 4 seeds.
+ * @param {Array} obj The object to record the pattern
+ * @param {String} curr Current array (index selected) to add into *obj*
+ * @param {Number} len The amount of entries to record
  */
-function patternCheck(arr, curr) {
+function patternCheck(obj, curr, len) {
     this.roll = () => {
-        return Math.floor(Math.random() * arr.length);
+        return Math.floor(Math.random() * curr.length); 
     }
-    this.ranNum = this.roll();
-    if (arr.length === 0) {
-        // If the array is empty, then fill it with the first option that it randomly picks
-        console.log("The array is not long at all.");
-        arr.push(curr[this.ranNum]);
-    } else {
-        for (let i = 0; i < curr.length; i++) {
-            console.log("Stepping into the loop");
-            if (arr[this.ranNum] === curr[i]) {
-                console.log("A match has been found. Rerolling");
-                this.roll();
+    this.num = roll();
+    this.select = curr[this.num];
+
+    let record = false;
+    
+    for (let i = 0; i < len; i++) {
+        // The maximum number of entries that can be recorded into the test variable
+        // First check to see if the array has anything
+        if (obj[i] === undefined) {
+            obj.push(select);
+            break;
+        } else {
+            // Now step in to check the rest of the entries
+            if (obj[i] === select) {
+                continue;
             } else {
-                console.log("No match found. Adding and breaking loop");
+
             }
         }
     }
-    console.log("Result: " + arr);
 }
-
-// Nope
-// function ranTrack(arr, curr) {
-//     this.random = (size) => {
-//         return Math.floor(Math.random() * size);
-//     }
-//     this.ranNum = this.random(arr.length);
-//     if (arr.length === 0) {
-//         arr.push(curr);
-//     }
-//     else {
-//         for (let i = 0; i < arr.length; i++) {
-//             // Loop each array entry until something clicks
-//             if (arr[i] === curr) {
-//                 // If the index of the array matches any current selected option,
-//                 // then reroll
-//                 this.ranNum = this.random(arr.length);
-//             } else {
-//                 arr.push(curr);
-//                 console.log(arr);
-//                 return
-//             }
-//         }
-//     }
-// }
 
 exports.module = {
     // Because of a special case, Dad Bot is being thrown in here
@@ -475,17 +470,19 @@ exports.module = {
             let whiteListChannel = 'secret-garden';
             let seeds = [
                 'A...oh, what\'s this? OwO',
-                'Some Blue Jazz',
-                'An Ancient Fruit',
-                'A lovely bunch of coconuts',
-                'A bouquet of Lavender',
-                'A Stardew Valley Farming Spreadsheet',
+                'Some Blue Jazz.',
+                'An Ancient Fruit.',
+                'A lovely bunch of coconuts.',
+                'A bouquet of Lavender.',
+                'A Stardew Valley Farming Spreadsheet.',
                 'Um...Cabbage Patch Kids...?',
                 'XP Orb. +10 Experience!',
-                'A lost soul',
+                'A lost soul.',
                 'A Rare Candy. Level up!',
-                'A Banananana Nut',
-                ''
+                'A Banananana Nut.',
+                'Nothing, because the water evaporated. ¯\\_(ツ)_/¯',
+                'A lost library book.',
+                'Nothing, because you forgot to fill your watering can.'
             ];
             let ran = Math.floor(Math.random() * seeds.length);
             if (msg.channel.name === whiteListChannel) {
@@ -507,8 +504,8 @@ exports.module = {
     'aaa': {
         fn: msg => {
             let ha = ['Test 1', 'Test 2', 'Test 3', 'Test 4'];
-            patternCheck(ranTest, ha);
-            console.log(ranTest);
+            patternCheck(lastTest, ha, 2);
+            console.log(lastTest);
         }
     }
 }
