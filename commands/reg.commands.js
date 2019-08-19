@@ -134,7 +134,7 @@ function patternCheck(obj, curr, len) {
             if (obj[i] === select) {
                 continue;
             } else {
-
+                record = true;
             }
         }
     }
