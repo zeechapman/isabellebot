@@ -120,23 +120,9 @@ function patternCheck(obj, curr, len) {
     }
     this.num = roll();
     this.select = curr[this.num];
-
-    let record = false;
-    
+  
     for (let i = 0; i < len; i++) {
-        // The maximum number of entries that can be recorded into the test variable
-        // First check to see if the array has anything
-        if (obj[i] === undefined) {
-            obj.push(select);
-            break;
-        } else {
-            // Now step in to check the rest of the entries
-            if (obj[i] === select) {
-                continue;
-            } else {
-                record = true;
-            }
-        }
+        
     }
 }
 
