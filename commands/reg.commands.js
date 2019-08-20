@@ -508,12 +508,5 @@ exports.module = {
         fn: msg => {
             msg.channel.send("Deep Food.\nIt's food, but it's...\n***D E E P***");
         }
-    },
-    'aaa': {
-        fn: msg => {
-            let ha = ['Test 1', 'Test 2', 'Test 3', 'Test 4'];
-            patternCheck(lastTest, ha);
-            console.log(lastTest);
-        }
     }
 }
