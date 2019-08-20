@@ -109,21 +109,31 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
 
 /**
  * Prevent the same random entry from occuring consistently.
- * Checks last 4 seeds.
- * @param {Array} obj The object to record the pattern
+ * @param {Array} obj The array to record the pattern
  * @param {String} curr Current array (index selected) to add into *obj*
  * @param {Number} len The amount of entries to record
  */
 function patternCheck(obj, curr, len) {
     this.roll = () => {
-        return Math.floor(Math.random() * curr.length); 
+        return Math.floor(Math.random() * curr.length);
     }
     this.num = roll();
     this.select = curr[this.num];
-  
+
     for (let i = 0; i < len; i++) {
-        
+        if (obj[i] === undefined) {
+            console.log("Ended at " + i);
+            obj.push(select);
+            break;
+        } else if (obj[i] === select) {
+            console.log("Matched");
+        } else {
+            console.log("Nothing...");
+            obj.push(select);
+            break;
+        }
     }
+
 }
 
 exports.module = {
@@ -138,11 +148,11 @@ exports.module = {
             let thumbnail = 'dadbot-thumbnail.png';
             let footer = '~Dad';
             let embed = new Discord.RichEmbed();
-            
+
             // As requested, blacklist Dad Bot from triggering on certain people.
             let blacklist = ['256537367308009473'];
             let blMatch = false;
-            
+
             for (let i = 0; i < blacklist.length; i++) {
                 if (blacklist[i] === msg.author.id) {
                     blMatch = true;
