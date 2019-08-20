@@ -117,22 +117,40 @@ function patternCheck(obj, curr, len) {
     this.roll = () => {
         return Math.floor(Math.random() * curr.length);
     }
-    this.num = roll();
-    this.select = curr[this.num];
+    this.num;
+    this.select;
 
-    for (let i = 0; i < len; i++) {
-        if (obj[i] === undefined) {
-            console.log("Ended at " + i);
-            obj.push(select);
-            break;
-        } else if (obj[i] === select) {
-            console.log("Matched");
-        } else {
-            console.log("Nothing...");
-            obj.push(select);
-            break;
+    this.loop = () => {
+        this.num = roll();
+        this.select = curr[this.num];
+        for (let i = 0; i < len; i++) {
+            if (i < len && obj.length < len) {
+                // First, fill the array if it's empty.
+                if (obj[i] === undefined) {
+                    console.log("empty");
+                    obj.push(select);
+                    break;
+                }
+            } else {
+                // If it's not empty, then start swapping.
+                if (obj[i] === select) {
+                    console.log("Matched.");
+                    this.loop();
+                    break;
+                }
+                else {
+                    console.log("No match");
+                    for (let j = 0; j < len; j++) {
+                        obj.pop();
+                    }
+                    obj.push(select);
+                    break;
+                }
+            }
         }
     }
+
+    this.loop();
 
 }
 
@@ -500,7 +518,7 @@ exports.module = {
     'aaa': {
         fn: msg => {
             let ha = ['Test 1', 'Test 2', 'Test 3', 'Test 4'];
-            patternCheck(lastTest, ha, 2);
+            patternCheck(lastTest, ha, 3);
             console.log(lastTest);
         }
     }
