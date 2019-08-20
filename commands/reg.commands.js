@@ -497,10 +497,14 @@ exports.module = {
                 'A lost library book.',
                 'Nothing, because you forgot to fill your watering can.'
             ];
-            msg.channel.send("You water the garden...");
-            setTimeout(() => {
-                msg.channel.send("What grew? " + patternCheck(lastSeeds, seeds, 9));
-            }, 1000);
+            if (msg.channel.name === whiteListChannel) {
+                msg.channel.send("You water the garden...");
+                setTimeout(() => {
+                    msg.channel.send("What grew? " + patternCheck(lastSeeds, seeds, 9));
+                }, 1000);
+            } else {
+                return;
+            }
 
         }
     },
