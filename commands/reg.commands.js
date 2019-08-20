@@ -111,20 +111,21 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
  * Prevent the same random entry from occuring consistently.
  * @param {Array} obj The array to record the pattern
  * @param {String} curr Current array (index selected) to add into *obj*
- * @param {Number} len The amount of entries to record
  */
-function patternCheck(obj, curr, len) {
+function patternCheck(obj, curr) {
     this.roll = () => {
         return Math.floor(Math.random() * curr.length);
     }
+
     this.num;
     this.select;
 
     this.loop = () => {
         this.num = roll();
         this.select = curr[this.num];
-        for (let i = 0; i < len; i++) {
-            if (i < len && obj.length < len) {
+        for (let i = 0; i < curr.length; i++) {
+            console.log(obj.length + ' ' + curr.length);
+            if (i < (curr.length - 1)) {
                 // First, fill the array if it's empty.
                 if (obj[i] === select) {
                     console.log("Matched inside of empty");
@@ -137,20 +138,12 @@ function patternCheck(obj, curr, len) {
                     break;
                 }
             } else {
-                // If it's not empty, then start swapping.
-                if (obj[i] === select) {
-                    console.log("Matched.");
-                    this.loop();
-                    return select;
+                console.log("No match");
+                for (let j = 0; j < curr.length; j++) {
+                    obj.pop();
                 }
-                else {
-                    console.log("No match");
-                    for (let j = 0; j < len; j++) {
-                        obj.pop();
-                    }
-                    obj.push(select);
-                    break;
-                }
+                obj.push(select);
+                break;
             }
         }
     }
@@ -504,16 +497,11 @@ exports.module = {
                 'A lost library book.',
                 'Nothing, because you forgot to fill your watering can.'
             ];
-            // let ran = Math.floor(Math.random() * seeds.length);
-            // if (msg.channel.name === whiteListChannel) {
-                msg.channel.send("You water the garden...");
-                setTimeout(() => {
-                    msg.channel.send("What grew? " + patternCheck(lastSeeds, seeds, 6));
-                }, 1000);
-            // }
-            // else {
-            //     return;
-            // }
+            msg.channel.send("You water the garden...");
+            setTimeout(() => {
+                msg.channel.send("What grew? " + patternCheck(lastSeeds, seeds, 9));
+            }, 1000);
+
         }
     },
     'deep': {
@@ -524,7 +512,7 @@ exports.module = {
     'aaa': {
         fn: msg => {
             let ha = ['Test 1', 'Test 2', 'Test 3', 'Test 4'];
-            patternCheck(lastTest, ha, 3);
+            patternCheck(lastTest, ha);
             console.log(lastTest);
         }
     }
