@@ -126,6 +126,11 @@ function patternCheck(obj, curr, len) {
         for (let i = 0; i < len; i++) {
             if (i < len && obj.length < len) {
                 // First, fill the array if it's empty.
+                if (obj[i] === select) {
+                    console.log("Matched inside of empty");
+                    this.loop();
+                    break;
+                }
                 if (obj[i] === undefined) {
                     console.log("empty");
                     obj.push(select);
@@ -136,7 +141,7 @@ function patternCheck(obj, curr, len) {
                 if (obj[i] === select) {
                     console.log("Matched.");
                     this.loop();
-                    break;
+                    return select;
                 }
                 else {
                     console.log("No match");
@@ -151,6 +156,7 @@ function patternCheck(obj, curr, len) {
     }
 
     this.loop();
+    return select;
 
 }
 
@@ -498,16 +504,16 @@ exports.module = {
                 'A lost library book.',
                 'Nothing, because you forgot to fill your watering can.'
             ];
-            let ran = Math.floor(Math.random() * seeds.length);
-            if (msg.channel.name === whiteListChannel) {
+            // let ran = Math.floor(Math.random() * seeds.length);
+            // if (msg.channel.name === whiteListChannel) {
                 msg.channel.send("You water the garden...");
                 setTimeout(() => {
-                    msg.channel.send("What grew? " + seeds[ran]);
+                    msg.channel.send("What grew? " + patternCheck(lastSeeds, seeds, 6));
                 }, 1000);
-            }
-            else {
-                return;
-            }
+            // }
+            // else {
+            //     return;
+            // }
         }
     },
     'deep': {
