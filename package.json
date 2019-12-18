@@ -6,15 +6,25 @@
   "dependencies": {
     "discord.js": "^11.5.1",
     "express": "^4.17.1",
-    "firebase": "^6.3.0",
-    "firebase-admin": "^8.2.0",
+    "firebase": "^7.6.0",
+    "firebase-admin": "^8.8.0",
     "mkdirp": "^0.5.1",
-    "pg": "^7.11.0"
+    "pg": "^7.15.0",
+    "prism-media": "^1.1.0",
+    "ws": "^7.2.1"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node app.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeechapman/isabellebot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zeechapman/isabellebot/issues"
+  },
+  "homepage": "https://github.com/zeechapman/isabellebot#readme"
 }

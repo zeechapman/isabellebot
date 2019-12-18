@@ -25,6 +25,47 @@ let emotes = {
     'thisisfine': '<:thisisfine:467198644823654402>'
 }
 
+let seeds = [
+    'Some Blue Jazz.',
+    'An Ancient Fruit.',
+    'A lovely bunch of coconuts.',
+    'A bouquet of Lavender.',
+    'Devils Fingers...or is that a Demogorgon?',
+    'XP Orb. ' + (Math.floor(Math.random() * 100) * 10) + ' Experience gained!',
+    'A...oh, what\'s this? OwO',
+    'A Stardew Valley Farming Spreadsheet.',
+    'NaN undefined!',
+    'Um...Cabbage Patch Kids...?',
+    '28 STAB WOUNDS',
+    'A thing grew. What grew? A thing grew. What grew? A thing grew. What grew? A thing grew. What grew? A thing grew. What grew? **__Recursion.__**',
+    'Lewis\' secret friend gift from Lewis!',
+    'A Partridge in a Pear tree!',
+    'Exactly ' + Math.floor(Math.random() * 999999999) + ' grains of dirt.',
+    'Another watering can...?',
+    'A garden! ...wait...',
+    'An idea!',
+    'A corrupted ███████████████████████████',
+    'A copy of E.T. for the Atari 2600',
+    'A lost soul. It faded away.',
+    'A Rare Candy. Level up!',
+    'A Banananana Nut.',
+    'Nothing, the water evaporated. ¯\\_(ツ)_/¯',
+    'A lost library book.',
+    'Nothing, because you forgot to fill your watering can.',
+    'A mirror!rorrim A',
+    '```Missingno     aaa0\nA?,OK   ;  jkr//\n           POKEDéX```',
+    'A square Watermelon!',
+    'Walnuts, Peanuts, Pineapple smells, along the rest of the D.K. crew',
+    'An Oak Tree.',
+    'An Alolan Exeggutor. That counts as a tree, right?',
+    'Jazzberries!',
+    'Snozberries!',
+    'A Money Bush! Oh wait, it\'s Monopoly money.',
+    'An axe! Someone burried the hatchet, and it came back it seems.',
+];
+
+let seedIndex = 9999999; // Counts position in seeds[]. Number set high so it can be shuffled initially.
+
 // Dad Bot variables
 let dadReroll = () => {
     return Math.floor(Math.random() * 20) + 10;
@@ -107,50 +148,20 @@ function coolDownControl(msg, cdObj, cdMsg, cdTime, fn) {
     }
 }
 
+
 /**
- * Prevent the same random entry from occuring consistently.
- * @param {Array} obj The array to record the pattern
- * @param {String} curr Current array (index selected) to add into *obj*
+ * Shuffle the array using the Fisher-Yates algorithm
+ * @param {Array} arr Array to shuffle
  */
-function patternCheck(obj, curr) {
-    this.roll = () => {
-        return Math.floor(Math.random() * curr.length);
+function shuffle(arr) {
+    let j, x;
+    for (let i = arr.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = arr[i];
+        arr[i] = arr[j];
+        arr[j] = x;
     }
-
-    this.num;
-    this.select;
-
-    this.loop = () => {
-        this.num = roll();
-        this.select = curr[this.num];
-        for (let i = 0; i < curr.length; i++) {
-            console.log(obj.length + ' ' + curr.length);
-            if (i < (curr.length - 1)) {
-                // First, fill the array if it's empty.
-                if (obj[i] === select) {
-                    console.log("Matched inside of empty");
-                    this.loop();
-                    break;
-                }
-                if (obj[i] === undefined) {
-                    console.log("empty");
-                    obj.push(select);
-                    break;
-                }
-            } else {
-                console.log("No match");
-                for (let j = 0; j < curr.length; j++) {
-                    obj.pop();
-                }
-                obj.push(select);
-                break;
-            }
-        }
-    }
-
-    this.loop();
-    return select;
-
+    return arr;
 }
 
 exports.module = {
@@ -481,31 +492,22 @@ exports.module = {
     'water': {
         fn: msg => {
             let whiteListChannel = 'secret-garden';
-            let seeds = [
-                'A...oh, what\'s this? OwO',
-                'Some Blue Jazz.',
-                'An Ancient Fruit.',
-                'A lovely bunch of coconuts.',
-                'A bouquet of Lavender.',
-                'A Stardew Valley Farming Spreadsheet.',
-                'Um...Cabbage Patch Kids...?',
-                'XP Orb. +10 Experience!',
-                'A lost soul.',
-                'A Rare Candy. Level up!',
-                'A Banananana Nut.',
-                'Nothing, because the water evaporated. ¯\\_(ツ)_/¯',
-                'A lost library book.',
-                'Nothing, because you forgot to fill your watering can.'
-            ];
             if (msg.channel.name === whiteListChannel) {
-                msg.channel.send("You water the garden...");
-                setTimeout(() => {
-                    msg.channel.send("What grew? " + patternCheck(lastSeeds, seeds, 9));
-                }, 1000);
+                if (seedIndex >= seeds.length) {
+                    shuffle(seeds);
+                    seedIndex = 0;
+                }
+                    msg.channel.send("You water the garden...");
+                    setTimeout(() => {
+                        msg.channel.send("What grew?");
+                        seedIndex++;
+                        setTimeout(() => {
+                            msg.channel.send(seeds[seedIndex]);
+                        }, 1000);
+                    }, 1500);
             } else {
                 return;
             }
-
         }
     },
     'deep': {
