@@ -53,15 +53,42 @@ let seeds = [
     'A lost library book.',
     'Nothing, because you forgot to fill your watering can.',
     'A mirror!rorrim A',
-    '```Missingno     aaa0\nA?,OK   ;  jkr//\n           POKEDéX```',
+    '```Missingno     aaa0\nA?,OK   ;  jbr//\n           POKEDéX```',
     'A square Watermelon!',
     'Walnuts, Peanuts, Pineapple smells, along the rest of the D.K. crew',
-    'An Oak Tree.',
+    'An Oak Tree. That was fast!',
     'An Alolan Exeggutor. That counts as a tree, right?',
     'Jazzberries!',
     'Snozberries!',
     'A Money Bush! Oh wait, it\'s Monopoly money.',
     'An axe! Someone burried the hatchet, and it came back it seems.',
+    'A new leaf!',
+    'An invitation...is someone going to be in Smash?',
+    '||       ||!',
+    'ANOTHER SETTLEMENT NEEDS OUR HELP',
+    'An Apple...laptop?',
+    'A rock.',
+    'Hey, Vsauce! Michael here.',
+    'A reference to a game!',
+    'A Sunflower!',
+    'A Peashooter!',
+    'A copy of Plants Vs Zombies!',
+    'Animal Crossing!',
+    'A...um...let\'s pretend that never was there.',
+    'A pun!',
+    'A Korok seed!\n(1/900)',
+    'A thumb...strangely, it\'s green.',
+    'An AOL free trial CD!',
+    'Water!',
+    'Lavendar! Oh wait, it\'s mispelled.',
+    'A stale meme!',
+    'A skeleton from Dark Sou--OH GOD, RUN!',
+    'A Katamari!',
+    'A Tomato. The vegatable...?',
+    'Cilantro-scented soap bars!',
+    'You water the garden......',
+    'A random outcome!',
+    'A seed!'
 ];
 
 let seedIndex = 9999999; // Counts position in seeds[]. Number set high so it can be shuffled initially.
@@ -493,7 +520,7 @@ exports.module = {
         fn: msg => {
             let whiteListChannel = 'secret-garden';
             if (msg.channel.name === whiteListChannel) {
-                if (seedIndex >= seeds.length) {
+                if (seedIndex >= seeds.length - 1) {
                     shuffle(seeds);
                     seedIndex = 0;
                 }
