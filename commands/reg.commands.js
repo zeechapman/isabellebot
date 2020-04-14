@@ -21,8 +21,8 @@ const songList = require('./songs');
 
 // List of useable emotes
 let emotes = {
-    'caw': '<:caw:477160191029280769>',
-    'thisisfine': '<:thisisfine:467198644823654402>'
+    'caw': '<:caw:699732100693098627>',
+    'thisisfine': '<:this_is_fine:699732100693098627>'
 }
 
 let seeds = [
@@ -95,7 +95,7 @@ let seedIndex = 9999999; // Counts position in seeds[]. Number set high so it ca
 
 // Dad Bot variables
 let dadReroll = () => {
-    return Math.floor(Math.random() * 20) + 10;
+    return Math.floor(Math.random() * 30) + 15;
 }
 let dadCount = 0; // Number of times a dad joke could initiate 
 let dadLimit = dadReroll();
@@ -205,7 +205,7 @@ exports.module = {
             let embed = new Discord.RichEmbed();
 
             // As requested, blacklist Dad Bot from triggering on certain people.
-            let blacklist = ['256537367308009473'];
+            let blacklist = ['256537367308009473', '262752361959784458'];
             let blMatch = false;
 
             for (let i = 0; i < blacklist.length; i++) {
@@ -427,7 +427,7 @@ exports.module = {
          * Give a mentioned user a strike
          */
         fn: (msg, args) => {
-            let ids = ['290203577236848640', '166672575915753473', '365970141768450058', '518190826933977099', '266755300206313473']
+            let ids = ['290203577236848640', '166672575915753473', '365970141768450058', '518190826933977099', '266755300206313473', '184462208426573825', '167438798114914304']
             let str = args.split(' ');
             let id = str[0];
             let tag;
@@ -484,33 +484,6 @@ exports.module = {
             msg.channel.send('Ummm, ' + msg.member + ', I don\'t ' + spaced);
         }
     },
-    'happy': {
-        fn: msg => {
-            // Encapsulate to make sure it stays on cooldown
-            let command = () => {
-                // This will initiate in any case
-                function msgChannel() {
-                    let songChoice = songList[songIndex];
-                    msg.channel.send("Oh! Happy songs? I got one!\n" + songChoice.song + " - " + songChoice.artist + " (" + songChoice.link + ")");
-                    if (songIndex < songList.length - 1)
-                        songIndex++;
-                    else
-                        songIndex = 0;
-                }
-
-                // This will run if the user does not exist in the database
-                function userDoesNotExist() {
-                    msgChannel();
-                    msg.author.send("Psst. Here's a list of all of the songs if you're curious:\n" + songList.map(i => {
-                        return i.song + " - " + i.artist + " (" + i.link + ")\n"
-                    }).join(''));
-                }
-
-                database.happyCheck(msg.author, msgChannel, userDoesNotExist);
-            }
-            coolDownControl(msg, happyCD, "Hey hey, a bit too excited, huh?", 900, command)
-        }
-    },
     'waa': {
         fn: msg => {
             msg.channel.send('WAAAAAAAAH!');
@@ -518,28 +491,18 @@ exports.module = {
     },
     'water': {
         fn: msg => {
-            let whiteListChannel = 'secret-garden';
-            if (msg.channel.name === whiteListChannel) {
-                if (seedIndex >= seeds.length - 1) {
-                    shuffle(seeds);
-                    seedIndex = 0;
-                }
-                    msg.channel.send("You water the garden...");
-                    setTimeout(() => {
-                        msg.channel.send("What grew?");
-                        seedIndex++;
-                        setTimeout(() => {
-                            msg.channel.send(seeds[seedIndex]);
-                        }, 1000);
-                    }, 1500);
-            } else {
-                return;
+            if (seedIndex >= seeds.length - 1) {
+                shuffle(seeds);
+                seedIndex = 0;
             }
+            msg.channel.send("You water the garden...");
+            setTimeout(() => {
+                msg.channel.send("What grew?");
+                seedIndex++;
+                setTimeout(() => {
+                    msg.channel.send(seeds[seedIndex]);
+                }, 1000);
+            }, 1500);
         }
     },
-    'deep': {
-        fn: msg => {
-            msg.channel.send("Deep Food.\nIt's food, but it's...\n***D E E P***");
-        }
-    }
 }

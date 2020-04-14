@@ -6,7 +6,7 @@ const token = require('./data');
 
 // Global variables
 let http = /(https)|(http)/; // Capture if 'https' is in the string or 'http'
-let twitchClipsUrl = /(https:\/\/clips.twitch.tv)/;
+// let twitchClipsUrl = /(https:\/\/clips.twitch.tv)/;
 
 // When the bot is on, prepare
 client.on('ready', () => {
@@ -29,24 +29,25 @@ client.on('message', msg => {
             processCommand(msg, 4, isaCommands);
         } else if (msg.content.startsWith("!")) {
             processCommand(msg, 1, regCommands);
-        } else if (twitchClipsUrl.test(msg.content)) {
-            // If someone posted a clip outside of the clips channel, send it to the clip channel
-            let clip = msg.content;
-            let sender = msg.author;
-            let chName = 'goggles-clips'; // What it's called on Goggle's Discord
-            let clipsChannel = msg.guild.channels.find(val => {
-                return val.name === 'goggles-clips';
-            });
+        
+        // } else if (twitchClipsUrl.test(msg.content)) {
+        //     // If someone posted a clip outside of the clips channel, send it to the clip channel
+        //     let clip = msg.content;
+        //     let sender = msg.author;
+        //     let chName = 'goggles-clips'; // What it's called on Goggle's Discord
+        //     let clipsChannel = msg.guild.channels.find(val => {
+        //         return val.name === 'goggles-clips';
+        //     });
 
-            if (msg.channel.name === chName) {
-                // If the channel is the clips channel, do nothing
-                return;
-            } else {
-                // If it is not the clips channel, delete the post, then send it to the correct channel, tagging the user
-                // at the same time.
-                clipsChannel.send('Originally posted by ' + sender + '\n' + clip);
-                msg.delete();
-            }
+        //     if (msg.channel.name === chName) {
+        //         // If the channel is the clips channel, do nothing
+        //         return;
+        //     } else {
+        //         // If it is not the clips channel, delete the post, then send it to the correct channel, tagging the user
+        //         // at the same time.
+        //         clipsChannel.send('Originally posted by ' + sender + '\n' + clip);
+        //         msg.delete();
+        //     }
         // By the power of Necromancy, rise Dad Bot...RIIISE!
         // (also sorry for the large amount of ORs)
         } else if (msg.content.startsWith("im ") || msg.content.startsWith("I'm ") || msg.content.startsWith("i'm ") || msg.content.startsWith('I’m ') || msg.content.startsWith('i’m ') || msg.content.startsWith('i am ') || msg.content.startsWith('I am ')) {
@@ -79,11 +80,11 @@ client.on('messageDelete', msg => {
     // Instead of allowing it to say nothing (original issue),
     // simply let them know that it's a embedded image (or URL)
     if (msg.content === '') {
-        logsChannel.send("**__MESSAGE DELETED__**\n\n\`\`\`It contained an embedded image, or a URL.\`\`\`\nDeleted from: #" + msg.channel.name + "\nAuthor of message: " + author + "\n---------------");
+        logsChannel.send("**__MESSAGE DELETED__**\n\n```It contained an embedded image, or a URL.```\nDeleted from: #" + msg.channel.name + "\nAuthor of message: " + author + "\n---------------");
     } else if (msg.content === 'p!next' || msg.content === 'p!back') {
         return; // Do nothing, because it's just Pokecord doing its thing
     } else {
-        logsChannel.send("**__MESSAGE DELETED__**\n\n\`\`\`" + msg.content + "\`\`\`\nDeleted from: #" + msg.channel.name + "\nAuthor of message: " + author + "\n---------------");
+        logsChannel.send("**__MESSAGE DELETED__**\n\n```" + msg.content + "```\nDeleted from: #" + msg.channel.name + "\nAuthor of message: " + author + "\n---------------");
     }
 });
 
@@ -100,8 +101,10 @@ client.on('messageUpdate', (msg, nMsg) => {
 
     // Exclude certain users from logging. Mainly, Pokecord and MEE6
     let exclude = [
-        '159985870458322944',
-        '365975655608745985'
+        '159985870458322944', // MEE6
+        '365975655608745985', // Pokecord
+        '372181371864612864', // Helios
+        '204255221017214977'  // Just a Bot
     ];
     let match = false;
     let chName = 'event-logs';
