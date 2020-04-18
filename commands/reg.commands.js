@@ -21,8 +21,8 @@ const songList = require('./songs');
 
 // List of useable emotes
 let emotes = {
-    'caw': '<:caw:699732100693098627>',
-    'thisisfine': '<:this_is_fine:700952466317115432>'
+    'caw': '<:caw:696212943871803393>',
+    'thisisfine': '<:this_is_fine:696212488303280209>'
 }
 
 let seeds = [
