@@ -5,6 +5,7 @@ function getTime() {
     let date = new Date();
     let hrs = date.getHours();
     let min = date.getMinutes();
+    min = min < 10 ? '0' + min : min; // If minutes less than 10, then add a digit
     let ampm = hrs >= 12 ? 'PM' : 'AM';
     hrs = hrs % 12;
     hrs = hrs ? hrs : 12; // If 0, then set it to 12
@@ -47,3 +48,14 @@ function getChannel(msg, chName) {
 }
 
 exports.getChannel = getChannel;
+
+/**
+ * 
+ * @param {*} msg Required
+ * @param {*} str The emoji's name (ex: OMEGALUL)
+ */
+function getEmoji(msg, str) {
+    /// TODO: Find ways to get emoji data without having to get ID
+}
+
+exports.getEmoji = getEmoji;
