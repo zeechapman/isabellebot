@@ -7,7 +7,7 @@ function getTime() {
     let min = date.getMinutes();
     let ampm = hrs >= 12 ? 'PM' : 'AM';
     hrs = hrs % 12;
-    hrs = hrs ? hours : 12; // If 0, then set it to 12
+    hrs = hrs ? hrs : 12; // If 0, then set it to 12
     let time = hrs + ':' + min + ' ' + ampm;
 
     return time;
