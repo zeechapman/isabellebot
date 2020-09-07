@@ -34,8 +34,14 @@ client.on('messageDelete', (msg) => {
     if (msg.author === client.user)
         return;
     
-    let channel = msg.guild.channels.cache.find(ch => ch.name === channels.logs);
-    channel.send(`__MESSAGE DELETED__\n\n${msg.content}\n\nAuthor: ${msg.author.tag}\nChannel: #${msg.channel.name}\n----------`);
+    let ch = getChannel(msg, channels.logs);
+
+    // Quick check on if message is empty
+    let msgChk = msg.content === '' ? '*Message was just an image. For safety (and sanity of developer) the image is not saved.*' : msg.content;
+
+    ch.send(`__MESSAGE DELETED__\n\n${msgChk}\n\nAuthor: ${msg.author.tag}\nChannel: #${msg.channel.name}\n----------`);
+
+    /// TODO: Add a way to strip out the URL, or at least remove the https part
 });
 
 client.on('messageUpdate', (oldMsg, newMsg) => {
