@@ -35,3 +35,15 @@ function processCmd(msg) {
 }
 
 exports.processCmd = processCmd;
+
+/**
+ * 
+ * @param {*} msg Required for grabbing the channel info
+ * @param {string} chName The name of the channel
+ */
+function getChannel(msg, chName) {
+    let channel = msg.guild.channels.cache.find(ch => ch.name === chName);
+    return channel;
+}
+
+exports.getChannel = getChannel;

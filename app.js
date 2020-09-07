@@ -3,7 +3,7 @@ const client = new Discord.Client();
 
 const token = require('./token');
 const commands = require('./commands');
-const { processCmd, getTime } = require('./misc');
+const { processCmd, getTime, getChannel } = require('./misc');
 
 // Channels
 let channels = {
@@ -34,8 +34,13 @@ client.on('messageDelete', (msg) => {
     if (msg.author === client.user)
         return;
     
-    channel = msg.guild.channels.cache.find(ch => ch.name === channels.logs);
+    let channel = msg.guild.channels.cache.find(ch => ch.name === channels.logs);
     channel.send(`__MESSAGE DELETED__\n\n${msg.content}\n\nAuthor: ${msg.author.tag}\nChannel: #${msg.channel.name}\n----------`);
+});
+
+client.on('messageUpdate', (oldMsg, newMsg) => {
+    let ch = getChannel(oldMsg, channels.logs);
+    ch.send(`__MESSAGE EDITED__\n\n**Original:**\n${oldMsg.content}\n\n**New:**\n${newMsg.content}\n\nAuthor: ${oldMsg.author.tag}\nChannel: #${oldMsg.channel.name}`);
 });
 
 
