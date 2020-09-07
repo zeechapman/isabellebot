@@ -5,6 +5,4 @@ When I first developed Isabelle Bot, I admittedly wrote a lot of it in a hurry, 
 
 Although the code is easier and more maintainable, I've realized I can do a bit more with it, and make some other additional changes now that I've assigned the role of multiple bots into one single bot. One issue is the code is still a bit of a mess, and could use another revision. This would require me to re-write a lot, and I figured it would be easier to go back to square one again, and write everything over once more.
 
-Instead of ditching version numbers, I'd like to finally consider this **Version 3**.
-
-#### Other fixes will be included over time
+Instead of ditching version numbers originally, I'd like to consider this **Version 3**.
