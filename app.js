@@ -3,7 +3,7 @@ const client = new Discord.Client();
 
 const token = require('./token');
 const commands = require('./commands');
-const { processCmd, getTime, getChannel } = require('./misc');
+const { processCmd, getTime, getChannel, getEmoji } = require('./misc');
 
 // Channels
 let channels = {
@@ -46,7 +46,6 @@ client.on('messageUpdate', (oldMsg, newMsg) => {
     let ch = getChannel(oldMsg, channels.logs);
     ch.send(`__MESSAGE EDITED__\n\n**Original:**\n${oldMsg.content}\n\n**New:**\n${newMsg.content}\n\nAuthor: ${oldMsg.author.tag}\nChannel: #${oldMsg.channel.name}`);
 });
-
 
 // Token is required to log in
 client.login(token);
