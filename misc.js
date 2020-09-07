@@ -37,7 +37,7 @@ function processCmd(msg) {
 exports.processCmd = processCmd;
 
 /**
- * 
+ * Grab the channel name and info
  * @param {*} msg Required for grabbing the channel info
  * @param {string} chName The name of the channel
  */
