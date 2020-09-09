@@ -23,8 +23,11 @@ client.on('message', (msg) => {
     // Prevent bot from responding to itself
     if (msg.author === client.user)
         return;
-    if (msg.content.startsWith('!')) {
-        processCmd(msg);
+    try {
+        if (msg.content.startsWith('!'))
+            processCmd(msg);
+    } catch(e) {
+        console.log(`\x1b[31mError:\x1b[0m Command not valid \x1b[36m(${msg.content})`);
     }
 });
 
@@ -42,6 +45,7 @@ client.on('messageDelete', (msg) => {
     ch.send(`__MESSAGE DELETED__\n\n${msgChk}\n\nAuthor: ${msg.author.tag}\nChannel: #${msg.channel.name}\n----------`);
 });
 
+// On edited message
 client.on('messageUpdate', (oldMsg, newMsg) => {
     let ch = getChannel(oldMsg, channels.logs);
     ch.send(`__MESSAGE EDITED__\n\n**Original:**\n${oldMsg.content}\n\n**New:**\n${newMsg.content}\n\nAuthor: ${oldMsg.author.tag}\nChannel: #${oldMsg.channel.name}`);
