@@ -55,7 +55,8 @@ exports.getChannel = getChannel;
  * @param {*} str The emoji's name (ex: OMEGALUL)
  */
 function getEmoji(msg, str) {
-    /// TODO: Find ways to get emoji data without having to get ID
+    const emo = msg.guild.emojis.cache.find(e => e.name === str);
+    return '<:' + emo.name + ':' + emo.id + '>';
 }
 
 exports.getEmoji = getEmoji;
