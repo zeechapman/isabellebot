@@ -11,7 +11,7 @@
     "mkdirp": "^0.5.1",
     "pg": "^7.15.0",
     "prism-media": "^1.1.0",
-    "ws": "^7.2.1"
+    "ws": "^7.4.5"
   },
   "devDependencies": {},
   "scripts": {
